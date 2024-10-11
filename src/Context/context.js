@@ -4,7 +4,6 @@ let WindowContext = createContext();
 
 export default function Provider({ children }) {
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-    console.log(isMobile)
     useEffect(() => {
         const handleResize = () => setIsMobile(window.innerWidth < 768);
         window.addEventListener('resize', handleResize);

@@ -20,6 +20,8 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { useWindowSize } from '../../../Context/context'
 function HeaderLayout() {
   let isMobile = useWindowSize()
+  console.log(isMobile)
+
   return (
     <div>
       <Header className={"bg-dark"} />
@@ -147,11 +149,10 @@ function MobileNavBar() {
         <BrandLogo className={"px-4"} />
         <GiHamburgerMenu className='fs-4 px-4' onClick={() => {
           setOpen(!isOpen)
-          console.log(isOpen)
         }} />
       </div>
       {
-        isOpen ? (<div className="nav-items-container d-flex flex-column align-items-center gap-3 justify-content-center mr-5">
+        isOpen ? (<div className="nav-items-container d-flex flex-column align-items-center gap-3 justify-content-center mr-0 p-3">
           <div className="nav-items text-align-center flex-column flex-wrap child-start d-flex align-items-center justify-content-center gap-3 p-3 mr-0">
             <NavItem >
               <NavLink className='text-dark fs-4' to={"/"}>Home</NavLink>

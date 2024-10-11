@@ -1,0 +1,103 @@
+.carousel {
+    min-height: 100vh;
+    position: relative;
+}
+
+.carousel-item-1 {
+    background-image: url(../../../Assets/home-page/hero-section.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.carousel-controller-container {
+    position: absolute;
+    bottom: 25px;
+    left: 44%;
+    z-index: 3;
+}
+
+.controller-bar {
+    height: 8px;
+    width: 60px;
+    opacity: 0.6;
+}
+
+.image-container {
+    height: 85vh;
+    width: 45vw;
+    bottom: 0;
+
+}
+
+.selected {
+    opacity: 1;
+}
+
+
+
+.fwd-icon,
+.prev-icon {
+    position: absolute;
+    top: 50%;
+    z-index: 3;
+}
+
+.fwd-icon {
+    right: 1rem;
+}
+
+.prev-icon {
+    left: 1rem;
+}
+
+.carousel-item>.container {
+    height: 100vh;
+}
+
+.carousel-item {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #23856D;
+    position: relative;
+
+}
+
+.content-container {
+    padding: 4rem;
+}
+
+@media (max-width: 786px) {
+    .image-container {
+        height: 45vh;
+        width: 90vw;
+    }
+
+    .carousel-item>.container {
+        height: auto;
+    }
+}
+
+.carousel-animation {
+    animation: carousel 0.2s ease-in;
+}
+
+
+
+
+@keyframes carousel {
+    0% {
+        transform: translateX(-800px);
+    }
+
+    50% {
+        transform: translateX(-400px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
