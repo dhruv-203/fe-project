@@ -1,0 +1,7 @@
+.bestseller-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,8 +1,8 @@
 import React from 'react'
 
-function BtnContainer({ children }) {
+function BtnContainer({ children, className = " gap-4 " }) {
     return (
-        <div className='d-flex gap-4 flex-wrap align-items-center justify-content-center'>
+        <div className={'d-flex flex-wrap align-items-center justify-content-center ' + className}>
             {children}
         </div>
     )

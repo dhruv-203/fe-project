@@ -7,7 +7,6 @@ import { useState } from 'react';
 import CarouselItem from './CarouselItem';
 function Carousel({ className = "", data }) {
   let isMobile = useWindowSize()
-  console.log(isMobile)
   const [currItem, setCurrItem] = useState(0)
   function handleForward() {
     if (currItem >= data.length - 1) {
@@ -37,7 +36,7 @@ function Carousel({ className = "", data }) {
         <div className={"second-bar bg-light controller-bar " + (currItem === 1 ? "selected" : "")} onClick={() => setCurrItem(1)}></div>
       </span>}
       {
-        <CarouselItem key={currItem} className={currItem === 0 ? "carousel-item-1" : " "} data={data[currItem]} />
+        <CarouselItem key={currItem} className={data[currItem].title === "NEW COLLECTION" ? "carousel-item-1" : " "} data={data[currItem]} />
       }
 
     </div>
