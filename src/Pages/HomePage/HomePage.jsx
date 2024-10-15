@@ -11,7 +11,14 @@ import SectionTitle from '../../Components/HomePage/EditorPick/SectionTitle';
 import CategoryGrid from '../../Components/HomePage/EditorPick/CategoryGrid';
 import BestSellerGrid from '../../Components/HomePage/BestSeller/BestSellerGrid';
 import SectionContainer from '../../Components/HomePage/ImageContent/SectionContainer';
+import Layout from '../../Components/HomePage/Layout';
 import img from '../../Assets/home-page/product-branding.png'
+import postImg1 from '../../Assets/home-page/posts-images/post-1.jpg'
+import postImg2 from '../../Assets/home-page/posts-images/post-2.jpg'
+import postImg3 from '../../Assets/home-page/posts-images/post-3.jpg'
+import PostGrid from '../../Components/HomePage/Posts/PostGrid';
+import Post from '../../Components/HomePage/Posts/Post';
+import Footer from '../../Components/HomePage/Footer/Footer';
 function HomePage() {
   let isMobile = useWindowSize();
   console.log(isMobile)
@@ -39,22 +46,22 @@ function HomePage() {
         ]
 
       } />
-      <div className="editorsPick mt-5 container d-flex flex-column gap-4 align-items-center justify-content-center">
+      <Layout className="editorsPick">
         <SectionTitleContainer className={" p-4 "}>
           <SectionTitle fontColor={" text-dark "} className={" p-2 fw-700 "} fontSize={"fs-3"} >Editor's Pick</SectionTitle>
           <SectionDescription fontColor={"text-dark "} className={"p-2"}>Problems trying to resolve the conflict between</SectionDescription>
         </SectionTitleContainer>
         <CategoryGrid />
-      </div>
-      <div className="bestSeller container mt-5 d-flex flex-column align-items-center justify-content-center gap-4">
+      </Layout>
+      <Layout className="bestSeller">
         <SectionTitleContainer className={" p-4 "}>
           <PreTitle fontColor='text-dark' fontSize='fs-5' className={"opacity-06 fw-600"} >Featured Products</PreTitle>
           <SectionTitle fontColor={" text-dark "} className={" p-2 fw-700 "} fontSize={"fs-3"} >BESTSELLER PRODUCTS</SectionTitle>
           <SectionDescription fontColor={"text-dark "} className={"p-2"}>Problems trying to resolve the conflict between</SectionDescription>
         </SectionTitleContainer>
         <BestSellerGrid />
-      </div>
-      <Carousel className=" mt-5 h-40" data={
+      </Layout>
+      <Carousel className=" mt-5 " data={
 
         [
           {
@@ -75,12 +82,26 @@ function HomePage() {
 
         ]
       } />
-      <div className="container py-5 image-content-section">
+      <div className="container image-content-section h-100">
         <SectionContainer
           className='asian-lady-container'
           img={img}
         />
       </div>
+      <Layout className="posts">
+        <SectionTitleContainer className={" p-4 "}>
+          <PreTitle fontColor='text-primary' fontSize='fs-7' className={" fw-600 "} >Practice Advice</PreTitle>
+          <SectionTitle fontColor={" text-dark "} className={" p-2 fw-700 "} fontSize={"fs-3"} >Featured Posts</SectionTitle>
+          <SectionDescription fontColor={"text-dark "} className={" p-2"}>Problems trying to resolve the conflict between
+            <br /> the two major realms of Classical physics: Newtonian mechanics </SectionDescription>
+        </SectionTitleContainer>
+        <PostGrid>
+          <Post img={postImg1} />
+          <Post img={postImg2} />
+          <Post img={postImg3} />
+        </PostGrid>
+      </Layout>
+      <Layout className={"mb-3"}><Footer /></Layout>
     </div>
   )
 }

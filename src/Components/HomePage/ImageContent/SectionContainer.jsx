@@ -9,11 +9,14 @@ function SectionContainer({ className = " ", img }) {
     let isMobile = useWindowSize()
     console.log(img)
     return (
-        <div className={"d-flex justify-content-center align-items-center gap-3" + " " + className + (isMobile ? " flex-column-reverse " : " ")}>
+        <div className={"d-flex justify-content-center align-items-center gap-3 " + " " + className + (isMobile ? " flex-column-reverse " : " ")}>
+            <div className="img-container">
+                <img src={img} alt="" />
+            </div>
 
             <div className="contentContainer ">
                 <ContentContainer
-                    className=' gap-4 '
+                    className=' gap-5 '
                     preTitle={"SUMMER 2020"}
                     preTitleFontSize=' fs-7 '
                     preTitleOpacity=' opacity-05 '

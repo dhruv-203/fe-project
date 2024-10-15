@@ -32,17 +32,21 @@ function HeaderLayout() {
   )
 }
 
-export function HeaderLogoContainer({ children, className = "" }) {
+function handleLinkClick(isOpen, setOpen) {
+  setOpen(!isOpen)
+}
+
+export function HeaderLogoContainer({ children, className = "", logoColor }) {
   return (
     <LogoContainer className={'gap-3 ' + className}>
       <Logo >
-        <FaInstagram className='text-light ' />
+        <FaInstagram className={logoColor} />
       </Logo>
       <Logo>
-        <FaFacebook className='text-light ' />
+        <FaFacebook className={logoColor} />
       </Logo>
       <Logo>
-        <FaTwitter className='text-light ' />
+        <FaTwitter className={logoColor} />
       </Logo>
       {children}
     </LogoContainer>
@@ -73,7 +77,7 @@ function Header({ className = "" }) {
       {/* Socials Container */}
       <div className="header-socials-container d-flex justify-contant-center align-items-center gap-1">
         <Text className={"text-light"}>Follow us :</Text>
-        <HeaderLogoContainer className='flex-wrap'>
+        <HeaderLogoContainer className='flex-wrap' logoColor={'text-light'}>
           <Logo>
             <FaYoutube className='text-light p-2 fs-5' />
           </Logo>
@@ -83,9 +87,9 @@ function Header({ className = "" }) {
   )
 }
 
-function NavItem({ children, className = "" }) {
+function NavItem({ children, className = "", handleClick }) {
   return (
-    <Text className={'text-dark opacity-06' + className}>
+    <Text className={'text-dark opacity-06' + className} onClick={handleClick}>
       {children}
     </Text>
   )
@@ -97,7 +101,7 @@ function NavItem({ children, className = "" }) {
 function DesktopNavBar() {
   return (
     <div className={`navbar container-fluid gap-2  d-flex justify-content-between py-2  align-items-center bg-light `} >
-      <BrandLogo className={"px-4"} />
+      <BrandLogo className={"px-4 p-3"} />
       <div className="nav-items-container d-flex  align-items-center gap-3 justify-content-between container mr-5">
         <div className="nav-items text-align-center flex-wrap child-start d-flex align-items-center justify-content-center gap-3 p-3 ">
           <NavItem>
@@ -146,7 +150,7 @@ function MobileNavBar() {
   return (
     <div className={`navbar  bg-light`} >
       <div className='gap-2  d-flex justify-content-between py-2  align-items-center  '>
-        <BrandLogo className={"px-4"} />
+        <BrandLogo className={"px-4 p-3"} />
         <GiHamburgerMenu className='fs-4 px-4' onClick={() => {
           setOpen(!isOpen)
         }} />
@@ -154,27 +158,27 @@ function MobileNavBar() {
       {
         isOpen ? (<div className="nav-items-container d-flex flex-column align-items-center gap-3 justify-content-center mr-0 p-3">
           <div className="nav-items text-align-center flex-column flex-wrap child-start d-flex align-items-center justify-content-center gap-3 p-3 mr-0">
-            <NavItem >
+            <NavItem handleClick={() => { handleLinkClick(isOpen, setOpen) }}>
               <NavLink className='text-dark fs-4' to={"/"}>Home</NavLink>
             </NavItem>
-            <NavItem >
+            <NavItem handleClick={() => { handleLinkClick(isOpen, setOpen) }} >
               <NavLink className='text-dark fs-4 d-flex align-items-center justify-content-center' to={"/products"}>Shop</NavLink>
             </NavItem>
-            <NavItem>
+            <NavItem handleClick={() => { handleLinkClick(isOpen, setOpen) }}>
               <NavLink className='text-dark fs-4' to={"/about"}>About</NavLink>
             </NavItem>
-            <NavItem>
+            <NavItem handleClick={() => { handleLinkClick(isOpen, setOpen) }}>
               <NavLink className='text-dark fs-4' to={"/about"}>Blog</NavLink>
             </NavItem>
-            <NavItem>
+            <NavItem handleClick={() => { handleLinkClick(isOpen, setOpen) }}>
               <NavLink className='text-dark fs-4' to={"/contact"}>Contact</NavLink>
             </NavItem>
-            <NavItem>
+            <NavItem handleClick={() => { handleLinkClick(isOpen, setOpen) }}>
               <NavLink className='text-dark fs-4' to={"/about"}>Pages</NavLink>
             </NavItem>
           </div>
           <div className="login-register-container flex-column flex-wrap d-flex justify-content-center align-items-center gap-4">
-            <NavLink to={"/"} className={"text-primary d-flex justify-content-center align-items-center gap-1"}>
+            <NavLink to={"/"} onClick={() => { handleLinkClick(isOpen, setOpen) }} className={"text-primary d-flex justify-content-center align-items-center gap-1"}>
               <MdPersonOutline className='fs-4' />
               <div className='py-2 fs-5 fw-600'>Login / Register</div>
             </NavLink>

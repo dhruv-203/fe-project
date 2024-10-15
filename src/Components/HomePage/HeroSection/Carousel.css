@@ -1,5 +1,5 @@
 .carousel {
-    height: 100vh;
+    min-height: 100vh;
     position: relative;
 }
 
@@ -77,6 +77,10 @@
     .image-container {
         height: 45vh;
         width: 90vw;
+    }
+
+    .content-container {
+        padding: 3rem;
     }
 
     .carousel-item>.container {

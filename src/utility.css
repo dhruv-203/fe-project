@@ -241,6 +241,9 @@ a {
 .p-5 {
     padding: 3rem !important;
 }
+.p-6{
+    padding: 4rem !important;
+}
 
 /* Padding Top */
 .pt-0 {
