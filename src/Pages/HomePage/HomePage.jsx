@@ -21,7 +21,6 @@ import Post from '../../Components/HomePage/Posts/Post';
 import Footer from '../../Components/HomePage/Footer/Footer';
 function HomePage() {
   let isMobile = useWindowSize();
-  console.log(isMobile)
   return (
     <div>
       <Carousel className=" " data={
@@ -101,7 +100,7 @@ function HomePage() {
           <Post img={postImg3} />
         </PostGrid>
       </Layout>
-      <Layout className={"mb-3"}><Footer /></Layout>
+
     </div>
   )
 }

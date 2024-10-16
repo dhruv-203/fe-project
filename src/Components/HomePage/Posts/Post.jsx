@@ -15,7 +15,7 @@ function Post({ img }) {
 
             </div>
             <div className="post-content">
-                <div className="tagGrid w-90 d-flex py-4 px-3 align-items-center justify-content-start gap-2">
+                <div className="tagGrid w-90 d-flex p-2 align-items-center justify-content-start gap-2">
                     <PreTitle fontColor='text-primary' fontSize='fs-7' className='fw-400' >Google</PreTitle>
                     <PreTitle fontColor='text-secondary' fontSize='fs-7' className='fw-400 ' >Trending</PreTitle>
                     <PreTitle fontColor='text-secondary' fontSize='fs-7' className='fw-400 ' >New</PreTitle>
@@ -23,14 +23,14 @@ function Post({ img }) {
                 <SectionTitle fontSize={"fs-5"} fontColor={"text-dark"} className='fw-400 p-2 w-90'>
                     Loudest à la Madison #1 (L'integral)
                 </SectionTitle>
-                <SectionDescription fontColor={"text-dark "} className='p-3 w-90'>
+                <SectionDescription fontColor={"text-dark "} className='p-2 w-90'>
                     We focus on ergonomics and meeting you where you work. It's only a keystroke away.
                 </SectionDescription>
-                <div className="meta-data-container p-3 w-90 d-flex align-items-center justify-content-between">
+                <div className="meta-data-container p-2 w-90 d-flex align-items-center justify-content-between">
                     <MetaData Logo={<CiAlarmOn className='text-primary fs-6 fw-600' />} text={"22 April 2021"} />
                     <MetaData Logo={<AiOutlineAreaChart className='text-success fs-6 fw-600' />} text={"10 comments"} />
                 </div>
-                <div className="learn-more fw-700 text-secondary p-2 d-flex w-100 text-align-center justify-content-center justify-self-center align-items-center gap-1 fs-7">Learn More <span><FaChevronRight className='text-primary fs-6 fw-400' /></span></div>
+                <div className="learn-more fw-700 text-secondary p-2 d-flex w-100 text-align-center justify-content-start  align-items-center gap-1 fs-7">Learn More <span><FaChevronRight className='text-primary fs-6 fw-400' /></span></div>
             </div>
         </div>
     )

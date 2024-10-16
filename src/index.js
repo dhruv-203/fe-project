@@ -3,14 +3,18 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import HomePage from './Pages/HomePage/HomePage'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import ProductsPage from './Pages/ProductsPage/ProductsPage';
 import Provider from './Context/context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "",
+    element: <Navigate to={"home"} />,
+  },
+  {
+    path: "home",
     element: <App />,
     children: [
       {
@@ -18,7 +22,7 @@ const router = createBrowserRouter([
         element: <HomePage />
       },
       {
-        path: "/products",
+        path: "/home/products",
         element: <ProductsPage />
       }
     ]

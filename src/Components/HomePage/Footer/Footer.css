@@ -4,6 +4,7 @@
     gap: 0.5rem;
     align-items: start;
     justify-content: center;
+    padding: 1rem;
 }
 
 .footer-item {
@@ -27,7 +28,14 @@
 
 .row2 {
     align-items: center;
-    justify-content: stretch;
+    justify-content: space-between;
+}
+
+.line {
+    height: 1px;
+    width: 100%;
+    background-color: rgb(9, 9, 9, 0.1);
+    align-self: center;
 }
 
 @media (max-width: 500px) {

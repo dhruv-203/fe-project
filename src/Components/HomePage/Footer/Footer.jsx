@@ -5,17 +5,16 @@ import Layout from '../Layout'
 import SectionTitle from '../EditorPick/SectionTitle'
 import SectionDescription from '../EditorPick/SectionDescription'
 import './Footer.css'
-import Btn from '../HeroSection/Btn'
 
 function Footer() {
     return (
-        <div className='footer d-flex flex-column gap-4 align-items-center justify-content-center'>
-            <div className="row1 d-flex flex-wrap justify-content-between w-90  align-items-center ">
-                <BrandLogo className={"p-1"} />
-                <HeaderLogoContainer className='text-primary opacity-1' logoColor={"text-primary"} />
+        <div className='footer  d-flex flex-column gap-4 align-items-start w-100   justify-content-stretch '>
+            <div className="row1 d-flex flex-wrap justify-content-between w-100  align-items-center ">
+                <BrandLogo className={"p-1 px-2"} />
+                <HeaderLogoContainer className='text-primary opacity-1 px-4' logoColor={"text-primary"} />
             </div>
-            <hr className='fs-7 text-dark' />
-            <div className="row2 d-flex  gap-4 w-90 ">
+            <div className="line"></div>
+            <div className="row2 d-flex  gap-4 w-100 ">
                 <div className="item-container">
                     <div className="head footer-item"><SectionTitle className='fw-600' fontSize={"fs-6"}>Company Info</SectionTitle></div>
                     <div className="content footer-item">

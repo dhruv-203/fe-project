@@ -9,8 +9,8 @@
 .post-content {
     padding: 0.875rem;
     display: grid;
-    line-height: 1.5rem;
-    grid-template-rows: repeat(1fr, 5);
+    /* line-height: 1.5rem; */
+    grid-template-rows: repeat(5, 1fr);
 }
 
 .post-img-container {

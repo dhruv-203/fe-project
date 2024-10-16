@@ -20,7 +20,6 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { useWindowSize } from '../../../Context/context'
 function HeaderLayout() {
   let isMobile = useWindowSize()
-  console.log(isMobile)
 
   return (
     <div>
@@ -89,7 +88,7 @@ function Header({ className = "" }) {
 
 function NavItem({ children, className = "", handleClick }) {
   return (
-    <Text className={'text-dark opacity-06' + className} onClick={handleClick}>
+    <Text className={' text-dark opacity-06 ' + className} onClick={handleClick}>
       {children}
     </Text>
   )
@@ -105,22 +104,22 @@ function DesktopNavBar() {
       <div className="nav-items-container d-flex  align-items-center gap-3 justify-content-between container mr-5">
         <div className="nav-items text-align-center flex-wrap child-start d-flex align-items-center justify-content-center gap-3 p-3 ">
           <NavItem>
-            <NavLink className='text-dark' to={"/"}>Home</NavLink>
+            <NavLink className='text-dark' to={"/home"}>Home</NavLink>
           </NavItem>
           <NavItem >
-            <NavLink className='text-dark d-flex align-items-center justify-content-center' to={"/products"}>Shop <GoChevronDown className='fs-5 text-align-center px-1' /></NavLink>
+            <NavLink className='text-dark d-flex align-items-center justify-content-center' to={"/home/products"}>Shop </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink className='text-dark' to={"/about"}>About</NavLink>
+            <NavLink className='text-dark' to={"/home/about"}>About</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink className='text-dark' to={"/about"}>Blog</NavLink>
+            <NavLink className='text-dark' to={"/home/about"}>Blog</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink className='text-dark' to={"/contact"}>Contact</NavLink>
+            <NavLink className='text-dark' to={"/home/contact"}>Contact</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink className='text-dark' to={"/about"}>Pages</NavLink>
+            <NavLink className='text-dark' to={"/home/about"}>Pages</NavLink>
           </NavItem>
         </div>
         <div className="login-register-container flex-wrap d-flex justify-content-center align-items-center gap-4">
@@ -159,22 +158,22 @@ function MobileNavBar() {
         isOpen ? (<div className="nav-items-container d-flex flex-column align-items-center gap-3 justify-content-center mr-0 p-3">
           <div className="nav-items text-align-center flex-column flex-wrap child-start d-flex align-items-center justify-content-center gap-3 p-3 mr-0">
             <NavItem handleClick={() => { handleLinkClick(isOpen, setOpen) }}>
-              <NavLink className='text-dark fs-4' to={"/"}>Home</NavLink>
+              <NavLink className='text-dark fs-4' to={"/home"}>Home</NavLink>
             </NavItem>
             <NavItem handleClick={() => { handleLinkClick(isOpen, setOpen) }} >
-              <NavLink className='text-dark fs-4 d-flex align-items-center justify-content-center' to={"/products"}>Shop</NavLink>
+              <NavLink className='text-dark fs-4 d-flex align-items-center justify-content-center' to={"/home/products"}>Shop</NavLink>
             </NavItem>
             <NavItem handleClick={() => { handleLinkClick(isOpen, setOpen) }}>
-              <NavLink className='text-dark fs-4' to={"/about"}>About</NavLink>
+              <NavLink className='text-dark fs-4' to={"/home/about"}>About</NavLink>
             </NavItem>
             <NavItem handleClick={() => { handleLinkClick(isOpen, setOpen) }}>
-              <NavLink className='text-dark fs-4' to={"/about"}>Blog</NavLink>
+              <NavLink className='text-dark fs-4' to={"/home//about"}>Blog</NavLink>
             </NavItem>
             <NavItem handleClick={() => { handleLinkClick(isOpen, setOpen) }}>
-              <NavLink className='text-dark fs-4' to={"/contact"}>Contact</NavLink>
+              <NavLink className='text-dark fs-4' to={"/home/contact"}>Contact</NavLink>
             </NavItem>
             <NavItem handleClick={() => { handleLinkClick(isOpen, setOpen) }}>
-              <NavLink className='text-dark fs-4' to={"/about"}>Pages</NavLink>
+              <NavLink className='text-dark fs-4' to={"/home/about"}>Pages</NavLink>
             </NavItem>
           </div>
           <div className="login-register-container flex-column flex-wrap d-flex justify-content-center align-items-center gap-4">

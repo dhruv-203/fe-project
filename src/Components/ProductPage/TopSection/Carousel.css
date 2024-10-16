@@ -1,0 +1,25 @@
+.forward {
+    position: absolute;
+    right: -40px;
+    top: calc(50% - 24px);
+}
+
+.backward {
+    position: absolute;
+    left: -40px;
+    top: calc(50% - 24px);
+}
+
+.carousel-2 {
+    position: relative;
+}
+
+@media (max-width: 768px) {
+    .forward {
+        right: -20px;
+    }
+
+    .backward {
+        left: -20px;
+    }
+}
