@@ -1,0 +1,21 @@
+.brand-logo img {
+    height: auto;
+    width: 120px;
+    aspect-ratio: 16/ 9;
+}
+
+.reddit img {
+    aspect-ratio: 1/1;
+    width: 90px;
+}
+
+
+.brand-logos-container {
+    width: 100%
+}
+
+@media (max-width:500px) {
+    .brand-logos-container {
+        flex-direction: column;
+    }
+}

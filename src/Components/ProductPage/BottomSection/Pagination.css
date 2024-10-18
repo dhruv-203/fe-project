@@ -1,0 +1,26 @@
+.number-items {
+    border: 1.5px solid #ccc;
+}
+
+.number-items:not(:last-child) {
+    border-right: none;
+    /* Remove right border */
+    outline: 1.5px solid #ccc;
+}
+
+.number-items:not(:first-child) {
+    border-left: none;
+    /* Remove left border */
+    outline: 1.5px solid #ccc;
+    /* Create the illusion of a single border */
+}
+
+.next {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.prev {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}

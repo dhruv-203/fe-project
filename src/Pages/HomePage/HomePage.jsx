@@ -18,14 +18,15 @@ import postImg2 from '../../Assets/home-page/posts-images/post-2.jpg'
 import postImg3 from '../../Assets/home-page/posts-images/post-3.jpg'
 import PostGrid from '../../Components/HomePage/Posts/PostGrid';
 import Post from '../../Components/HomePage/Posts/Post';
-import Footer from '../../Components/HomePage/Footer/Footer';
+import { useState } from 'react';
 function HomePage() {
   let isMobile = useWindowSize();
+
+
   return (
     <div>
-      <Carousel className=" " data={
-
-        [
+      <Carousel className=" "
+        data={[
           {
             "preTitle": "SUMMER 2020",
             "title": "NEW COLLECTION",
@@ -42,9 +43,9 @@ function HomePage() {
             imgWidth: "100%"
           },
 
-        ]
+        ]}
 
-      } />
+      />
       <Layout className="editorsPick">
         <SectionTitleContainer className={" p-4 "}>
           <SectionTitle fontColor={" text-dark "} className={" p-2 fw-700 "} fontSize={"fs-3"} >Editor's Pick</SectionTitle>
@@ -80,7 +81,8 @@ function HomePage() {
           }
 
         ]
-      } />
+      }
+      />
       <div className="container image-content-section h-100">
         <SectionContainer
           className='asian-lady-container'

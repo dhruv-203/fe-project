@@ -10,11 +10,11 @@ function BreadCrumb({ title }) {
     const pathNames = location.pathname.split("/").filter((x) => x)
     const isMobile = useWindowSize()
     return (
-        <div className={"breadCrumbContainer d-flex justify-content-between align-items-center py-3 " + (isMobile ? " w-80 " : " w-70 ")}>
-            <div className='container d-flex justify-content-between align-items-center p-1'>
-                {<BrandLogo  >
+        <div className={"breadCrumbContainer justify-content-between d-flex align-items-center py-3 "}>
+            <div className='container d-flex  justify-content-between align-items-center p-1'>
+                {title ? <BrandLogo  >
                     {title}
-                </BrandLogo>}
+                </BrandLogo> : <></>}
                 <div className="crumbs d-flex justify-content-center align-items-center gap-2">
                     {
                         pathNames.map((val, ind, arr) => {

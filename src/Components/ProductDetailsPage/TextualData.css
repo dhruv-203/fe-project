@@ -1,0 +1,12 @@
+.option-btn {
+    border: 1px solid rgb(128, 128, 128, 0.5)
+}
+
+.select-btn {
+    border-radius: 5px;
+}
+
+.text-data-card {
+    min-width: 280px;
+    max-width: 400px
+}

@@ -1,0 +1,31 @@
+.indicator {
+    width: auto;
+    height: 75px;
+    opacity: 0.5;
+    aspect-ratio: 4/3;
+}
+
+.indicator-active {
+    opacity: 1;
+}
+
+.carousel-indicators {
+    position: absolute;
+    bottom: -90px;
+    left: 0px;
+
+}
+
+.carousel-margin-bottom {
+    margin-bottom: 6rem;
+}
+
+@media (max-width: 768px) {
+    .indicator {
+        height: 50px;
+    }
+
+    .carousel-indicators {
+        bottom: -60px;
+    }
+}

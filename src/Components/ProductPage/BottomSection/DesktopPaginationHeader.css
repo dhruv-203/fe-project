@@ -1,0 +1,22 @@
+.dropdown-head {
+    position: relative;
+}
+
+.dropdown {
+    position: absolute;
+    top: 92%;
+    left: 38.5%;
+    width: 35%;
+    z-index: 2;
+}
+
+.sort-open,
+.dropdown {
+    background-color: rgb(128, 128, 128, 0.7);
+}
+
+.sort-item,
+.sort-open {
+    z-index: 3;
+    color: rgba(255, 255, 255, 0.9);
+}

@@ -1,0 +1,11 @@
+.product-listing-grid {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    align-items: start;
+}
+
+@media (max-width:768px) {
+    .product-listing-grid {
+        grid-template-columns: 1fr;
+    }
+}
