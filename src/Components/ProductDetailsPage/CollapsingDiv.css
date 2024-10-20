@@ -1,0 +1,12 @@
+.collapse-head {
+    position: relative;
+}
+
+.collapse-content {
+    position: relative;
+    bottom: 0px;
+    left: 0px;
+    text-align: justify;
+    max-width: 280px;
+    padding: 1rem;
+}

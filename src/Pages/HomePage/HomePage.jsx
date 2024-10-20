@@ -68,7 +68,7 @@ function HomePage() {
             "preTitle": "SUMMER 2020",
             "title": "VITA CLASSIC PRODUCT",
             "description": "We know how large objects will act, We know how are objects will act, We know",
-            "bottomChild": <BtnContainer><Btn className={"fs-4 fw-700 "}>$16.48</Btn><Btn className={"fs-6 text-light bg-success rounded fw-700"}>ADD TO CART</Btn></BtnContainer>,
+            "bottomChild": <BtnContainer><div className={"px-2 py-3 fs-4 fw-700 "}>$16.48</div><Btn className={"fs-6 text-light bg-success rounded fw-700"}>ADD TO CART</Btn></BtnContainer>,
             heroImg: heroImg,
             imgHeight: "100%",
             imgWidth: "100%"

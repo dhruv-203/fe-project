@@ -1,0 +1,36 @@
+.display {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.add-info-image-container>img {
+    width: 25vw;
+    min-width: 280px;
+}
+
+.additional-info-2 {
+    flex-direction: column;
+}
+
+@media (max-width: 1000px) {
+    .display {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .additional-info-2 {
+        flex-direction: row;
+        grid-column: 1/ span 2;
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .display {
+        grid-template-columns: 1fr;
+    }
+
+    .additional-info-2 {
+        grid-column: auto;
+        flex-direction: column;
+    }
+}

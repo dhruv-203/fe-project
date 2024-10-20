@@ -31,6 +31,7 @@
 
 .image-container img {
     max-width: 400px;
+
 }
 
 .selected {
@@ -73,9 +74,9 @@
     padding: 4rem;
 }
 
-@media (max-width: 786px) {
+@media (max-width: 768px) {
     .image-container {
-        height: 45vh;
+        height: 55vh;
         width: 90vw;
     }
 

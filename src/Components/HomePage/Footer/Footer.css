@@ -27,7 +27,7 @@
 }
 
 .row2 {
-    align-items: center;
+    align-items: start;
     justify-content: space-between;
 }
 
@@ -48,7 +48,7 @@
     }
 }
 
-@media (max-width:768px) and (min-width:502px) {
+@media (max-width:768px) and (min-width:501px) {
     .row2 {
         flex-wrap: wrap;
     }

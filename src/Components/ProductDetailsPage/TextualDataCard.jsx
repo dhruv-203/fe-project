@@ -18,7 +18,7 @@ function TextualDataCard({ data }) {
             <div className="reviews-ratings-container p-2 d-flex justify-content-center align-items-center gap-3">
                 <LogoContainer className='gap-1 '>
                     {
-                        Array.from({ length: 5 }, (v, i) => ((i + 1 <= data.rating) ? <RxStarFilled className='text-warning' /> : <RxStar className='text-warning' />))
+                        Array.from({ length: 5 }, (v, i) => ((i + 1 <= data.rating) ? <RxStarFilled key={i} className='text-warning' /> : <RxStar key={i} className='text-warning' />))
                     }
                 </LogoContainer>
                 <SectionDescription >{data.reviewCount} Reviews</SectionDescription>
@@ -27,7 +27,7 @@ function TextualDataCard({ data }) {
             <div className="line w-90 "></div>
             <div className="d-flex align-items-center justify-content-between gap-2 p-2 ">
                 {data.colors.map((val) => {
-                    return <CircleBtn width={"30px"} height={"30px"} bgColor={val} />
+                    return <CircleBtn key={val} width={"30px"} height={"30px"} bgColor={val} />
                 })}
             </div>
             <div className="action-btns-container mt-4 p-2  d-flex justify-content-center align-items-center gap-2">

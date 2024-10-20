@@ -4,6 +4,9 @@ import BreadCrumb from '../../Components/ProductPage/TopSection/BreadCrumb'
 import product1 from '../../Assets/product-page/ProductsDetails/Product-1.png'
 import DetailsSection from '../../Components/ProductDetailsPage/DetailsSection'
 import product2 from '../../Assets/product-page/ProductsDetails/Product-2.png'
+import AdditionalInformationSection from '../../Components/ProductDetailsPage/AdditionalInformationSection'
+import BrandLogosContainer from '../../Components/ProductPage/BrandLogosContainer'
+import BestsellerProductsSection from '../../Components/ProductDetailsPage/BestsellerProductsSection'
 function ProductDetails() {
     const data = {
         productImages: [
@@ -31,6 +34,9 @@ function ProductDetails() {
         <div className='container'>
             <BreadCrumb title={""} />
             <DetailsSection data={data} />
+            <AdditionalInformationSection />
+            <BestsellerProductsSection />
+            <BrandLogosContainer />
         </div>
     )
 }
