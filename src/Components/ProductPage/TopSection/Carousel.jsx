@@ -6,7 +6,8 @@ import './Carousel.css'
 import { Fragment } from 'react';
 //DataItems is an array of JSX Elements which are carousel items 
 function Carousel({ className = " ", DataItems, numberOfItemsToShowInDesktop, numberOfItemsToShowInMobile, BottomIndicators = "" }) {
-    const isMobile = useWindowSize()
+    let isMobile = (useWindowSize()).isMobile
+
     const [tail, setTail] = useState(isMobile ? numberOfItemsToShowInMobile : numberOfItemsToShowInDesktop)
     const [head, setHead] = useState(0)
     useEffect(() => {

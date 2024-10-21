@@ -8,12 +8,15 @@ import AdditionalInformationSection from '../../Components/ProductDetailsPage/Ad
 import BrandLogosContainer from '../../Components/ProductPage/BrandLogosContainer'
 import BestsellerProductsSection from '../../Components/ProductDetailsPage/BestsellerProductsSection'
 function ProductDetails() {
+    const { productId } = useParams()
+
     const data = {
         productImages: [
             product1,
             product2
         ],
         productDetails: {
+            id: productId,
             title: "Floating Phone",
             rating: 4,
             reviewCount: 10,
@@ -28,7 +31,6 @@ function ProductDetails() {
             ]
         }
     }
-    const { productId } = useParams()
 
     return (
         <div className='container'>

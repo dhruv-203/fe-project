@@ -6,7 +6,8 @@ import './Carousel.css'
 import { useState } from 'react';
 import CarouselItem from './CarouselItem';
 function Carousel({ className = "", data }) {
-  let isMobile = useWindowSize()
+  let isMobile = (useWindowSize()).isMobile
+
   const [currItem, setCurrItem] = useState(0)
   function handleForward() {
     if (currItem >= data.length - 1) {

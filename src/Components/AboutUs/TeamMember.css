@@ -1,0 +1,13 @@
+.profile-container {
+    width: 316px;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    padding: 1rem;
+}
+
+@media (max-width: 768px) {
+    .profile-container {
+        width: 280px;
+        aspect-ratio: 1 / 1;
+    }
+}

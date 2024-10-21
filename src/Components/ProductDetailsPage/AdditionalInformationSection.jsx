@@ -6,11 +6,12 @@ import { useState } from 'react'
 import './AdditionalInformationSection.css'
 import { useWindowSize } from '../../Context/context'
 function AdditionalInformation() {
-    const isMobile = useWindowSize()
+    let isMobile = (useWindowSize()).isMobile
+
     return (
         <>
             <div className="add-info-image-container mx-auto"><img src={additional1} height={"auto"} style={{ "aspectRatio": "3/4" }} alt="" /></div>
-            <div className={"additional-info-1  d-flex flex-column  justify-content-center gap-3 " + (isMobile ? "align-items-center" : "align-items-start")}>
+            <div className={"additional-info-1   d-flex flex-column  justify-content-center gap-3 " + (isMobile ? "align-items-start" : "align-items-start")}>
                 <AdditionalInfoTitle className={"px-3"}>the quick fox jumps over</AdditionalInfoTitle>
                 <span className="fs-7 text-secondary px-3">
                     Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequent door ENIM RELIT Mollie. Excitation venial consequent sent nostrum met.
@@ -24,16 +25,16 @@ function AdditionalInformation() {
             </div>
             <div className={"additional-info-2 gap-3  d-flex justify-content-start " + (isMobile ? "align-items-center" : "align-items-start")} >
                 <div className="item px-3 d-flex flex-column align-items-start justify-content-center gap-2">
-                    <AdditionalInfoTitle className={"mb-3"}>the quick fox jumps over</AdditionalInfoTitle>
-                    <CollapsingDiv title={"the quick fox jumps over"} content={"Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequent door ENIM RELIT Mollie. Excitation venial consequent sent nostrum met."} />
-                    <CollapsingDiv title={"the quick fox jumps over"} content={"Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequent door ENIM RELIT Mollie. Excitation venial consequent sent nostrum met."} />
-                    <CollapsingDiv title={"the quick fox jumps over"} content={"Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequent door ENIM RELIT Mollie. Excitation venial consequent sent nostrum met."} />
+                    <AdditionalInfoTitle className={" mb-3  "}>the quick fox jumps over</AdditionalInfoTitle>
+                    <CollapsingDiv title={"the quick fox jumps over the lazy dog"} content={"Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequent door ENIM RELIT Mollie. Excitation venial consequent sent nostrum met."} />
+                    <CollapsingDiv title={"the quick fox jumps over the lazy dog"} content={"Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequent door ENIM RELIT Mollie. Excitation venial consequent sent nostrum met."} />
+                    <CollapsingDiv title={"the quick fox jumps over the lazy dog"} content={"Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequent door ENIM RELIT Mollie. Excitation venial consequent sent nostrum met."} />
                 </div>
                 <div className="item px-3 d-flex flex-column align-items-start justify-content-center gap-2">
-                    <AdditionalInfoTitle className={"mb-3"}>the quick fox jumps over</AdditionalInfoTitle>
-                    <CollapsingDiv title={"the quick fox jumps over"} content={"Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequent door ENIM RELIT Mollie. Excitation venial consequent sent nostrum met."} />
-                    <CollapsingDiv title={"the quick fox jumps over"} content={"Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequent door ENIM RELIT Mollie. Excitation venial consequent sent nostrum met."} />
-                    <CollapsingDiv title={"the quick fox jumps over"} content={"Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequent door ENIM RELIT Mollie. Excitation venial consequent sent nostrum met."} />
+                    <AdditionalInfoTitle className={" mb-3 "}>the quick fox jumps over</AdditionalInfoTitle>
+                    <CollapsingDiv title={"the quick fox jumps over the lazy dog"} content={"Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequent door ENIM RELIT Mollie. Excitation venial consequent sent nostrum met."} />
+                    <CollapsingDiv title={"the quick fox jumps over the lazy dog"} content={"Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequent door ENIM RELIT Mollie. Excitation venial consequent sent nostrum met."} />
+                    <CollapsingDiv title={"the quick fox jumps over the lazy dog"} content={"Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequent door ENIM RELIT Mollie. Excitation venial consequent sent nostrum met."} />
                 </div>
             </div>
 
@@ -58,18 +59,24 @@ function DescriptionContainer() {
 }
 
 function AdditionalInformationSection() {
-    const [SectionToDisplay, setSectionToDisplay] = useState(<AdditionalInformation />)
-    const isMobile = useWindowSize()
+    const items = {
+        "addInfo": <AdditionalInformation />,
+        "descrip": <DescriptionContainer />,
+        "reviews": <ReviewsContainer />
+    }
+    const [SectionToDisplay, setSectionToDisplay] = useState("addInfo")
+    let isMobile = (useWindowSize()).isMobile
+
 
     return (
         <div className="d-flex flex-column align-items-center justify-content-center gap-3 py-2">
-            <div className="action-tab d-flex justify-content-center align-items-center gap-5 my-5">
-                <div className="tab description-tab fs-6 text-secondary" onClick={() => setSectionToDisplay(<DescriptionContainer />)}>Description</div>
-                <div className="tab add-info-tab fs-6 text-secondary" onClick={() => setSectionToDisplay(<AdditionalInformation />)}>Additional Information</div>
-                <div className="tab reviews-tab fs-6 text-secondary" onClick={() => setSectionToDisplay(<ReviewsContainer />)}>Reviews</div>
+            <div className={" action-tab d-flex justify-content-center align-items-center my-5 px-3 " + (isMobile ? " gap-2 " : " gap-5 ")}>
+                <div className={" tab description-tab fs-7 text-secondary " + (SectionToDisplay === "descrip" ? "fw-600" : " ")} onClick={() => setSectionToDisplay("descrip")}>Description</div>
+                <div className={" tab add-info-tab fs-7 text-secondary " + (SectionToDisplay === "addInfo" ? "fw-600" : " ")} onClick={() => setSectionToDisplay("addInfo")}>Additional Information</div>
+                <div className={" tab reviews-tab fs-7 text-secondary " + (SectionToDisplay === "reviews" ? "fw-600" : " ")} onClick={() => setSectionToDisplay("reviews")}>Reviews <span className=" text-success fw-700 ">(0)</span></div>
             </div>
             <div className={"display w-100  gap-3 align-items-start mt-3 " + (isMobile ? "justify-items-center " : "justify-items-between")}>
-                {SectionToDisplay}
+                {items[SectionToDisplay]}
             </div>
         </div>
     )

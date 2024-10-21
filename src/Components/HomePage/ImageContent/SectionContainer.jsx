@@ -6,7 +6,8 @@ import './SectionContainer.css'
 import { useWindowSize } from '../../../Context/context'
 
 function SectionContainer({ className = " ", img }) {
-    let isMobile = useWindowSize()
+    let isMobile = (useWindowSize()).isMobile
+
     return (
         <div className={"d-flex justify-content-center align-items-center gap-3 " + " " + className + (isMobile ? " flex-column-reverse " : " ")}>
             <div className="img-container">

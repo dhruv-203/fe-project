@@ -1,0 +1,59 @@
+.left-info {
+    flex-grow: 1;
+    flex-shrink: 2;
+}
+
+.right-info {
+    flex-grow: 2;
+}
+
+.video-div {
+    background-image: url('../../Assets/AboutUs/video.png');
+    width: 90%;
+    height: auto;
+    z-index: -1;
+    aspect-ratio: 16/9;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+    max-width: 1100px;
+    border-radius: 20px;
+}
+
+.play-btn {
+    height: 90px;
+    width: 90px;
+    background-color: #23a6f0;
+    position: absolute;
+    top: calc(50% - 45px);
+    left: calc(50% - 45px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.big-companies {
+    background-color: #fafafa;
+}
+
+.play-icn {
+    height: 60px;
+    width: 60px;
+
+}
+
+@media (max-width: 768px) {
+    .video-div {
+        aspect-ratio: 1/1;
+        max-width: 500px;
+    }
+}
+
+@media (max-width: 1150px) and (min-width: 769px) {
+    .video-div {
+        max-width: 700px;
+    }
+}

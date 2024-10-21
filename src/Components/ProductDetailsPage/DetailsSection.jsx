@@ -6,7 +6,7 @@ import './DetailsSection.css'
 
 
 function DetailsSection({ className = " ", data }) {
-    const isMobile = useWindowSize()
+    let isMobile = (useWindowSize()).isMobile
     const imagesArray = data.productImages.map((val) => {
         return <img src={val} width={"100%"} height={"auto"} style={{ "aspectRatio": "1/1" }} alt="" />
     })

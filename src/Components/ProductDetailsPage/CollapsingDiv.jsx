@@ -6,7 +6,7 @@ function CollapsingDiv({ title, content }) {
     const [isOpen, setOpen] = useState(false)
     return (
         <div className="collapsing-container w-100">
-            <div className="collapse-head p-2 d-flex alig-items-center justify-content-center gap-2" onClick={() => setOpen(!isOpen)}>
+            <div className="collapse-head p-2 d-flex alig-items-center justify-content-start gap-2" onClick={() => setOpen(!isOpen)}>
                 {isOpen ? <FaChevronDown className='fs-6' /> : <FaChevronRight className='fs-6' />}
                 <div className="fs-7 text-secondary">{title}</div>
 

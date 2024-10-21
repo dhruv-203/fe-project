@@ -29,6 +29,10 @@
         grid-template-columns: 1fr;
     }
 
+    .additional-info-1 {
+        margin: 2rem;
+    }
+
     .additional-info-2 {
         grid-column: auto;
         flex-direction: column;

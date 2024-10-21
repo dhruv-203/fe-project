@@ -12,7 +12,8 @@ import { useWindowSize } from '../../../Context/context'
 import './Pagination.css'
 // this data expects an array of jsx elements to display in pagintion 
 function Pagination({ data = [] }) {
-    const isMobile = useWindowSize()
+      let isMobile = (useWindowSize()).isMobile
+
     const [maxDisplay, setMaxDisplay] = useState(9)
     const [currIndex, setCurrIndex] = useState(1)
     let [noPages, setNoPages] = useState(Math.ceil((data.length / maxDisplay)))
@@ -75,7 +76,8 @@ export default Pagination
 //Code optimised by gpt by removing some extra states that i created 
 // this data expects an array of jsx elements to display in pagintion 
 function Pagination({ data = [] }) {
-    const isMobile = useWindowSize()
+    let isMobile = (useWindowSize()).isMobile
+
     const [maxDisplay, setMaxDisplay] = useState(9)
     const [currIndex, setCurrIndex] = useState(1)
     let noPages = Math.ceil((data.length / maxDisplay))

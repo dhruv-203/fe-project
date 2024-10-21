@@ -7,6 +7,9 @@ import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 import ProductsPage from './Pages/ProductsPage/ProductsPage';
 import Provider from './Context/context';
 import ProductDetails from './Pages/ProductDetailPage/ProductDetails';
+import AboutUs from './Pages/AboutUsPage/AboutUs';
+import ContactUs from './Pages/ContactUs/ContactUs';
+import contactImg from './Assets/AboutUs/contact.png'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([
   {
@@ -28,6 +31,14 @@ const router = createBrowserRouter([
       {
         path: "products/:productId",
         element: <ProductDetails />
+      },
+      {
+        path: "about",
+        element: <AboutUs />
+      },
+      {
+        path: "contact",
+        element: <ContactUs img={contactImg} />
       }
     ]
   }

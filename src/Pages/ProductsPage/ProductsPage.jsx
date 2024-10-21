@@ -18,7 +18,8 @@ import ProductCard from '../../Components/HomePage/BestSeller/ProductCard'
 import BrandLogosContainer from '../../Components/ProductPage/BrandLogosContainer'
 import { NavLink } from 'react-router-dom'
 function ProductsPage() {
-  const isMobile = useWindowSize()
+  let isMobile = (useWindowSize()).isMobile
+
   return (
     <>
       <div className="product-top-section d-flex align-items-center justify-content-center flex-column">

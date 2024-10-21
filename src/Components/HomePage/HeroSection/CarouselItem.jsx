@@ -5,7 +5,8 @@ import { useWindowSize } from '../../../Context/context';
 let initial = true;
 
 function CarouselItem({ className, data }) {
-    let isMobile = useWindowSize()
+    let isMobile = (useWindowSize()).isMobile
+
     useEffect(() => {
         initial = false;
     }, [])

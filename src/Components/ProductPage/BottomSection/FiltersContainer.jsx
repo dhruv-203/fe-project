@@ -5,7 +5,8 @@ import FilterCategory from './FilterCategory'
 import { useWindowSize } from '../../../Context/context'
 import Slider from './Slider'
 function FiltersContainer() {
-    const isMobile = useWindowSize();
+    let isMobile = (useWindowSize()).isMobile
+
 
     return (
 

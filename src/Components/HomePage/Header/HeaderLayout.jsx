@@ -17,10 +17,11 @@ import { HiOutlinePhone } from "react-icons/hi";
 import { MdPersonOutline } from "react-icons/md";
 import { useState } from 'react'
 import { GiHamburgerMenu } from "react-icons/gi";
-import { useWindowSize } from '../../../Context/context'
-function HeaderLayout() {
-  let isMobile = useWindowSize()
+import { useWindowSize, useCart } from '../../../Context/context'
 
+
+function HeaderLayout() {
+  let isMobile = (useWindowSize()).isMobile
   return (
     <div>
       <Header className={"bg-dark"} />
@@ -98,6 +99,7 @@ function NavItem({ children, className = "", handleClick }) {
 
 
 function DesktopNavBar() {
+  const { getCount } = useCart()
   return (
     <div className={`navbar container-fluid gap-2  d-flex justify-content-between py-2  align-items-center bg-light `} >
       <BrandLogo className={"px-4 p-3"} />
@@ -128,12 +130,14 @@ function DesktopNavBar() {
             <Text className='py-2'>Login / Register</Text>
           </NavLink>
           <LogoContainer className='navbar-logo-container flex-wrap text-primary gap-4  align-items-center'>
-            <Logo>
-              <BiSearchAlt2 />
+            <Logo >
+              <BiSearchAlt2 className='fs-5 mt-1' />
             </Logo>
-            <Logo>
-              <span className="d-flex align-items-center justify-content-center gap-1"><BsCart /> <span className="fs-6 text-align-center">1</span></span>
-            </Logo>
+            <NavLink to={"/home/cart"}>
+              <Logo>
+                <span className="d-flex align-items-center justify-content-center gap-1 text-primary"><BsCart /> <span className="fs-6 text-align-center">{getCount()}</span></span>
+              </Logo>
+            </NavLink>
             <Logo>
               <span className="d-flex align-items-center justify-content-center gap-1"><HiOutlineHeart /> <span className="fs-6 text-align-center">1</span></span>
             </Logo>
@@ -146,6 +150,7 @@ function DesktopNavBar() {
 
 function MobileNavBar() {
   const [isOpen, setOpen] = useState(false)
+  const { getCount } = useCart()
   return (
     <div className={`navbar  bg-light`} >
       <div className='gap-2  d-flex justify-content-between py-2  align-items-center  '>
@@ -186,7 +191,7 @@ function MobileNavBar() {
                 <BiSearchAlt2 />
               </Logo>
               <Logo className='fs-3'>
-                <span className="d-flex align-items-center justify-content-center gap-1"><BsCart /> <span className="fs-6 text-align-center">1</span></span>
+                <span className="d-flex align-items-center justify-content-center gap-1"><BsCart /> <span className="fs-6 text-align-center">{getCount()}</span></span>
               </Logo>
               <Logo className='fs-3'>
                 <span className="d-flex align-items-center justify-content-center gap-1"><HiOutlineHeart /> <span className="fs-6 text-align-center">1</span></span>

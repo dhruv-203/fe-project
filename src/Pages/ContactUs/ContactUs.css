@@ -1,0 +1,21 @@
+.right-contact-div {
+    height: 100%;
+    width: 60vw;
+    aspect-ratio: 1/1;
+}
+
+.right-contact-div>img {
+    aspect-ratio: 1/1;
+}
+
+
+.left-contact-div {
+    /* flex-grow: 2; */
+    flex-shrink: 2;
+}
+
+@media (max-width:1100px) {
+    .right-contact-div {
+        display: none;
+    }
+}

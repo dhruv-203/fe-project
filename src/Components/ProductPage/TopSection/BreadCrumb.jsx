@@ -8,7 +8,6 @@ import { useWindowSize } from '../../../Context/context';
 function BreadCrumb({ title }) {
     const location = useLocation()
     const pathNames = location.pathname.split("/").filter((x) => x)
-    const isMobile = useWindowSize()
     return (
         <div className={"breadCrumbContainer justify-content-between d-flex align-items-center py-3 "}>
             <div className='container d-flex  justify-content-between align-items-center p-1 px-2'>

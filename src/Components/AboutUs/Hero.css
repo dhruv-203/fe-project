@@ -1,0 +1,12 @@
+.abt-hero-img-container {
+    width: 45vw;
+    height: auto;
+    aspect-ratio: 1/1;
+    padding: 1rem;
+}
+
+@media (max-width: 768px) {
+    .abt-hero-img-container {
+        width: 80vw;
+    }
+}

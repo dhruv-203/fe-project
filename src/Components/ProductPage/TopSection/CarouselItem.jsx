@@ -2,7 +2,8 @@ import React from 'react'
 import './CarouselItem.css'
 import { useWindowSize } from '../../../Context/context'
 function CarouselItem({ img, categoryTitle, numberOfItems }) {
-    const isMobile = useWindowSize()
+    let isMobile = (useWindowSize()).isMobile
+
     return (
         <div className='product-carousel-item d-flex p-2 align-items-center justify-content-center'>
             <img src={img} alt="" className='item-image' />

@@ -20,7 +20,7 @@ import PostGrid from '../../Components/HomePage/Posts/PostGrid';
 import Post from '../../Components/HomePage/Posts/Post';
 import { useState } from 'react';
 function HomePage() {
-  let isMobile = useWindowSize();
+
 
 
   return (
