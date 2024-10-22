@@ -27,7 +27,7 @@ function DetailsSection({ className = " ", data }) {
     return (
         <div className={' d-flex align-items-center justify-content-between ' + (isMobile ? " flex-column " : " ")}>
             <Carousel className={" carousel-margin-bottom " + (isMobile ? " w-70 " : ' w-40 ')} numberOfItemsToShowInDesktop={1} DataItems={imagesArray} numberOfItemsToShowInMobile={1} BottomIndicators={BottomIndicators} />
-            <TextualDataCard data={data.productDetails} />
+            <TextualDataCard data={data.productDetails} key={data.productDetails.id} />
         </div>
     )
 }

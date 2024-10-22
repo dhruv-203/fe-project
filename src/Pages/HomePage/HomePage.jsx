@@ -18,6 +18,7 @@ import postImg2 from '../../Assets/home-page/posts-images/post-2.jpg'
 import postImg3 from '../../Assets/home-page/posts-images/post-3.jpg'
 import PostGrid from '../../Components/HomePage/Posts/PostGrid';
 import Post from '../../Components/HomePage/Posts/Post';
+import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 function HomePage() {
 
@@ -31,7 +32,7 @@ function HomePage() {
             "preTitle": "SUMMER 2020",
             "title": "NEW COLLECTION",
             "description": "We know how large objects will act, but things on a small scale.",
-            "bottomChild": <Btn className={"fs-6 text-light bg-success fw-700 rounded"}>SHOP NOW</Btn>
+            "bottomChild": <NavLink to={'products'}><Btn className={"fs-6 text-light bg-success fw-700 rounded"}>SHOP NOW</Btn></NavLink>
           },
           {
             "preTitle": "SUMMER 2020",
@@ -77,7 +78,7 @@ function HomePage() {
             "preTitle": "SUMMER 2020",
             "title": "NEW COLLECTION",
             "description": "We know how large objects will act, but things on a small scale.",
-            "bottomChild": <Btn className={"fs-6 text-light bg-success fw-700 rounded"}>SHOP NOW</Btn>
+            "bottomChild": <NavLink to={'products'}><Btn className={"fs-6 text-light bg-success fw-700 rounded"}>SHOP NOW</Btn></NavLink>
           }
 
         ]

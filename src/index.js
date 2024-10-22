@@ -10,6 +10,8 @@ import ProductDetails from './Pages/ProductDetailPage/ProductDetails';
 import AboutUs from './Pages/AboutUsPage/AboutUs';
 import ContactUs from './Pages/ContactUs/ContactUs';
 import contactImg from './Assets/AboutUs/contact.png'
+import Cart from './Pages/Cart/Cart';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([
   {
@@ -39,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: "contact",
         element: <ContactUs img={contactImg} />
+      },
+      {
+        path: "cart",
+        element: <Cart />
       }
     ]
   }

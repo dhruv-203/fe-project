@@ -3,7 +3,6 @@ import { useLocation, NavLink } from 'react-router-dom'
 import BrandLogo from '../../HomePage/Header/BrandLogo'
 import { FaChevronRight } from "react-icons/fa6";
 import { Fragment } from 'react';
-import { useWindowSize } from '../../../Context/context';
 
 function BreadCrumb({ title }) {
     const location = useLocation()

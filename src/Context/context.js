@@ -7,19 +7,19 @@ export default function Provider({ children }) {
     const [cart, setCart] = useState([])
 
     function addToCart(prod) {
-        console.log(prod)
         setCart([...cart, prod])
         return prod
     }
 
-    function removeFromCart(prodID) {
-        setCart(cart.filter((prod) => prod.prodID !== prodID))
-        return prodID
+    function removeFromCart(prodID, prodColor) {
+        setCart([...cart.filter((prod) => {
+            return !((prod.prodID === prodID) && (prod.prodColor === prodColor));
+        })])
     }
 
-    function getQuantity(prodID) {
-        let prod = cart.find((val) => val.id === prodID)
-        return prod ? prod.prodQuant : -1
+    function getQuantity(prodID, prodColor) {
+        let prod = cart.find((val) => (val.prodID === prodID && val.prodColor === prodColor))
+        return prod ? prod.prodQuant : 0
     }
 
     function getProds() {
@@ -33,13 +33,13 @@ export default function Provider({ children }) {
     }
 
     function getCount() {
-        return cart.length
+        return cart.reduce((acc, curr) => (acc + curr.prodQuant), 0)
     }
 
-    function updateCart(prodID, prodColor) {
+    function updateCart(prodID, prodColor, Quant) {
         setCart(cart.map((val) => {
             if ((val.prodID === prodID && val.prodColor === prodColor)) {
-                return { ...val, prodQuant: val.prodQuant + 1 }
+                return { ...val, prodQuant: Quant }
             }
             else {
                 return val

@@ -5,7 +5,6 @@ import Layout from './Components/HomePage/Layout';
 import Footer from './Components/HomePage/Footer/Footer';
 import './utility.css'
 function App() {
-
   return (
     <div className="App">
       <HeaderLayout />

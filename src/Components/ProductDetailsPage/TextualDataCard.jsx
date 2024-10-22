@@ -37,14 +37,13 @@ function TextualDataCard({ data }) {
                 <CircleBtn className={"d-flex p-1 align-items-center justify-content-center option-btn"} width={" 30px "} height={" 30px "} ><HiOutlineHeart className='fs-6' /></CircleBtn>
                 {
                     productExists(data.id, selectedColor) ? <CircleBtn className={" d-flex p-1 justify-content-center align-items-center option-btn "} width={" 30px "} height={" 30px "}  > <BsCartCheck className='fs-6' onClick={() => {
-                        removeFromCart(data.id)
+                        removeFromCart(data.id, selectedColor)
                     }} /> </CircleBtn> : <CircleBtn className={" d-flex p-1 justify-content-center align-items-center option-btn "} width={" 30px "} height={" 30px "} onClick={() => {
-                        console.log("hi")
                         addToCart({
                             prodID: data.id,
                             prodName: data.title,
                             prodPrice: data.price,
-                            prodQuant: getQuantity(data.id) + 1,
+                            prodQuant: getQuantity(data.id, selectedColor) + 1,
                             prodColor: selectedColor
                         })
                     }} > <BsCart className='fs-6' /> </CircleBtn>}

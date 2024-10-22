@@ -1,0 +1,32 @@
+/* Common styling to remove background and borders */
+input[type="number"] {
+    width: 30px;
+    aspect-ratio: 6 / 3;
+    padding: 10px;
+    border: 2px solid grey;
+    outline: none
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    display: none;
+}
+
+.quantity-container {
+    position: relative;
+}
+
+.up-arrow,
+.down-arrow {
+    position: absolute;
+    left: 55%;
+    /* height: 0.875rem; */
+}
+
+.up-arrow {
+    top: 10px;
+}
+
+.down-arrow {
+    bottom: 10px;
+}

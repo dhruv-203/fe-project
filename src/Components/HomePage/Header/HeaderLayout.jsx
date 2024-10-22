@@ -102,7 +102,7 @@ function DesktopNavBar() {
   const { getCount } = useCart()
   return (
     <div className={`navbar container-fluid gap-2  d-flex justify-content-between py-2  align-items-center bg-light `} >
-      <BrandLogo className={"px-4 p-3"} />
+      <NavLink to={'/home'}><BrandLogo className={"px-4 p-3"} /></NavLink>
       <div className="nav-items-container d-flex  align-items-center gap-3 justify-content-between container mr-5">
         <div className="nav-items text-align-center flex-wrap child-start d-flex align-items-center justify-content-center gap-3 p-3 ">
           <NavItem>
@@ -154,7 +154,7 @@ function MobileNavBar() {
   return (
     <div className={`navbar  bg-light`} >
       <div className='gap-2  d-flex justify-content-between py-2  align-items-center  '>
-        <BrandLogo className={"px-4 p-3"} />
+        <NavLink to={"/home"}><BrandLogo className={"px-4 p-3"} /></NavLink>
         <GiHamburgerMenu className='fs-4 px-4' onClick={() => {
           setOpen(!isOpen)
         }} />
