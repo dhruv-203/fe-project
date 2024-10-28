@@ -88,11 +88,19 @@ function Pagination({ data = [] }) {
     }, [currIndex, noPages])
 
     const handlePrev = () => {
+        window.scrollTo({
+            top: isMobile ? 300 : 400,
+            behavior: 'smooth'
+        })
         if (currIndex > 1) setCurrIndex(currIndex - 1);
     }
 
     const handleNext = () => {
         if (currIndex < noPages) setCurrIndex(currIndex + 1);
+        window.scrollTo({
+            top: isMobile ? 300 : 400,
+            behavior: 'smooth'
+        })
     }
 
     useEffect(() => {
@@ -128,7 +136,13 @@ function Pagination({ data = [] }) {
                     <div
                         key={page}
                         className={"number-items fs-7 text-align-center " + (page === currIndex ? "bg-primary text-light" : "bg-light text-primary") + (isMobile ? " p-3 " : " p-4 ")}
-                        onClick={() => setCurrIndex(page)}
+                        onClick={() => {
+                            window.scrollTo({
+                                top: isMobile ? 300 : 400,
+                                behavior: 'smooth'
+                            })
+                            setCurrIndex(page)
+                        }}
                     >
                         {page}
                     </div>
