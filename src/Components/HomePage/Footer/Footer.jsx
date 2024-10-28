@@ -1,7 +1,6 @@
 import React from 'react'
 import BrandLogo from '../Header/BrandLogo'
 import { HeaderLogoContainer } from '../Header/HeaderLayout'
-import Layout from '../Layout'
 import SectionTitle from '../EditorPick/SectionTitle'
 import SectionDescription from '../EditorPick/SectionDescription'
 import './Footer.css'

@@ -10,7 +10,6 @@ function Cart() {
     const isMobile = useWindowSize().isMobile
     const { getProds } = useCart()
     const datas = getProds()
-    console.log(datas)
     return (
         <div className=''>
             <BreadCrumb />

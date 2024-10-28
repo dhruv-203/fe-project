@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
 import { TbMenuDeep } from "react-icons/tb";
-import FilterHead from './FilterHead';
 import FilterItem from './FilterItem';
-import FilterCategory from './FilterCategory';
-import Slider from './Slider';
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 import FiltersContainer from './FiltersContainer';
 

@@ -39,6 +39,7 @@ function ProductDetails() {
             <AdditionalInformationSection />
             <BestsellerProductsSection />
             <BrandLogosContainer />
+
         </div>
     )
 }

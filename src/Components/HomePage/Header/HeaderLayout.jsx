@@ -23,7 +23,7 @@ import { useWindowSize, useCart } from '../../../Context/context'
 function HeaderLayout() {
   let isMobile = (useWindowSize()).isMobile
   return (
-    <div>
+    <div >
       <Header className={"bg-dark"} />
       {
         isMobile ? <MobileNavBar /> : <DesktopNavBar />
@@ -172,7 +172,7 @@ function MobileNavBar() {
               <NavLink className='text-dark fs-4' to={"/home/about"}>About</NavLink>
             </NavItem>
             <NavItem handleClick={() => { handleLinkClick(isOpen, setOpen) }}>
-              <NavLink className='text-dark fs-4' to={"/home//about"}>Blog</NavLink>
+              <NavLink className='text-dark fs-4' to={"/home/about"}>Blog</NavLink>
             </NavItem>
             <NavItem handleClick={() => { handleLinkClick(isOpen, setOpen) }}>
               <NavLink className='text-dark fs-4' to={"/home/contact"}>Contact</NavLink>
@@ -190,9 +190,11 @@ function MobileNavBar() {
               <Logo className='fs-3'>
                 <BiSearchAlt2 />
               </Logo>
-              <Logo className='fs-3'>
-                <span className="d-flex align-items-center justify-content-center gap-1"><BsCart /> <span className="fs-6 text-align-center">{getCount()}</span></span>
-              </Logo>
+              <NavLink to={"/home/cart"} onClick={() => { handleLinkClick(isOpen, setOpen) }}>
+                <Logo className='fs-3'>
+                  <span className="d-flex align-items-center justify-content-center gap-1 text-primary"><BsCart /> <span className="fs-6 text-align-center">{getCount()}</span></span>
+                </Logo>
+              </NavLink>
               <Logo className='fs-3'>
                 <span className="d-flex align-items-center justify-content-center gap-1"><HiOutlineHeart /> <span className="fs-6 text-align-center">1</span></span>
               </Logo>

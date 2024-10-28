@@ -2,7 +2,6 @@ import React from 'react'
 import { useState } from 'react'
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa6'
 import FilterItem from './FilterItem'
-import { Fragment } from 'react'
 import './DesktopPaginationHeader.css'
 function DesktopPaginationHeader() {
     const [sortOption, setSortOption] = useState("Popularity")

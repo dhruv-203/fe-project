@@ -1,5 +1,4 @@
 import React from 'react'
-import { useWindowSize } from '../../Context/context'
 import Carousel from '../../Components/HomePage/HeroSection/Carousel';
 import Btn from '../../Components/HomePage/HeroSection/Btn';
 import BtnContainer from '../../Components/HomePage/HeroSection/BtnContainer';
@@ -19,7 +18,6 @@ import postImg3 from '../../Assets/home-page/posts-images/post-3.jpg'
 import PostGrid from '../../Components/HomePage/Posts/PostGrid';
 import Post from '../../Components/HomePage/Posts/Post';
 import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
 function HomePage() {
 
 

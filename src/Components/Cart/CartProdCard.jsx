@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import CircleBtn from '../ProductDetailsPage/CircleBtn'
 import CartText from './CartText'
 import CustomNumberInput from './CustomNumberInput'

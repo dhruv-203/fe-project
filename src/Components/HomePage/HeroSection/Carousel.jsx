@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import "../../../utility.css"
 import { useWindowSize } from '../../../Context/context';
 import { IoChevronForward, IoChevronBackSharp } from "react-icons/io5";

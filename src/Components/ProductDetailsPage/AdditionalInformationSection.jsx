@@ -5,6 +5,8 @@ import AdditionalInfoTitle from './AdditionalInfoTitle'
 import { useState } from 'react'
 import './AdditionalInformationSection.css'
 import { useWindowSize } from '../../Context/context'
+
+// a component to be used internally 
 function AdditionalInformation() {
     let isMobile = (useWindowSize()).isMobile
 
@@ -58,7 +60,7 @@ function DescriptionContainer() {
     </>)
 }
 
-function AdditionalInformationSection() {
+export default function AdditionalInformationSection() {
     const items = {
         "addInfo": <AdditionalInformation />,
         "descrip": <DescriptionContainer />,
@@ -82,4 +84,3 @@ function AdditionalInformationSection() {
     )
 }
 
-export default AdditionalInformationSection
