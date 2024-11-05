@@ -7,7 +7,8 @@ import './DetailsSection.css'
 
 function DetailsSection({ className = " ", data }) {
     let isMobile = (useWindowSize()).isMobile
-    const imagesArray = data.productImages.map((val) => {
+    console.log(data)
+    const imagesArray = data.additionalImages.map((val) => {
         return <img src={val} width={"100%"} height={"auto"} style={{ "aspectRatio": "1/1" }} alt="" />
     })
 
@@ -27,7 +28,7 @@ function DetailsSection({ className = " ", data }) {
     return (
         <div className={' d-flex align-items-center justify-content-between ' + (isMobile ? " flex-column " : " ")}>
             <Carousel className={" carousel-margin-bottom " + (isMobile ? " w-70 " : ' w-40 ')} numberOfItemsToShowInDesktop={1} DataItems={imagesArray} numberOfItemsToShowInMobile={1} BottomIndicators={BottomIndicators} />
-            <TextualDataCard data={data.productDetails} key={data.productDetails.id} />
+            <TextualDataCard data={{ id: data.id, title: data.title, rating: data.ratings, reviewCount: data.reviews.length, productDescription: data.longDescription, colors: data.colors, price: data.discountedPrice }} key={data.id} />
         </div>
     )
 }

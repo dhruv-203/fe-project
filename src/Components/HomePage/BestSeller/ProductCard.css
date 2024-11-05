@@ -1,5 +1,5 @@
 .card {
-    min-width: 238px;
+    
     min-height: 615px;
     display: grid;
     grid-template-rows: 10fr 1fr 1fr 1fr;
