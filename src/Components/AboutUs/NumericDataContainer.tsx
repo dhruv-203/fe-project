@@ -1,7 +1,11 @@
 import React from 'react'
 import SlotCounter from 'react-slot-counter'
 import './NumericDataContainer.css'
-function NumericDataContainer({ title, description }) {
+interface NumericDataContainerProps {
+    title: string,
+    description: string
+}
+function NumericDataContainer({ title, description }: NumericDataContainerProps) {
     return (
         <div className="my-auto text-align-center">
             <SlotCounter charClassName='char fw-600 ' containerClassName='text-align-center mx-auto' value={title} />

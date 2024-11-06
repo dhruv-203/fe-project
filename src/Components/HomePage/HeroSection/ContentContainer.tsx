@@ -1,7 +1,20 @@
 import React from 'react'
 import { useWindowSize } from '../../../Context/context'
 
-function ContentContainer({ preTitle, title, description, bottomChild, className = " ", titleFontSize = "title", preTitleFontSize = "fs-5", preTitleOpacity = "opacity-1", descriptionOpacity = "opacity-1", padding = " " }) {
+interface ContentContainerProps {
+    preTitle: string,
+    title: string,
+    description: string,
+    bottomChild: JSX.Element,
+    className?: string,
+    titleFontSize?: string,
+    preTitleFontSize?: string,
+    preTitleOpacity?: string,
+    descriptionOpacity?: string,
+    padding?: string
+}
+
+function ContentContainer({ preTitle, title, description, bottomChild, className = " ", titleFontSize = "title", preTitleFontSize = "fs-5", preTitleOpacity = "opacity-1", descriptionOpacity = "opacity-1", padding = " " }: ContentContainerProps) {
     let isMobile = (useWindowSize()).isMobile
 
     return (

@@ -3,7 +3,7 @@ import { useWindowSize } from '../../Context/context'
 import ContentContainer from '../../Components/HomePage/HeroSection/ContentContainer'
 import Btn from '../../Components/HomePage/HeroSection/Btn'
 import './ContactUs.css'
-function ContactUs({ img }) {
+function ContactUs({ img }: { img: string }) {
     let isMobile = (useWindowSize()).isMobile
 
     return (

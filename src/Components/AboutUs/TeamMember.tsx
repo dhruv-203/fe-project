@@ -1,7 +1,14 @@
 import React from 'react'
 import { useWindowSize } from '../../Context/context'
 import { HeaderLogoContainer } from '../HomePage/Header/HeaderLayout'
-function TeamMember({ profilePic, username = "Username", profession = "Profession" }) {
+
+interface TeamMemberProps {
+    profilePic: string,
+    username?: string
+    profession?: string
+}
+
+function TeamMember({ profilePic, username = "Username", profession = "Profession" }: TeamMemberProps) {
     let isMobile = (useWindowSize()).isMobile
 
     return (

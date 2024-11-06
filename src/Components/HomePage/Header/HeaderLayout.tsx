@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import '../../../utility.css'
 import './HeaderLayout.css'
 import Text from './Text'
@@ -12,7 +12,6 @@ import { BsCart } from "react-icons/bs";
 import Logo from './Logo';
 import { FaYoutube } from 'react-icons/fa6';
 import { HiOutlineHeart } from "react-icons/hi2";
-import { GoChevronDown } from "react-icons/go";
 import { HiOutlinePhone } from "react-icons/hi";
 import { MdPersonOutline } from "react-icons/md";
 import { useState } from 'react'
@@ -32,11 +31,17 @@ function HeaderLayout() {
   )
 }
 
-function handleLinkClick(isOpen, setOpen) {
+function handleLinkClick(isOpen: boolean, setOpen: React.Dispatch<React.SetStateAction<boolean>>) {
   setOpen(!isOpen)
 }
 
-export function HeaderLogoContainer({ children, className = "", logoColor }) {
+interface HeaderLogoContainerProps {
+  children?: ReactNode,
+  className?: string,
+  logoColor: string
+}
+
+export function HeaderLogoContainer({ children = <></>, className = " ", logoColor }: HeaderLogoContainerProps) {
   return (
     <LogoContainer className={'gap-3 ' + className}>
       <Logo >
@@ -60,12 +65,16 @@ function Header({ className = "" }) {
       {/* Header Contact Container */}
       <div className="header-contact-container d-flex gap-2 justify-content-center align-content-center flex-wrap  text-light">
         <Text className={"d-flex align-items-center justify-content-center gap-2 text-light"}>
-          <HiOutlinePhone className='fs-5 text-light' />
-          <p className="fw-600">(225) 555-0118</p>
+          <>
+            <HiOutlinePhone className='fs-5 text-light' />
+            <p className="fw-600">(225) 555-0118</p>
+          </>
         </Text>
         <Text className={"d-flex align-items-center justify-content-center gap-2 text-light"}>
-          <PiEnvelope className='fs-5 text-light' />
-          <p className="fw-600">info@yourdomain.com</p>
+          <>
+            <PiEnvelope className='fs-5 text-light' />
+            <p className="fw-600">info@yourdomain.com</p>
+          </>
         </Text>
       </div>
 
@@ -87,7 +96,13 @@ function Header({ className = "" }) {
   )
 }
 
-function NavItem({ children, className = "", handleClick }) {
+interface NavItemProps {
+  children: ReactNode,
+  className?: string,
+  handleClick?: () => void
+}
+
+function NavItem({ children, className = "", handleClick = () => { return null } }: NavItemProps) {
   return (
     <Text className={' text-dark opacity-06 ' + className} onClick={handleClick}>
       {children}
@@ -149,7 +164,7 @@ function DesktopNavBar() {
 }
 
 function MobileNavBar() {
-  const [isOpen, setOpen] = useState(false)
+  const [isOpen, setOpen] = useState<boolean>(false)
   const { getCount } = useCart()
   return (
     <div className={`navbar  bg-light`} >

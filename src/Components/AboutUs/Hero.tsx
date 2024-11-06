@@ -3,7 +3,16 @@ import ContentContainer from '../HomePage/HeroSection/ContentContainer'
 import heroImg from '../../Assets/AboutUs/hero.png'
 import './Hero.css'
 import { useWindowSize } from '../../Context/context'
-function Hero({ className, preTitle, title, description, bottomChild }) {
+
+interface HeroProps {
+    className?: string,
+    preTitle: string,
+    title: string,
+    description: string,
+    bottomChild: JSX.Element
+}
+
+function Hero({ className = " ", preTitle, title, description, bottomChild }: HeroProps) {
     let isMobile = (useWindowSize()).isMobile
 
     return (
