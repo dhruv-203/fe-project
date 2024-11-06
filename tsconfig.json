@@ -14,7 +14,8 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitAny": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    // "checkJs": false,
   },
   "include": [
     "src"

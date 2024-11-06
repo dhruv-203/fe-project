@@ -4,7 +4,7 @@ import SectionDescription from '../EditorPick/SectionDescription'
 import './ProductCard.css'
 import CircleBtn from '../../ProductDetailsPage/CircleBtn'
 
-interface ProductCardProps {
+export interface ProductCardProps {
     url: string,
     title: string,
     description: string,

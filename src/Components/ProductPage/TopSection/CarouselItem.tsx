@@ -1,7 +1,14 @@
 import React from 'react'
 import './CarouselItem.css'
 import { useWindowSize } from '../../../Context/context'
-function CarouselItem({ img, categoryTitle, numberOfItems }) {
+
+interface CarouselItemProps {
+    img: string,
+    categoryTitle: string,
+    numberOfItems: number
+}
+
+function CarouselItem({ img, categoryTitle, numberOfItems }: CarouselItemProps) {
     let isMobile = (useWindowSize()).isMobile
 
     return (

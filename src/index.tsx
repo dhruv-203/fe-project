@@ -12,7 +12,7 @@ import ContactUs from './Pages/ContactUs/ContactUs';
 import contactImg from './Assets/AboutUs/contact.png'
 import Cart from './Pages/Cart/Cart';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const rootElement = document.getElementById('root');
 const router = createBrowserRouter([
   {
     path: "",
@@ -49,13 +49,27 @@ const router = createBrowserRouter([
     ]
   }
 ])
-root.render(
-  <React.StrictMode>
-    <Provider>
-      <RouterProvider router={router} />
-    </Provider>
-  </React.StrictMode>
-);
+// root.render(
+//   <React.StrictMode>
+//     <Provider>
+//       <RouterProvider router={router} />
+//     </Provider>
+//   </React.StrictMode>
+// );
+
+
+if (rootElement) {
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(
+    <React.StrictMode>
+      <Provider>
+        <RouterProvider router={router} />
+      </Provider>
+    </React.StrictMode>
+  );
+} else {
+  console.error("Root element not found");
+}
 
 
 

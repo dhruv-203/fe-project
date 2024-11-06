@@ -1,5 +1,5 @@
 import "./Slider.css"; // This is for our custom styles
-import { useState } from "react";
+import React, { useState } from "react";
 const Slider = () => {
     const [minValue, setMinValue] = useState(12);
     const [maxValue, setMaxValue] = useState(425);
@@ -7,7 +7,7 @@ const Slider = () => {
     const maxLimit = 425;
 
     // Handle change for the min handle
-    const handleMinChange = (event) => {
+    const handleMinChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = parseInt(event.target.value);
         if (value < maxValue) {
             setMinValue(value);
@@ -15,7 +15,7 @@ const Slider = () => {
     };
 
     // Handle change for the max handle
-    const handleMaxChange = (event) => {
+    const handleMaxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = parseInt(event.target.value);
         if (value > minValue) {
             setMaxValue(value);

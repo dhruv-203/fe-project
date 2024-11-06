@@ -74,8 +74,12 @@ export default Pagination
 */
 
 //Code optimised by gpt by removing some extra states that i created 
-// this data expects an array of jsx elements to display in pagintion 
-function Pagination({ data = [] }) {
+// this data expects an array of jsx elements to display in pagintion
+
+
+
+
+function Pagination({ data = [] }: { data: JSX.Element[] }) {
     let isMobile = (useWindowSize()).isMobile
 
     const [maxDisplay, setMaxDisplay] = useState(9)
