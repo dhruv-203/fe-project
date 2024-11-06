@@ -3,11 +3,17 @@ import SectionTitle from '../EditorPick/SectionTitle'
 import SectionDescription from '../EditorPick/SectionDescription'
 import './ProductCard.css'
 import CircleBtn from '../../ProductDetailsPage/CircleBtn'
-import defaultImg from '../../../Assets/home-page/featured-products/person-1.jpg'
-function ProductCard({ url = defaultImg, title = "Graphic Design", description = "English Department", ogPrice = "16.48", discountPrice = "6.48", colors = ["#23A6F0",
-    "#2DC071",
-    "#E77C40",
-    "#252B42"] }) {
+
+interface ProductCardProps {
+    url: string,
+    title: string,
+    description: string,
+    ogPrice: number,
+    discountPrice: number,
+    colors: string[]
+}
+
+function ProductCard({ url, title, description, ogPrice, discountPrice, colors }: ProductCardProps) {
     return (
         <div className="card">
             <div className="model-photo" style={{ "backgroundImage": `url(${url})` }} id="person-1"></div>

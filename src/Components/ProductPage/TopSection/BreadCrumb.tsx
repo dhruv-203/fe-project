@@ -4,7 +4,11 @@ import BrandLogo from '../../HomePage/Header/BrandLogo'
 import { FaChevronRight } from "react-icons/fa6";
 import { Fragment } from 'react';
 
-function BreadCrumb({ title }) {
+interface BreadCrumbProps {
+    title?: string
+}
+
+function BreadCrumb({ title = " " }: BreadCrumbProps) {
     const location = useLocation()
     const pathNames = location.pathname.split("/").filter((x) => x)
     return (

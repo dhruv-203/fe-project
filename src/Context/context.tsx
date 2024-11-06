@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect, useContext, ReactNode } from "react";
 
-interface CartItem {
+export interface CartItem {
+    img: string,
     prodID: string,
     prodName: string,
     prodPrice: number,
@@ -31,7 +32,7 @@ let WindowContext = createContext<WindowContextType>({
     cart: {
         getProds: () => [],
         getCount: () => 0,
-        addToCart: () => ({ prodID: "", prodColor: "", prodName: "", prodPrice: 0, prodQuant: 0 }),
+        addToCart: () => ({ img: "", prodID: "", prodColor: "", prodName: "", prodPrice: 0, prodQuant: 0 }),
         removeFromCart: () => { },
         productExists: () => false,
         updateCart: () => { },
@@ -40,7 +41,7 @@ let WindowContext = createContext<WindowContextType>({
 });
 
 export default function Provider({ children }: { children: ReactNode }): JSX.Element {
-    const [isMobile, setIsMobile] = useState<boolean>(typeof window !== undefined ? (window.innerWidth <= 768) : false);
+    const [isMobile, setIsMobile] = useState<boolean>(typeof window !== "undefined" ? (window.innerWidth <= 768) : false);
     const [cart, setCart] = useState<CartItem[]>([])
 
     function addToCart(prod: CartItem): CartItem {

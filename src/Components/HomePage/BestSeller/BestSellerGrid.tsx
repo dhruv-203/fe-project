@@ -8,8 +8,8 @@ function BestSellerGrid({ className = " " }) {
         <div className={' bestseller-grid ' + className}>
             {
                 giveData().slice(0, 8).map((val) => {
-                    return (<NavLink  to={`/home/products/${val.id}`} key={val.id}>
-                        <ProductCard url={val.displayImage} title={val.title} description={val.shortDescription} ogPrice={val.originalPrice} discountPrice={val.discountedPrice} />
+                    return (<NavLink to={`/home/products/${val.id}`} key={val.id}>
+                        <ProductCard url={val.displayImage} title={val.title} description={val.shortDescription} ogPrice={val.originalPrice} discountPrice={val.discountedPrice} colors={val.colors} />
                     </NavLink>)
                 })
             }

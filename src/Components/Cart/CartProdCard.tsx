@@ -4,9 +4,9 @@ import CartText from './CartText'
 import CustomNumberInput from './CustomNumberInput'
 import { RxCross2 } from 'react-icons/rx'
 import { useCart } from '../../Context/context'
-
-function CartProdCard({ data }) {
-    const { updateCart, removeFromCart } = useCart()
+import { CartItem } from '../../Context/context'
+function CartProdCard({ data }: { data: CartItem }) {
+    const { removeFromCart } = useCart()
 
     return (
         <div className="d-flex cart-product-card justify-content-between p-3">
@@ -21,7 +21,7 @@ function CartProdCard({ data }) {
                 </div>
 
             </div>
-            <div className="sub-total p-2 fw-600 fs-6">{parseFloat((+data.prodQuant) * (+data.prodPrice)).toFixed(2)}</div>
+            <div className="sub-total p-2 fw-600 fs-6">{parseFloat(((+data.prodQuant) * (+data.prodPrice)).toString()).toFixed(2)}</div>
             <CustomNumberInput id={data.prodID} color={data.prodColor} />
         </div>
     )

@@ -18,10 +18,9 @@ import postImg3 from '../../Assets/home-page/posts-images/post-3.jpg'
 import PostGrid from '../../Components/HomePage/Posts/PostGrid';
 import Post from '../../Components/HomePage/Posts/Post';
 import { NavLink } from 'react-router-dom';
+import { useWindowSize } from '../../Context/context';
 function HomePage() {
-
-
-
+  const isMobile = (useWindowSize()).isMobile
   return (
     <div>
       <Carousel className=" "
@@ -86,6 +85,23 @@ function HomePage() {
         <SectionContainer
           className='asian-lady-container'
           img={img}
+          preTitle={"SUMMER 2020"}
+          preTitleFontSize=' fs-7 '
+          preTitleOpacity=' opacity-05 '
+          title={"Part of the Neural Universe"}
+          titleFontSize=' fs-1 '
+          description={"We know how large objects will act, but things on a small scale."}
+          descriptionOpacity=' opacity-06'
+          bottomChild={
+            <BtnContainer className={" gap-3 "}>
+              <Btn className={(isMobile ? "fs-7" : "fs-6") + " text-light bg-success rounded fw-700"}>
+                ADD TO CART
+              </Btn>
+              <Btn className={(isMobile ? "fs-7" : "fs-6") + " rounded fw-700 text-success border border-success"}>
+                Read More
+              </Btn>
+            </BtnContainer>
+          }
         />
       </div>
       <Layout className="posts">

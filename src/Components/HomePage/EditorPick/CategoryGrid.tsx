@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import men from '../../../Assets/home-page/clothes-category/person-1.jpg'
 import women from '../../../Assets/home-page/clothes-category/person-2.jpg'
 import accessories from '../../../Assets/home-page/clothes-category/person-3.jpg'
 import kids from '../../../Assets/home-page/clothes-category/person-4.jpg'
 import './CategoryGrid.css'
-function ImageTag({ children }) {
+function ImageTag({ children }: { children: ReactNode }) {
     return (
         <span className='img-tag px-3 py-2 fs-6 fw-700'>{children}</span>
     )
 }
-function CategoryGrid({ className = "" }) {
+function CategoryGrid({ className = " " }: { className?: string }) {
     return (
         <div className='categoryGrid my-3 mx-auto'>
             <div className="men">

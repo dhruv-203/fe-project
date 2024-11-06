@@ -23,7 +23,7 @@ function Cart() {
                             <CartText className={"fw-500"}>Subtotal:</CartText>
                             <CartText className={"fw-500"}>{
                                 datas.reduce((acc, curr) => {
-                                    return (parseFloat(parseFloat(acc + (curr.prodPrice * curr.prodQuant)).toFixed(2)))
+                                    return (parseFloat(parseFloat((acc + (curr.prodPrice * curr.prodQuant)).toString()).toFixed(2)))
                                 }, 0.0)
                             }</CartText>
                         </CartTotalItem>
@@ -37,7 +37,7 @@ function Cart() {
                             <CartText className={"fw-500"}>Total:</CartText>
                             <CartText className={"fw-500"}>{
                                 datas.reduce((acc, curr) => {
-                                    return parseFloat(parseFloat(acc + (curr.prodPrice * curr.prodQuant)).toFixed(2))
+                                    return parseFloat(parseFloat((acc + (curr.prodPrice * curr.prodQuant)).toString()).toFixed(2))
                                 }, 0)
                             }</CartText>
                         </CartTotalItem>

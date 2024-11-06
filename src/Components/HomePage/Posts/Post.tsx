@@ -8,7 +8,11 @@ import { FaChevronRight } from "react-icons/fa6";
 import { CiAlarmOn } from "react-icons/ci";
 import { AiOutlineAreaChart } from "react-icons/ai";
 
-function Post({ img }) {
+interface PostProps {
+    img: string
+}
+
+function Post({ img }: PostProps) {
     return (
         <div className='post '>
             <div className="post-img-container" style={{ "backgroundImage": `url(${img})` }}>

@@ -2,14 +2,20 @@ import React, { useState } from 'react'
 import './CustomNumberInput.css'
 import { BiChevronUp, BiChevronDown } from 'react-icons/bi'
 import { useCart } from '../../Context/context'
-function CustomNumberInput({ id, color }) {
+
+interface CustomNumberInputProps {
+    id: string,
+    color: string
+}
+
+function CustomNumberInput({ id, color }: CustomNumberInputProps) {
     const { updateCart, getQuantity } = useCart()
     const [count, setCount] = useState(getQuantity(id, color))
     return (
         <div className="quantity-container p-2">
             <input className='rounded' onChange={(e) => {
 
-                if (!isNaN(e.target.value)) {
+                if (!isNaN(+e.target.value)) {
                     if (+e.target.value === 0) {
                         updateCart(id, color, 1)
                         setCount(1)

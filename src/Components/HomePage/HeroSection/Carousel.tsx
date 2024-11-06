@@ -1,11 +1,27 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import "../../../utility.css"
 import { useWindowSize } from '../../../Context/context';
 import { IoChevronForward, IoChevronBackSharp } from "react-icons/io5";
 import './Carousel.css'
 import { useState } from 'react';
 import CarouselItem from './CarouselItem';
-function Carousel({ className = "", data }) {
+
+interface CarouselData {
+  preTitle: string,
+  title: string,
+  description: string,
+  bottomChild: ReactNode,
+  heroImg?: string,
+  imgHeight?: string,
+  imgWidth?: string
+}
+
+interface CarouselProps {
+  className?: string,
+  data: CarouselData[]
+}
+
+function Carousel({ className = "", data }: CarouselProps) {
   let isMobile = (useWindowSize()).isMobile
 
   const [currItem, setCurrItem] = useState(0)
@@ -37,7 +53,7 @@ function Carousel({ className = "", data }) {
         <div className={"second-bar bg-light controller-bar " + (currItem === 1 ? "selected" : "")} onClick={() => setCurrItem(1)}></div>
       </span>}
       {
-        <CarouselItem key={currItem} className={data[currItem].title === "NEW COLLECTION" ? "carousel-item-1" : " "} data={data[currItem]} />
+        <CarouselItem key={currItem} className={data[currItem].title === "NEW COLLECTION" ? "carousel-item-1" : " "} content={data[currItem]} />
       }
 
     </div>
