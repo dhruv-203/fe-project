@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import additional1 from '../../Assets/product-page/ProductsDetails/additionalinformation.jpg'
 import CollapsingDiv from './CollapsingDiv'
 import AdditionalInfoTitle from './AdditionalInfoTitle'
@@ -11,7 +11,7 @@ function AdditionalInformation() {
     let isMobile = (useWindowSize()).isMobile
 
     return (
-        <>
+        <div className={"display w-100  gap-3 align-items-start mt-3 " + (isMobile ? "justify-items-center " : "justify-items-between")}>
             <div className="add-info-image-container mx-auto"><img src={additional1} height={"auto"} style={{ "aspectRatio": "3/4" }} alt="" /></div>
             <div className={"additional-info-1   d-flex flex-column  justify-content-center gap-3 " + (isMobile ? "align-items-start" : "align-items-start")}>
                 <AdditionalInfoTitle className={"px-3"}>the quick fox jumps over</AdditionalInfoTitle>
@@ -41,45 +41,50 @@ function AdditionalInformation() {
             </div>
 
 
-        </>
+        </div>
 
     )
 }
 
-function ReviewsContainer() {
-    return (<>
-        <div className="reviews-container p-2">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem adipisci qui modi molestias autem nulla quisquam sint eaque voluptatibus, eius officia excepturi error omnis officiis eveniet tempora iste odit tempore cum tenetur, esse molestiae possimus, distinctio dolor. Deserunt pariatur cum dolores mollitia reiciendis adipisci doloribus repudiandae ea nostrum et! Magni.
-        </div>
-    </>)
+function ReviewsContainer({ reviews }) {
+    return (<div className='d-flex w-60 justify-content-between align-items-center flex-wrap '>
+
+        {
+            reviews.map((val, ind) => {
+                return <div className="d-flex flex-column p-3 my-3 border rounded" style={{ boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }} key={ind}> <p className="mb-0 text-secondary">{val}</p>
+                </div>
+            })
+        }
+
+    </div>)
 }
 
-function DescriptionContainer() {
-    return (<>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reiciendis cupiditate cum temporibus mollitia vitae iusto modi. Tenetur rerum, aliquam ex dolore, quae blanditiis doloremque hic molestiae veritatis officiis sed numquam tempora delectus distinctio fuga quos? Excepturi deserunt ab assumenda, id molestias adipisci doloribus dolor vel! Iste sed perspiciatis repudiandae unde!
-    </>)
+function DescriptionContainer({ description }) {
+    return (<div className="d-flex w-60 justify-content-between align-items-center flex-wrap px-2 text-align-center ">
+        {description}
+    </div>)
 }
 
-export default function AdditionalInformationSection() {
+export default function AdditionalInformationSection({ reviews = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, totam ab necessitatibus mollitia architecto tempore alias dignissimos optio, nisi temporibus quas asperiores repudiandae quos explicabo earum veniam doloremque illo nemo enim soluta quasi sunt pariatur expedita. Vel ducimus, numquam, earum, quidem cumque porro iste velit error veniam sunt quaerat excepturi?", description = "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi quaerat voluptas veritatis, mollitia optio quam doloremque assumenda ad modi officia voluptatem quasi, quo quisquam eum vitae ea est. Et voluptas animi cumque ratione repudiandae odio accusamus nemo ex sit harum possimus tempora vel, reprehenderit accusantium dolores similique id blanditiis optio?" }) {
+    // console.log(reviews)
     const items = {
         "addInfo": <AdditionalInformation />,
-        "descrip": <DescriptionContainer />,
-        "reviews": <ReviewsContainer />
+        "descrip": <DescriptionContainer description={description} />,
+        "reviews": <ReviewsContainer reviews={reviews} />
     }
     const [SectionToDisplay, setSectionToDisplay] = useState("addInfo")
     let isMobile = (useWindowSize()).isMobile
 
 
     return (
-        <div className="d-flex flex-column align-items-center justify-content-center gap-3 py-2">
+        <div className="d-flex flex-column align-items-center justify-content-center gap-3 py-2 mb-2">
             <div className={" action-tab d-flex justify-content-center align-items-center my-5 px-3 " + (isMobile ? " gap-2 " : " gap-5 ")}>
                 <div className={" tab description-tab fs-7 text-secondary " + (SectionToDisplay === "descrip" ? "fw-600" : " ")} onClick={() => setSectionToDisplay("descrip")}>Description</div>
                 <div className={" tab add-info-tab fs-7 text-secondary " + (SectionToDisplay === "addInfo" ? "fw-600" : " ")} onClick={() => setSectionToDisplay("addInfo")}>Additional Information</div>
                 <div className={" tab reviews-tab fs-7 text-secondary " + (SectionToDisplay === "reviews" ? "fw-600" : " ")} onClick={() => setSectionToDisplay("reviews")}>Reviews <span className=" text-success fw-700 ">(0)</span></div>
             </div>
-            <div className={"display w-100  gap-3 align-items-start mt-3 " + (isMobile ? "justify-items-center " : "justify-items-between")}>
-                {items[SectionToDisplay]}
-            </div>
+            {items[SectionToDisplay]}
+
         </div>
     )
 }

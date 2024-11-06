@@ -81,6 +81,7 @@ function Pagination({ data = [] }) {
     const [maxDisplay, setMaxDisplay] = useState(9)
     const [currIndex, setCurrIndex] = useState(1)
     let noPages = Math.ceil((data.length / maxDisplay))
+    console.log(noPages)
     const pages = useMemo(() => {
         if (currIndex === 1) return [1, 2, 3];
         if (currIndex === noPages) return [noPages - 2, noPages - 1, noPages];
@@ -123,7 +124,7 @@ function Pagination({ data = [] }) {
 
     return (
         <div className="pagination-container  gap-3 d-flex justify-content-center align-items-center flex-column">
-            <div className="display-grid d-flex flex-wrap justify-content-center gap-4 align-items-center p-2">
+            <div className="display-grid  justify-content-center gap-4 align-items-center p-2">
 
                 {
                     paginatedData

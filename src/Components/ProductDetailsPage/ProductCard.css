@@ -2,3 +2,7 @@
     min-height: 0px !important;
     max-height: 400px !important;
 }
+
+.prod-det-card>.model-photo {
+    background-size: 100% 100%;
+}

@@ -13,7 +13,7 @@ import FiltersContainer from '../../Components/ProductPage/BottomSection/Filters
 import DesktopPaginationHeader from '../../Components/ProductPage/BottomSection/DesktopPaginationHeader'
 import './ProductPage.css'
 import Pagination from '../../Components/ProductPage/BottomSection/Pagination'
-import { giveData } from './data'
+import { giveData } from './data2'
 import ProductCard from '../../Components/HomePage/BestSeller/ProductCard'
 import BrandLogosContainer from '../../Components/ProductPage/BrandLogosContainer'
 import { NavLink } from 'react-router-dom'
@@ -38,7 +38,7 @@ function ProductsPage() {
 
           <Pagination data={giveData().map((val) => {
             return (<NavLink to={`${val.id}`} key={val.id}>
-              <ProductCard title={val.title} description={val.description} ogPrice={val.ogPrice} discountPrice={val.discountPrice} />
+              <ProductCard url={val.displayImage} title={val.title} description={val.shortDescription} ogPrice={val.originalPrice} discountPrice={val.discountedPrice} colors={val.colors} />
             </NavLink>)
           })} />
         </div>
