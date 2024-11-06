@@ -16,7 +16,7 @@ function ProductCard({ url = defaultImg, title = "Graphic Design", description =
             <div className="price">${ogPrice} <span className="green">${discountPrice}&nbsp;&nbsp;</span></div>
             <div className="color-pallet">
                 {colors.map((val) => {
-                    return <CircleBtn className={'border border-2 '} key={val} width={"30px"} height={"30px"} bgColor={val} />
+                    return <CircleBtn className={'border border-3  circle-btn-border '} key={val} width={"30px"} height={"30px"} bgColor={val} />
                 })}
             </div>
         </div>
