@@ -9,10 +9,23 @@ import { IoMdEye } from "react-icons/io";
 import CircleBtn from './CircleBtn';
 import './TextualData.css'
 import { useWindowSize, useCart } from '../../Context/context';
-function TextualDataCard({ data }) {
+
+interface TextualDataType {
+    img: string,
+    id: string,
+    title: string,
+    price: number,
+    reviewCount: number,
+    rating: number,
+    productDescription: string,
+    colors: string[]
+
+}
+
+function TextualDataCard({ data }: { data: TextualDataType }) {
     let isMobile = (useWindowSize()).isMobile
     let { addToCart, productExists, getQuantity, removeFromCart } = useCart()
-    let [selectedColor, setSelectedColor] = useState("#23A6F0")
+    let [selectedColor, setSelectedColor] = useState(data.colors[0])
     return (
         <div className='d-flex flex-column text-data-card p-3 gap-2 justify-content-start mb-auto align-items-start'>
             <PreTitle className='p-2 fw-600'>{data.title}</PreTitle>
@@ -40,6 +53,7 @@ function TextualDataCard({ data }) {
                         removeFromCart(data.id, selectedColor)
                     }} /> </CircleBtn> : <CircleBtn className={" d-flex p-1 justify-content-center align-items-center option-btn "} width={" 30px "} height={" 30px "} onClick={() => {
                         addToCart({
+                            img: data.img,
                             prodID: data.id,
                             prodName: data.title,
                             prodPrice: data.price,

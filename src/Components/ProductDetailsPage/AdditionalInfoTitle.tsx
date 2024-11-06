@@ -1,6 +1,12 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { useWindowSize } from '../../Context/context'
-function AdditionalInfoTitle({ className, children }) {
+
+interface AdditionalInfoTitleProps {
+    className?: string,
+    children: ReactNode
+}
+
+function AdditionalInfoTitle({ className, children }: AdditionalInfoTitleProps) {
     let isMobile = (useWindowSize()).isMobile
 
     return (

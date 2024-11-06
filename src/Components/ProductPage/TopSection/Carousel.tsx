@@ -1,11 +1,20 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { IoChevronForward, IoChevronBackSharp } from "react-icons/io5";
 import { useState } from 'react';
 import { useWindowSize } from '../../../Context/context';
 import './Carousel.css'
 import { Fragment } from 'react';
 //DataItems is an array of JSX Elements which are carousel items 
-function Carousel({ className = " ", DataItems, numberOfItemsToShowInDesktop, numberOfItemsToShowInMobile, BottomIndicators = "" }) {
+
+interface CarouselProps {
+    className?: String,
+    DataItems: JSX.Element[],
+    numberOfItemsToShowInDesktop: number,
+    numberOfItemsToShowInMobile: number,
+    BottomIndicators?: React.ComponentType<{ handleIndicatorClick: (ind: number) => void; head: number }>
+}
+
+function Carousel({ className = " ", DataItems, numberOfItemsToShowInDesktop, numberOfItemsToShowInMobile, BottomIndicators }: CarouselProps) {
     let isMobile = (useWindowSize()).isMobile
 
     const [tail, setTail] = useState(isMobile ? numberOfItemsToShowInMobile : numberOfItemsToShowInDesktop)
@@ -28,7 +37,7 @@ function Carousel({ className = " ", DataItems, numberOfItemsToShowInDesktop, nu
             setTail(tail - 1)
         }
     }
-    function handleIndicatorClick(ind) {
+    function handleIndicatorClick(ind: number) {
         setHead(ind)
         setTail((ind + (isMobile ? numberOfItemsToShowInMobile : numberOfItemsToShowInDesktop)))
     }
@@ -44,7 +53,7 @@ function Carousel({ className = " ", DataItems, numberOfItemsToShowInDesktop, nu
             <div className="carouselItemContainer container gap-3 d-flex justify-content-center align-items-center">
                 {DataItems.slice(head, tail).map((val, ind) => <Fragment key={ind} >{val}</Fragment>)}
             </div>
-            {BottomIndicators === "" ? <></> : <BottomIndicators handleIndicatorClick={handleIndicatorClick} head={head} />}
+            {BottomIndicators ? <BottomIndicators handleIndicatorClick={handleIndicatorClick} head={head} /> : null}
         </div>
     )
 }

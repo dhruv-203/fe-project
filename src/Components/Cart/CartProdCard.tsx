@@ -11,7 +11,7 @@ function CartProdCard({ data }: { data: CartItem }) {
     return (
         <div className="d-flex cart-product-card justify-content-between p-3">
             <div className="cart-product-detail d-flex gap-3 align-items-center">
-                <div style={{ backgroundImage: data.img }} className="cart-product-image rounded px-2">
+                <div style={{ backgroundImage: `url(${data.img})` }} className="cart-product-image rounded px-2">
                     <CircleBtn width={"18px"} className={"cross-btn"} onClick={() => removeFromCart(data.prodID, data.prodColor)} bgColor='#db4444' height={"18px"} ><RxCross2 className='text-light cross fs-6' /></CircleBtn>
                 </div>
                 <div className=" cart-product-content flex-column gap-3 align-items-start px-2 ">

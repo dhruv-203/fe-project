@@ -1,8 +1,7 @@
-import React, { Fragment } from 'react'
 import additional1 from '../../Assets/product-page/ProductsDetails/additionalinformation.jpg'
 import CollapsingDiv from './CollapsingDiv'
 import AdditionalInfoTitle from './AdditionalInfoTitle'
-import { useState } from 'react'
+import { ReactNode, useState } from 'react'
 import './AdditionalInformationSection.css'
 import { useWindowSize } from '../../Context/context'
 
@@ -46,7 +45,7 @@ function AdditionalInformation() {
     )
 }
 
-function ReviewsContainer({ reviews }) {
+function ReviewsContainer({ reviews }: { reviews: string[] }) {
     return (<div className='d-flex w-60 justify-content-between align-items-center flex-wrap '>
 
         {
@@ -59,20 +58,26 @@ function ReviewsContainer({ reviews }) {
     </div>)
 }
 
-function DescriptionContainer({ description }) {
+function DescriptionContainer({ description }: { description: string }) {
     return (<div className="d-flex w-60 justify-content-between align-items-center flex-wrap px-2 text-align-center ">
         {description}
     </div>)
 }
 
-export default function AdditionalInformationSection({ reviews = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, totam ab necessitatibus mollitia architecto tempore alias dignissimos optio, nisi temporibus quas asperiores repudiandae quos explicabo earum veniam doloremque illo nemo enim soluta quasi sunt pariatur expedita. Vel ducimus, numquam, earum, quidem cumque porro iste velit error veniam sunt quaerat excepturi?", description = "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi quaerat voluptas veritatis, mollitia optio quam doloremque assumenda ad modi officia voluptatem quasi, quo quisquam eum vitae ea est. Et voluptas animi cumque ratione repudiandae odio accusamus nemo ex sit harum possimus tempora vel, reprehenderit accusantium dolores similique id blanditiis optio?" }) {
+export default function AdditionalInformationSection({ reviews = ["Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, totam ab necessitatibus mollitia architecto tempore alias dignissimos optio, nisi temporibus quas asperiores repudiandae quos explicabo earum veniam doloremque illo nemo enim soluta quasi sunt pariatur expedita. Vel ducimus, numquam, earum, quidem cumque porro iste velit error veniam sunt quaerat excepturi?"], description = "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi quaerat voluptas veritatis, mollitia optio quam doloremque assumenda ad modi officia voluptatem quasi, quo quisquam eum vitae ea est. Et voluptas animi cumque ratione repudiandae odio accusamus nemo ex sit harum possimus tempora vel, reprehenderit accusantium dolores similique id blanditiis optio?" }) {
     // console.log(reviews)
-    const items = {
-        "addInfo": <AdditionalInformation />,
-        "descrip": <DescriptionContainer description={description} />,
-        "reviews": <ReviewsContainer reviews={reviews} />
+    interface SectionToDisplayTypes {
+        addInfo: ReactNode,
+        descrip: ReactNode,
+        reviews: ReactNode
     }
-    const [SectionToDisplay, setSectionToDisplay] = useState("addInfo")
+    const items: SectionToDisplayTypes = {
+        addInfo: <AdditionalInformation />,
+        descrip: <DescriptionContainer description={description} />,
+        reviews: <ReviewsContainer reviews={reviews} />
+    }
+
+    const [SectionToDisplay, setSectionToDisplay] = useState<keyof SectionToDisplayTypes>("addInfo")
     let isMobile = (useWindowSize()).isMobile
 
 

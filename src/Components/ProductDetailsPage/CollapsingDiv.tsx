@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { useState } from 'react'
 import { FaChevronRight, FaChevronDown } from 'react-icons/fa6'
 import './CollapsingDiv.css'
-function CollapsingDiv({ title, content }) {
-    const [isOpen, setOpen] = useState(false)
+
+interface CollapsingDivProps {
+    title: string,
+    content: ReactNode,
+}
+
+function CollapsingDiv({ title, content }: CollapsingDivProps) {
+    const [isOpen, setOpen] = useState<boolean>(false)
     return (
         <div className="collapsing-container w-100">
             <div className="collapse-head p-2 d-flex alig-items-center justify-content-start gap-2" onClick={() => setOpen(!isOpen)}>
