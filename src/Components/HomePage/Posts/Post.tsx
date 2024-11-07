@@ -20,9 +20,9 @@ function Post({ img }: PostProps) {
             </div>
             <div className="post-content">
                 <div className="tagGrid w-90 d-flex p-2 align-items-center justify-content-start gap-2">
-                    <PreTitle fontColor='text-primary' fontSize='fs-7' className='fw-400' >Google</PreTitle>
-                    <PreTitle fontColor='text-secondary' fontSize='fs-7' className='fw-400 ' >Trending</PreTitle>
-                    <PreTitle fontColor='text-secondary' fontSize='fs-7' className='fw-400 ' >New</PreTitle>
+                    <PreTitle fontColor='text-primary cursor-pointer' fontSize='fs-7' className='fw-400' >Google</PreTitle>
+                    <PreTitle fontColor='text-secondary cursor-pointer' fontSize='fs-7' className='fw-400 ' >Trending</PreTitle>
+                    <PreTitle fontColor='text-secondary cursor-pointer' fontSize='fs-7' className='fw-400 ' >New</PreTitle>
                 </div>
                 <SectionTitle fontSize={"fs-5"} fontColor={"text-dark"} className='fw-400 p-2 w-90'>
                     Loudest à la Madison #1 (L'integral)
@@ -34,7 +34,7 @@ function Post({ img }: PostProps) {
                     <MetaData Logo={<CiAlarmOn className='text-primary fs-6 fw-600' />} text={"22 April 2021"} />
                     <MetaData Logo={<AiOutlineAreaChart className='text-success fs-6 fw-600' />} text={"10 comments"} />
                 </div>
-                <div className="learn-more fw-700 text-secondary p-2 d-flex w-100 text-align-center justify-content-start  align-items-center gap-1 fs-7">Learn More <span><FaChevronRight className='text-primary fs-6 fw-400' /></span></div>
+                <div className="learn-more fw-700 text-secondary p-2 d-flex w-100 text-align-center justify-content-start  align-items-center gap-1 fs-7 cursor-pointer">Learn More <span><FaChevronRight className='text-primary fs-6 fw-400' /></span></div>
             </div>
         </div>
     )

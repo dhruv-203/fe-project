@@ -561,6 +561,10 @@ a {
 }
 
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
 .d-block {
     display: block !important;
 }

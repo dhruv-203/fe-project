@@ -10,6 +10,27 @@ a {
   color: black
 }
 
+a:hover {
+  cursor: pointer;
+}
+
+.filter-item:hover {
+  cursor: pointer;
+}
+
+.filter-btn:hover {
+  cursor: pointer;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+input[type="checkbox"]:hover,
+input[type="checkbox"]~label:hover {
+  cursor: pointer;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

@@ -7,7 +7,7 @@ interface BtnProps extends HTMLAttributes<HTMLDivElement> {
 
 function Btn({ className = " ", children, ...rest }: BtnProps) {
     return (
-        <div className={"px-5 py-3 " + className} {...rest} >
+        <div style={{ cursor: "pointer" }} className={"px-5 py-3 " + className} {...rest} >
             {children}
         </div>
     )

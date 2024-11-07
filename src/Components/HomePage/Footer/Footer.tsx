@@ -79,7 +79,7 @@ function Footer() {
                     <div className="searchBarContainer w-100">
                         <div className="d-flex gap-0 w-100 justify-content-center align-items-stretch">
                             <input type="text" name="text" id="text" placeholder='Your Email' className='px-3 w-60 searchBar rounded' />
-                            <div className='px-2 py-3 bg-primary footer-btn text-light text-align-center fs-6 rounded w-40 d-flex align-items-center justify-content-center'>Suscribe</div>
+                            <div className='px-2 py-3 cursor-pointer bg-primary footer-btn text-light text-align-center fs-6 rounded w-40 d-flex align-items-center justify-content-center'>Suscribe</div>
                         </div>
                     </div>
                 </div>

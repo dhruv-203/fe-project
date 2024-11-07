@@ -8,7 +8,7 @@ interface LogoProps {
 
 function Logo({ children, className = "fs-5 " }: LogoProps) {
     return (
-        <div className={className}>
+        <div className={"cursor-pointer " + className}>
             {children}
         </div>
     )

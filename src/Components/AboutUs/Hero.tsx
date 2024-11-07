@@ -22,7 +22,7 @@ function Hero({ className = " ", preTitle, title, description, bottomChild }: He
                     preTitle="ABOUT COMPANY"
                     title="ABOUT US"
                     description="We know how large objects will act, but things on a small scale"
-                    bottomChild={<><div className="px-3 py-2 bg-primary text-light fs-7 fw-600 rounded">Get Quote Now</div></>}
+                    bottomChild={<><div className="px-3 py-2 bg-primary text-light fs-7 fw-600 rounded cursor-pointer">Get Quote Now</div></>}
                     preTitleFontSize='fs-7'
                     padding={isMobile ? ' px-5 ' : " "}
                     className='text-align-center'

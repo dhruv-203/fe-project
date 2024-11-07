@@ -42,13 +42,13 @@ function Carousel({ className = "", data }: CarouselProps) {
   }
   return (
     <div className={'carousel ' + className} >
-      <span className="fwd-icon title text-light fw-700" onClick={() => { handleForward() }}>
+      <span className="fwd-icon title text-light fw-700 cursor-pointer" onClick={() => { handleForward() }}>
         <IoChevronForward />
       </span>
-      <span className="prev-icon title  text-light fw-700" onClick={() => handleBackward()}>
+      <span className="prev-icon title  text-light fw-700 cursor-pointer" onClick={() => handleBackward()}>
         <IoChevronBackSharp />
       </span>
-      {isMobile ? <></> : <span className="carousel-controller-container d-flex gap-0 justify-content-center align-items-center">
+      {isMobile ? <></> : <span className="carousel-controller-container cursor-pointer d-flex gap-0 justify-content-center align-items-center">
         <div className={"first-bar bg-light controller-bar " + (currItem === 0 ? "selected" : "")} onClick={() => setCurrItem(0)}></div>
         <div className={"second-bar bg-light controller-bar " + (currItem === 1 ? "selected" : "")} onClick={() => setCurrItem(1)}></div>
       </span>}

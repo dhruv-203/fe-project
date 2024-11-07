@@ -44,10 +44,10 @@ function Carousel({ className = " ", DataItems, numberOfItemsToShowInDesktop, nu
 
     return (
         <div className={'carousel-2  p-2 d-flex  align-items-center justify-content-center ' + className}>
-            <span className={"forward fs-2 p-1 fw-500 " + (tail === DataItems.length ? "text-secondary" : "text-primary")} onClick={handleForward}>
+            <span className={"forward fs-2 p-1 fw-500 cursor-pointer " + (tail === DataItems.length ? "text-secondary" : "text-primary")} onClick={handleForward}>
                 <IoChevronForward />
             </span>
-            <span className={"backward fs-2 p-1 fw-500 " + (head === 0 ? "text-secondary" : "text-primary")} onClick={handleBackward}>
+            <span className={"backward fs-2 p-1 fw-500 cursor-pointer " + (head === 0 ? "text-secondary" : "text-primary")} onClick={handleBackward}>
                 <IoChevronBackSharp />
             </span>
             <div className="carouselItemContainer container gap-3 d-flex justify-content-center align-items-center">
