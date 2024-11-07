@@ -6,6 +6,7 @@ import FiltersContainer from './FiltersContainer';
 
 import './MobileFilter.css'
 function MobileFilter() {
+    const [sort, setSort] = useState("Sort-By")
     const [filterOpen, setFilterOpen] = useState(false)
     const [sortOpen, setSortOpen] = useState(false)
     return (
@@ -27,14 +28,26 @@ function MobileFilter() {
                         }
                         setSortOpen(!sortOpen)
                     }}>
-                        Sort by
+                        {sort}
                         {sortOpen ? <FaChevronUp className='fs-7 fw-600' /> : <FaChevronDown className='fs-7 fw-600' />}
                     </div>
                     {sortOpen ? <div className="mt-3 d-flex flex-column align-items-center justify-content-center gap-2">
-                        <FilterItem className='text-secondary'>Popularity</FilterItem>
-                        <FilterItem className='text-secondary'>Rating</FilterItem>
-                        <FilterItem className='text-secondary'>Date Added</FilterItem>
-                        <FilterItem className='text-secondary'>Name</FilterItem>
+                        <FilterItem onClick={() => {
+                            setSort("Popularity")
+                            setSortOpen(!sortOpen)
+                        }} className='text-secondary'>Popularity</FilterItem>
+                        <FilterItem onClick={() => {
+                            setSort("Rating")
+                            setSortOpen(!sortOpen)
+                        }} className='text-secondary'>Rating</FilterItem>
+                        <FilterItem onClick={() => {
+                            setSort("Date Added")
+                            setSortOpen(!sortOpen)
+                        }} className='text-secondary'>Date Added</FilterItem>
+                        <FilterItem onClick={() => {
+                            setSort("Name")
+                            setSortOpen(!sortOpen)
+                        }} className='text-secondary'>Name</FilterItem>
                     </div> : <></>}
                 </div>
             </div>
