@@ -27,7 +27,7 @@ function ProductsPage() {
         </div>
         <Carousel className='w-80' DataItems={[
           <CarouselItem img={category1} categoryTitle={"MEN'S CLOTHING"} numberOfItems={5} />, <CarouselItem img={category2} categoryTitle={"WoMEN'S CLOTHING"} numberOfItems={5} />, <CarouselItem img={category3} categoryTitle={"KID'S CLOTHING"} numberOfItems={5} />, <CarouselItem img={category4} categoryTitle={"MEN'S CLOTHING"} numberOfItems={5} />, <CarouselItem img={category5} categoryTitle={"BEAUTY"} numberOfItems={5} />, <CarouselItem img={category1} categoryTitle={"ACCESSORIES"} numberOfItems={5} />, <CarouselItem img={category2} categoryTitle={"JHIJH KJBKJ"} numberOfItems={5} />, <CarouselItem img={category3} categoryTitle={"MEN'S CLOTHING"} numberOfItems={5} />, <CarouselItem img={category4} categoryTitle={"ASKJN ASKJN"} numberOfItems={5} />, <CarouselItem img={category5} categoryTitle={"ASKJN KASJDN"} numberOfItems={5} />
-        ]} numberOfItemsToShowInDesktop={5} numberOfItemsToShowInMobile={2}  />
+        ]} numberOfItemsToShowInDesktop={5} numberOfItemsToShowInMobile={2} />
       </div>
 
       <div className="mt-5 container product-listing-grid w-100">

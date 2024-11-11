@@ -7,7 +7,7 @@ import './Cart.css'
 import { useWindowSize } from '../../Context/context'
 import { useCart } from '../../Context/context'
 function Cart() {
-    const isMobile = useWindowSize().isMobile
+    const { isMobile } = useWindowSize()
     const { getProds } = useCart()
     const datas = getProds()
     return (

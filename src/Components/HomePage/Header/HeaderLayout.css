@@ -1,4 +1,10 @@
-
+.nav-items-container {
+    top: 64px;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    z-index: 3;
+}
 
 @media (max-width: 900px) {
     .header-container {

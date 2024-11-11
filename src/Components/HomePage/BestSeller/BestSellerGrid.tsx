@@ -1,4 +1,3 @@
-import React from 'react'
 import ProductCard from './ProductCard'
 import './BestSellerGrid.css'
 import { giveData } from '../../../Pages/ProductsPage/data2'

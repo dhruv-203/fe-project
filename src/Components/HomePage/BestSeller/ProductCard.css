@@ -1,10 +1,15 @@
 .card {
-    
+
     min-height: 615px;
     display: grid;
     grid-template-rows: 10fr 1fr 1fr 1fr;
     grid-row-gap: 10px;
     text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
 }
 
 .model-photo {
@@ -14,7 +19,7 @@
     height: 100%;
 }
 
-.circle-btn-border{
+.circle-btn-border {
     border-color: #000000a1;
 }
 

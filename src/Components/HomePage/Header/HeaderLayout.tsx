@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useEffect } from 'react'
 import '../../../utility.css'
 import './HeaderLayout.css'
 import Text from './Text'
@@ -16,17 +16,101 @@ import { HiOutlinePhone } from "react-icons/hi";
 import { MdPersonOutline } from "react-icons/md";
 import { useState } from 'react'
 import { GiHamburgerMenu } from "react-icons/gi";
-import { useWindowSize, useCart } from '../../../Context/context'
+import { useCart } from '../../../Context/context'
 
 
 function HeaderLayout() {
-  let isMobile = (useWindowSize()).isMobile
+  const [isHamburger, setIsHamburger] = useState<boolean>(typeof window !== "undefined" ? (window.innerWidth <= 900) : false);
+  const { getCount } = useCart()
+  useEffect(() => {
+    const handleResize = () => setIsHamburger(window.innerWidth <= 900);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [])
+  const [isOpen, setOpen] = useState<boolean>(false)
   return (
     <div >
       <Header className={"bg-dark"} />
-      {
-        isMobile ? <MobileNavBar /> : <DesktopNavBar />
-      }
+      <div className={`position-relative  gap-2  d-flex justify-content-between py-2  align-items-center bg-light `} >
+        <NavLink to={'/home'}><BrandLogo className={"px-4 p-3"} /></NavLink>
+        {isHamburger ? <GiHamburgerMenu className='fs-4 px-4' onClick={() => {
+          setOpen(!isOpen)
+        }} /> :
+          <div className=" d-flex  align-items-center gap-3 justify-content-between container mr-5 ">
+            <div className="nav-items text-align-center flex-wrap child-start d-flex align-items-center justify-content-center gap-3 p-3 ">
+              <NavItem>
+                <NavLink className='text-dark' to={"/home"}>Home</NavLink>
+              </NavItem>
+              <NavItem >
+                <NavLink className='text-dark d-flex align-items-center justify-content-center' to={"/home/products"}>Shop </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink className='text-dark' to={"/home/about"}>About</NavLink>
+              </NavItem>
+
+              <NavItem>
+                <NavLink className='text-dark' to={"/home/contact"}>Contact</NavLink>
+              </NavItem>
+
+            </div>
+            <div className="login-register-container flex-wrap d-flex justify-content-center align-items-center gap-4">
+              <NavLink to={"/"} className={"text-primary d-flex justify-content-center align-items-center gap-1"}>
+                <MdPersonOutline className='fs-5' />
+                <Text className='py-2'>Login / Register</Text>
+              </NavLink>
+              <LogoContainer className='navbar-logo-container flex-wrap text-primary gap-4  align-items-center'>
+                <Logo >
+                  <BiSearchAlt2 className='fs-5 mt-1' />
+                </Logo>
+                <NavLink to={"/home/cart"}>
+                  <Logo>
+                    <span className="d-flex align-items-center justify-content-center gap-1 text-primary"><BsCart /> <span className="fs-6 text-align-center">{getCount()}</span></span>
+                  </Logo>
+                </NavLink>
+                <Logo>
+                  <span className="d-flex align-items-center justify-content-center gap-1"><HiOutlineHeart /> <span className="fs-6 text-align-center">1</span></span>
+                </Logo>
+              </LogoContainer>
+            </div>
+          </div>}
+        {
+          (isHamburger && isOpen) && (<div className="position-absolute  nav-items-container d-flex flex-column align-items-center gap-3 justify-content-center mr-0 py-3">
+            <div className="nav-items text-align-center flex-column flex-wrap child-start d-flex align-items-center justify-content-center gap-3 p-3 mr-0">
+              <NavItem handleClick={() => { handleLinkClick(isOpen, setOpen) }}>
+                <NavLink className='text-dark fs-4' to={"/home"}>Home</NavLink>
+              </NavItem>
+              <NavItem handleClick={() => { handleLinkClick(isOpen, setOpen) }} >
+                <NavLink className='text-dark fs-4 d-flex align-items-center justify-content-center' to={"/home/products"}>Shop</NavLink>
+              </NavItem>
+              <NavItem handleClick={() => { handleLinkClick(isOpen, setOpen) }}>
+                <NavLink className='text-dark fs-4' to={"/home/about"}>About</NavLink>
+              </NavItem>
+              <NavItem handleClick={() => { handleLinkClick(isOpen, setOpen) }}>
+                <NavLink className='text-dark fs-4' to={"/home/contact"}>Contact</NavLink>
+              </NavItem>
+            </div>
+            <div className="login-register-container flex-column flex-wrap d-flex justify-content-center align-items-center gap-4">
+              <NavLink to={"/"} onClick={() => { handleLinkClick(isOpen, setOpen) }} className={"text-primary d-flex justify-content-center align-items-center gap-1"}>
+                <MdPersonOutline className='fs-4' />
+                <div className='py-2 fs-5 fw-600'>Login / Register</div>
+              </NavLink>
+              <LogoContainer className='navbar-logo-container flex-column flex-wrap text-primary gap-4  align-items-center'>
+                <Logo className='fs-3'>
+                  <BiSearchAlt2 />
+                </Logo>
+                <NavLink to={"/home/cart"} onClick={() => { handleLinkClick(isOpen, setOpen) }}>
+                  <Logo className='fs-3'>
+                    <span className="d-flex align-items-center justify-content-center gap-1 text-primary"><BsCart /> <span className="fs-6 text-align-center">{getCount()}</span></span>
+                  </Logo>
+                </NavLink>
+                <Logo className='fs-3'>
+                  <span className="d-flex align-items-center justify-content-center gap-1"><HiOutlineHeart /> <span className="fs-6 text-align-center">1</span></span>
+                </Logo>
+              </LogoContainer>
+            </div>
+          </div>)
+        }
+      </div>
     </div>
   )
 }
@@ -107,117 +191,6 @@ function NavItem({ children, className = "", handleClick = () => { return null }
     <Text className={' text-dark opacity-06 ' + className} onClick={handleClick}>
       {children}
     </Text>
-  )
-}
-
-
-
-
-function DesktopNavBar() {
-  const { getCount } = useCart()
-  return (
-    <div className={`navbar container-fluid gap-2  d-flex justify-content-between py-2  align-items-center bg-light `} >
-      <NavLink to={'/home'}><BrandLogo className={"px-4 p-3"} /></NavLink>
-      <div className="nav-items-container d-flex  align-items-center gap-3 justify-content-between container mr-5">
-        <div className="nav-items text-align-center flex-wrap child-start d-flex align-items-center justify-content-center gap-3 p-3 ">
-          <NavItem>
-            <NavLink className='text-dark' to={"/home"}>Home</NavLink>
-          </NavItem>
-          <NavItem >
-            <NavLink className='text-dark d-flex align-items-center justify-content-center' to={"/home/products"}>Shop </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink className='text-dark' to={"/home/about"}>About</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink className='text-dark' to={"/home/about"}>Blog</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink className='text-dark' to={"/home/contact"}>Contact</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink className='text-dark' to={"/home/about"}>Pages</NavLink>
-          </NavItem>
-        </div>
-        <div className="login-register-container flex-wrap d-flex justify-content-center align-items-center gap-4">
-          <NavLink to={"/"} className={"text-primary d-flex justify-content-center align-items-center gap-1"}>
-            <MdPersonOutline className='fs-5' />
-            <Text className='py-2'>Login / Register</Text>
-          </NavLink>
-          <LogoContainer className='navbar-logo-container flex-wrap text-primary gap-4  align-items-center'>
-            <Logo >
-              <BiSearchAlt2 className='fs-5 mt-1' />
-            </Logo>
-            <NavLink to={"/home/cart"}>
-              <Logo>
-                <span className="d-flex align-items-center justify-content-center gap-1 text-primary"><BsCart /> <span className="fs-6 text-align-center">{getCount()}</span></span>
-              </Logo>
-            </NavLink>
-            <Logo>
-              <span className="d-flex align-items-center justify-content-center gap-1"><HiOutlineHeart /> <span className="fs-6 text-align-center">1</span></span>
-            </Logo>
-          </LogoContainer>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function MobileNavBar() {
-  const [isOpen, setOpen] = useState<boolean>(false)
-  const { getCount } = useCart()
-  return (
-    <div className={`navbar  bg-light`} >
-      <div className='gap-2  d-flex justify-content-between py-2  align-items-center  '>
-        <NavLink to={"/home"}><BrandLogo className={"px-4 p-3"} /></NavLink>
-        <GiHamburgerMenu className='fs-4 px-4' onClick={() => {
-          setOpen(!isOpen)
-        }} />
-      </div>
-      {
-        isOpen ? (<div className="nav-items-container d-flex flex-column align-items-center gap-3 justify-content-center mr-0 p-3">
-          <div className="nav-items text-align-center flex-column flex-wrap child-start d-flex align-items-center justify-content-center gap-3 p-3 mr-0">
-            <NavItem handleClick={() => { handleLinkClick(isOpen, setOpen) }}>
-              <NavLink className='text-dark fs-4' to={"/home"}>Home</NavLink>
-            </NavItem>
-            <NavItem handleClick={() => { handleLinkClick(isOpen, setOpen) }} >
-              <NavLink className='text-dark fs-4 d-flex align-items-center justify-content-center' to={"/home/products"}>Shop</NavLink>
-            </NavItem>
-            <NavItem handleClick={() => { handleLinkClick(isOpen, setOpen) }}>
-              <NavLink className='text-dark fs-4' to={"/home/about"}>About</NavLink>
-            </NavItem>
-            <NavItem handleClick={() => { handleLinkClick(isOpen, setOpen) }}>
-              <NavLink className='text-dark fs-4' to={"/home/about"}>Blog</NavLink>
-            </NavItem>
-            <NavItem handleClick={() => { handleLinkClick(isOpen, setOpen) }}>
-              <NavLink className='text-dark fs-4' to={"/home/contact"}>Contact</NavLink>
-            </NavItem>
-            <NavItem handleClick={() => { handleLinkClick(isOpen, setOpen) }}>
-              <NavLink className='text-dark fs-4' to={"/home/about"}>Pages</NavLink>
-            </NavItem>
-          </div>
-          <div className="login-register-container flex-column flex-wrap d-flex justify-content-center align-items-center gap-4">
-            <NavLink to={"/"} onClick={() => { handleLinkClick(isOpen, setOpen) }} className={"text-primary d-flex justify-content-center align-items-center gap-1"}>
-              <MdPersonOutline className='fs-4' />
-              <div className='py-2 fs-5 fw-600'>Login / Register</div>
-            </NavLink>
-            <LogoContainer className='navbar-logo-container flex-column flex-wrap text-primary gap-4  align-items-center'>
-              <Logo className='fs-3'>
-                <BiSearchAlt2 />
-              </Logo>
-              <NavLink to={"/home/cart"} onClick={() => { handleLinkClick(isOpen, setOpen) }}>
-                <Logo className='fs-3'>
-                  <span className="d-flex align-items-center justify-content-center gap-1 text-primary"><BsCart /> <span className="fs-6 text-align-center">{getCount()}</span></span>
-                </Logo>
-              </NavLink>
-              <Logo className='fs-3'>
-                <span className="d-flex align-items-center justify-content-center gap-1"><HiOutlineHeart /> <span className="fs-6 text-align-center">1</span></span>
-              </Logo>
-            </LogoContainer>
-          </div>
-        </div>) : <></>
-      }
-    </div >
   )
 }
 

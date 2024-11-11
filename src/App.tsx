@@ -6,13 +6,11 @@ import Footer from './Components/HomePage/Footer/Footer';
 import './utility.css'
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import { scrollUp } from './utils';
 function App() {
   const { pathname } = useLocation()
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    })
+    scrollUp(false, 'smooth', 0, 0)
   }, [pathname])
   return (
     <div className="App">

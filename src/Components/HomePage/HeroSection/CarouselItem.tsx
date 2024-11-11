@@ -18,7 +18,7 @@ interface CarouselItemProps {
 }
 
 function CarouselItem({ className = " ", content }: CarouselItemProps) {
-    let isMobile = (useWindowSize()).isMobile
+    let {isMobile} = (useWindowSize())
 
     useEffect(() => {
         initial = false;

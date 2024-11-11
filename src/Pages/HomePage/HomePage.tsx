@@ -20,7 +20,7 @@ import Post from '../../Components/HomePage/Posts/Post';
 import { NavLink } from 'react-router-dom';
 import { useWindowSize } from '../../Context/context';
 function HomePage() {
-  const isMobile = (useWindowSize()).isMobile
+  const { isMobile } = (useWindowSize())
   return (
     <div>
       <Carousel className=" "

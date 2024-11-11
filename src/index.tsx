@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import HomePage from './Pages/HomePage/HomePage'
-import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Navigate, BrowserRouter } from 'react-router-dom';
 import ProductsPage from './Pages/ProductsPage/ProductsPage';
 import Provider from './Context/context';
 import ProductDetails from './Pages/ProductDetailPage/ProductDetails';
@@ -63,7 +63,9 @@ if (rootElement) {
   root.render(
     <React.StrictMode>
       <Provider>
+        {/* <BrowserRouter> */}
         <RouterProvider router={router} />
+        {/* </BrowserRouter> */}
       </Provider>
     </React.StrictMode>
   );

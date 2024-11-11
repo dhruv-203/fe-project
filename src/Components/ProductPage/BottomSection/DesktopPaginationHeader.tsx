@@ -16,7 +16,7 @@ function DesktopPaginationHeader() {
                 <div className="fs-7">SEO Text will be here</div>
             </div>
 
-            <div className="sort-by-container dropdown-head w-30 px-3 gap-2 py-1 d-flex align-items-center justify-content-center">
+            <div className="sort-by-container dropdown-head w-40 px-3 gap-2 py-1 d-flex align-items-center justify-content-center">
                 <div className="fs-7 fw-600 p-1">
                     Sort-by
                 </div>

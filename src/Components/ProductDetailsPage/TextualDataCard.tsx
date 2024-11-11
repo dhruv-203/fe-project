@@ -23,7 +23,7 @@ interface TextualDataType {
 }
 
 function TextualDataCard({ data }: { data: TextualDataType }) {
-    let isMobile = (useWindowSize()).isMobile
+    let {isMobile} = (useWindowSize())
     let { addToCart, productExists, getQuantity, removeFromCart } = useCart()
     let [selectedColor, setSelectedColor] = useState(data.colors[0])
     return (

@@ -1,4 +1,3 @@
-import React from 'react'
 import Hero from '../../Components/AboutUs/Hero'
 import './AboutUs.css'
 import { useWindowSize } from '../../Context/context'
@@ -15,7 +14,7 @@ import BrandLogosContainer from '../../Components/ProductPage/BrandLogosContaine
 import abtImg from '../../Assets/AboutUs/bottom.png'
 import ContactUs from '../ContactUs/ContactUs'
 function AboutUs() {
-    let isMobile = (useWindowSize()).isMobile
+    let {isMobile} = (useWindowSize())
 
     return (
         <>

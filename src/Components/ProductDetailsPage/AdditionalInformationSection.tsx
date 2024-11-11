@@ -7,7 +7,7 @@ import { useWindowSize } from '../../Context/context'
 
 // a component to be used internally 
 function AdditionalInformation() {
-    let isMobile = (useWindowSize()).isMobile
+    const { isMobile } = useWindowSize()
 
     return (
         <div className={"display w-100  gap-3 align-items-start mt-3 " + (isMobile ? "justify-items-center " : "justify-items-between")}>

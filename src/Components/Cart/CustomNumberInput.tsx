@@ -34,14 +34,8 @@ function CustomNumberInput({ id, color }: CustomNumberInputProps) {
                 setCount(count + 1)
             }} />
             <BiChevronDown className='down-arrow fs-5' onClick={() => {
-                if (count > 1) {
-                    updateCart(id, color, (count - 1))
-                    setCount(count - 1)
-                }
-                else {
-                    updateCart(id, color, 1)
-                    setCount(1)
-                }
+                setCount(count > 1 ? count - 1 : 1)
+                updateCart(id, color, count > 1 ? count - 1 : 1)
             }} />
         </div>
     )

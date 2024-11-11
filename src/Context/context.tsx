@@ -79,9 +79,9 @@ export default function Provider({ children }: { children: ReactNode }): JSX.Ele
             if ((val.prodID === prodID && val.prodColor === prodColor)) {
                 return { ...val, prodQuant: Quant }
             }
-            else {
+            
                 return val
-            }
+            
         }))
     }
 

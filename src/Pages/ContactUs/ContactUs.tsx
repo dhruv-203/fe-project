@@ -4,7 +4,7 @@ import ContentContainer from '../../Components/HomePage/HeroSection/ContentConta
 import Btn from '../../Components/HomePage/HeroSection/Btn'
 import './ContactUs.css'
 function ContactUs({ img }: { img: string }) {
-    let isMobile = (useWindowSize()).isMobile
+    let {isMobile} = (useWindowSize())
 
     return (
         <div className='d-flex  bg-primary justify-content-center align-items-stretch gap-0 '>

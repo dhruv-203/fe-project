@@ -32,7 +32,7 @@ interface BottomIndicatorsProps {
 }
 
 function DetailsSection({ className = " ", data }: DetailsSectionProps) {
-    let isMobile = (useWindowSize()).isMobile
+    let {isMobile} = (useWindowSize())
     const imagesArray = data.additionalImages.map((val) => {
         return <img src={val} width={"100%"} height={"auto"} style={{ "aspectRatio": "1/1" }} alt="" />
     })

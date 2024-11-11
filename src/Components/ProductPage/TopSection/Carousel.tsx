@@ -15,7 +15,7 @@ interface CarouselProps {
 }
 
 function Carousel({ className = " ", DataItems, numberOfItemsToShowInDesktop, numberOfItemsToShowInMobile, BottomIndicators }: CarouselProps) {
-    let isMobile = (useWindowSize()).isMobile
+    let {isMobile} = (useWindowSize())
 
     const [tail, setTail] = useState(isMobile ? numberOfItemsToShowInMobile : numberOfItemsToShowInDesktop)
     const [head, setHead] = useState(0)
@@ -24,14 +24,12 @@ function Carousel({ className = " ", DataItems, numberOfItemsToShowInDesktop, nu
         setTail((0 + (isMobile ? numberOfItemsToShowInMobile : numberOfItemsToShowInDesktop)))
     }, [isMobile])
     function handleForward() {
-        console.log("Forward: " + tail)
         if (tail < DataItems.length) {
             setTail(tail + 1)
             setHead(head + 1)
         }
     }
     function handleBackward() {
-        console.log("Backward: " + tail)
         if (head > 0) {
             setHead(head - 1)
             setTail(tail - 1)

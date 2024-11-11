@@ -1133,3 +1133,11 @@ a {
 .opacity-1 {
     opacity: 1 !important;
 }
+
+.position-relative {
+    position: relative
+}
+
+.position-absolute {
+    position: absolute;
+}

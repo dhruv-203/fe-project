@@ -17,7 +17,7 @@ interface SectionContainerProps {
     bottomChild: ReactNode
 }
 function SectionContainer({ className = " ", img, preTitle, preTitleFontSize, preTitleOpacity, title, titleFontSize, description, descriptionOpacity, bottomChild }: SectionContainerProps) {
-    let isMobile = (useWindowSize()).isMobile
+    let {isMobile} = (useWindowSize())
 
     return (
         <div className={"d-flex justify-content-center align-items-center gap-3  " + className + (isMobile ? " flex-column-reverse " : " ")}>

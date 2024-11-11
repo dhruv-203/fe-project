@@ -1,4 +1,3 @@
-import React from 'react'
 import SectionTitle from '../EditorPick/SectionTitle'
 import SectionDescription from '../EditorPick/SectionDescription'
 import './ProductCard.css'

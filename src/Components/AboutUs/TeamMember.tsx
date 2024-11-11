@@ -9,7 +9,7 @@ interface TeamMemberProps {
 }
 
 function TeamMember({ profilePic, username = "Username", profession = "Profession" }: TeamMemberProps) {
-    let isMobile = (useWindowSize()).isMobile
+    let {isMobile} = (useWindowSize())
 
     return (
         <div className={' d-flex flex-column align-items-center justify-content-center gap-3 ' + (isMobile ? " px-4 " : " ")}>

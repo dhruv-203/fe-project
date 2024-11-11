@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useState, useMemo } from 'react'
 import { useWindowSize } from '../../../Context/context'
 import './Pagination.css'
-
+import { scrollUp } from '../../../utils'
 
 // Original code written by me 
 /*
@@ -80,7 +80,7 @@ export default Pagination
 
 
 function Pagination({ data = [] }: { data: JSX.Element[] }) {
-    let isMobile = (useWindowSize()).isMobile
+    let { isMobile } = (useWindowSize())
 
     const [maxDisplay, setMaxDisplay] = useState(9)
     const [currIndex, setCurrIndex] = useState(1)
@@ -92,19 +92,13 @@ function Pagination({ data = [] }: { data: JSX.Element[] }) {
     }, [currIndex, noPages])
 
     const handlePrev = () => {
-        window.scrollTo({
-            top: isMobile ? 300 : 400,
-            behavior: 'smooth'
-        })
+        scrollUp(isMobile, 'smooth', 300, 400)
         if (currIndex > 1) setCurrIndex(currIndex - 1);
     }
 
     const handleNext = () => {
         if (currIndex < noPages) setCurrIndex(currIndex + 1);
-        window.scrollTo({
-            top: isMobile ? 300 : 400,
-            behavior: 'smooth'
-        })
+        scrollUp(isMobile, 'smooth', 300, 400)
     }
 
     useEffect(() => {
@@ -141,10 +135,7 @@ function Pagination({ data = [] }: { data: JSX.Element[] }) {
                         key={page}
                         className={"number-items fs-7 text-align-center " + (page === currIndex ? "bg-primary text-light" : "bg-light text-primary") + (isMobile ? " p-3 " : " p-4 ")}
                         onClick={() => {
-                            window.scrollTo({
-                                top: isMobile ? 300 : 400,
-                                behavior: 'smooth'
-                            })
+                            scrollUp(isMobile, 'smooth', 300, 400)
                             setCurrIndex(page)
                         }}
                     >

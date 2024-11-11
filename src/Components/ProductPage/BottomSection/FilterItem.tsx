@@ -5,7 +5,6 @@ interface FilterItemProps extends HTMLAttributes<HTMLDivElement> {
 
 }
 function FilterItem({ children, className = " ", ...rest }: FilterItemProps) {
-    console.log("dsd")
     return (
         <div className={" filter-item fs-7 fw-600 px-2 py-1 " + className} {...rest}>{children}</div>
     )
