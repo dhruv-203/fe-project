@@ -7,11 +7,23 @@ import BestsellerProductsSection from '../../Components/ProductDetailsPage/Bests
 import { useSelector } from 'react-redux'
 import { RootState } from '../../Store'
 import { Product } from '../../Store/Slices/productsSlice'
+import { useEffect, useState } from 'react'
 function ProductDetails() {
     const { productId } = useParams()
 
-    // const data = giveData().find((val) => val.id === productId)
     const data = useSelector<RootState, Product[]>((state) => state.products.filteredProducts).find((val) => val.id === productId)
+
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        setLoading(false)
+    }, [data])
+
+    // Optional: Add loading state handling
+    if (loading && (!data)) {
+        return <div className="container mt-5">Loading products...</div>
+    }
+
     return (
         <div className='container'>
             <BreadCrumb title={""} />

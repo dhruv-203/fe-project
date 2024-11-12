@@ -3,12 +3,15 @@ import { useState } from 'react'
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa6'
 import FilterItem from './FilterItem'
 import './DesktopPaginationHeader.css'
-import { useSelector } from 'react-redux'
-import { RootState } from '../../../Store'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState, sortBy } from '../../../Store'
+import { SortOptions } from '../../../utils'
 function DesktopPaginationHeader() {
-    const [sortOption, setSortOption] = useState("Popularity")
+    // const [sortOption, setSortOption] = useState("Popularity")
+    const sortOption: SortOptions = useSelector<RootState, SortOptions>((state) => state.products.sortOption)
     const [sortOpen, setSortOpen] = useState(false)
     const selectedCategory = useSelector<RootState, string>((state) => state.products.selectedCategory)
+    const dispatcher = useDispatch()
     return (
 
         <div className="d-flex align-items-center   justify-content-between  w-100 ">
@@ -28,10 +31,8 @@ function DesktopPaginationHeader() {
                 }} className={'  filter-btn d-flex  w-40 gap-2  fs-7 fw-600 border border-rounded justify-content-between align-items-center p-3 ' + (sortOpen ? "sort-open" : "text-secondary")}>{sortOption} {sortOpen ? <FaChevronUp className='fs-7 fw-600' /> : <FaChevronDown className='fs-7 fw-600' />}</div>
                 {sortOpen ?
                     <div className='d-flex flex-column p-3 gap-2 dropdown fs-7 fw-600 justify-content-between align-items-center ' >
-                        <FilterItem className='sort-item' onClick={() => { setSortOption("Popularity"); setSortOpen(!sortOpen) }}>Popularity</FilterItem>
-                        <FilterItem className='sort-item' onClick={() => { setSortOption("Rating"); setSortOpen(!sortOpen) }}>Rating</FilterItem>
-                        <FilterItem className='sort-item' onClick={() => { setSortOption("Date Added"); setSortOpen(!sortOpen) }}>Date Added</FilterItem>
-                        <FilterItem className='sort-item' onClick={() => { setSortOption("Name"); setSortOpen(!sortOpen) }}>Name</FilterItem>
+                        <FilterItem className='sort-item' onClick={() => { dispatcher(sortBy(SortOptions.Rating)); setSortOpen(!sortOpen) }}>Rating</FilterItem>
+                        <FilterItem className='sort-item' onClick={() => { dispatcher(sortBy(SortOptions.Name)); setSortOpen(!sortOpen) }}>Name</FilterItem>
                     </div>
                     : <></>}
             </div>

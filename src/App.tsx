@@ -7,11 +7,28 @@ import './utility.css'
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { scrollUp } from './utils';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState, initializeCategoryList, initializeProducts } from './Store';
+import { Product } from './Store/Slices/productsSlice';
+import { giveData } from './Pages/ProductsPage/data2';
+
 function App() {
   const { pathname } = useLocation()
+  // const products = useSelector<RootState, Product[]>((state)=>state.products.products)
+  const dispatcher = useDispatch()
   useEffect(() => {
     scrollUp(false, 'smooth', 0, 0)
   }, [pathname])
+  useEffect(() => {
+    const categoryList = giveData().reduce((acc: string[], curr: Product) => {
+      if (!acc.includes(curr.category)) {
+        acc.push(curr.category)
+      }
+      return acc
+    }, [])
+    dispatcher(initializeProducts(giveData()))
+    dispatcher(initializeCategoryList(categoryList))
+  }, [])
   return (
     <div className="App">
       <HeaderLayout />

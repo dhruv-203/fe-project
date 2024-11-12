@@ -4,3 +4,8 @@ export function scrollUp(isMobile: boolean, scrollBehavior: ScrollBehavior, mobi
         behavior: scrollBehavior
     })
 }
+
+export enum SortOptions {
+    Rating = "Rating",
+    Name = "Name"
+}

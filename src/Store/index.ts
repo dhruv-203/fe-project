@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { productReducer, filterByBrands, filterByCategory, filterByPrice } from "./Slices/productsSlice";
+import { productReducer, filterByBrands, filterByCategory, filterByPrice, initializeCategoryList, initializeProducts, sortBy } from "./Slices/productsSlice";
 const store = configureStore(
     {
         reducer: {
@@ -9,4 +9,4 @@ const store = configureStore(
 )
 
 export type RootState = ReturnType<typeof store.getState>;
-export { store, filterByBrands, filterByCategory, filterByPrice }
+export { store, filterByBrands, filterByCategory, filterByPrice, initializeCategoryList, initializeProducts, sortBy }

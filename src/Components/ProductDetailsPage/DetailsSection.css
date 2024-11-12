@@ -5,6 +5,8 @@
     aspect-ratio: 4/3;
 }
 
+
+
 .indicator-active {
     opacity: 1;
 }
@@ -27,5 +29,11 @@
 
     .carousel-indicators {
         bottom: -60px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .details-section {
+        flex-direction: column;
     }
 }

@@ -51,7 +51,7 @@ function DetailsSection({ className = " ", data }: DetailsSectionProps) {
     }
 
     return (
-        <div className={' d-flex align-items-center justify-content-between ' + (isMobile ? " flex-column " : " ")}>
+        <div className={' d-flex align-items-center justify-content-between details-section' }>
             <Carousel className={" carousel-margin-bottom " + (isMobile ? " w-70 " : ' w-40 ')} numberOfItemsToShowInDesktop={1} DataItems={imagesArray} numberOfItemsToShowInMobile={1} BottomIndicators={BottomIndicators} />
             <TextualDataCard data={{ img: data.displayImage, id: data.id, title: data.title, rating: data.ratings, reviewCount: data.reviews.length, productDescription: data.longDescription, colors: data.colors, price: data.discountedPrice }} key={data.id} />
         </div>
