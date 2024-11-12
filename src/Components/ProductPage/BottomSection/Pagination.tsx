@@ -85,9 +85,11 @@ function Pagination({ data = [] }: { data: JSX.Element[] }) {
     const [maxDisplay, setMaxDisplay] = useState(9)
     const [currIndex, setCurrIndex] = useState(1)
     let noPages = Math.ceil((data.length / maxDisplay))
+
     const pages = useMemo(() => {
-        if (currIndex === 1) return [1, 2, 3];
-        if (currIndex === noPages) return [noPages - 2, noPages - 1, noPages];
+        console.log(noPages, currIndex)
+        if (currIndex === 1 || noPages <= 3) return [1, 2, 3];
+        if (currIndex === noPages && noPages >= 3) return [noPages - 2, noPages - 1, noPages];
         return [currIndex - 1, currIndex, currIndex + 1];
     }, [currIndex, noPages])
 
@@ -135,8 +137,11 @@ function Pagination({ data = [] }: { data: JSX.Element[] }) {
                         key={page}
                         className={"number-items fs-7 text-align-center " + (page === currIndex ? "bg-primary text-light" : "bg-light text-primary") + (isMobile ? " p-3 " : " p-4 ")}
                         onClick={() => {
-                            scrollUp(isMobile, 'smooth', 300, 400)
-                            setCurrIndex(page)
+                            if (page <= noPages) {
+                                // console.log(page, noPages)
+                                scrollUp(isMobile, 'smooth', 300, 400)
+                                setCurrIndex(page)
+                            }
                         }}
                     >
                         {page}

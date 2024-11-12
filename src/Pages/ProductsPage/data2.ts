@@ -750,7 +750,7 @@ const products = [
       "https://images.unsplash.com/photo-1620799140188-3b2a02fd9a77",
       "https://images.unsplash.com/photo-1618410319102-147cbd4c2ad6"
     ]
-  }
+  },
 ]
 
 export function giveData() {

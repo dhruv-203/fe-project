@@ -3,14 +3,16 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import HomePage from './Pages/HomePage/HomePage'
-import { createBrowserRouter, RouterProvider, Navigate, BrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import ProductsPage from './Pages/ProductsPage/ProductsPage';
-import Provider from './Context/context';
+import ContextProvider from './Context/context';
 import ProductDetails from './Pages/ProductDetailPage/ProductDetails';
 import AboutUs from './Pages/AboutUsPage/AboutUs';
 import ContactUs from './Pages/ContactUs/ContactUs';
 import contactImg from './Assets/AboutUs/contact.png'
 import Cart from './Pages/Cart/Cart';
+import { Provider } from 'react-redux';
+import { store } from './Store';
 
 const rootElement = document.getElementById('root');
 const router = createBrowserRouter([
@@ -49,23 +51,17 @@ const router = createBrowserRouter([
     ]
   }
 ])
-// root.render(
-//   <React.StrictMode>
-//     <Provider>
-//       <RouterProvider router={router} />
-//     </Provider>
-//   </React.StrictMode>
-// );
+
 
 
 if (rootElement) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <React.StrictMode>
-      <Provider>
-        {/* <BrowserRouter> */}
-        <RouterProvider router={router} />
-        {/* </BrowserRouter> */}
+      <Provider store={store}>
+        <ContextProvider>
+          <RouterProvider router={router} />
+        </ContextProvider>
       </Provider>
     </React.StrictMode>
   );

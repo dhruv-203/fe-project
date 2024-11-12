@@ -19,7 +19,6 @@ interface TextualDataType {
     rating: number,
     productDescription: string,
     colors: string[]
-
 }
 
 function TextualDataCard({ data }: { data: TextualDataType }) {

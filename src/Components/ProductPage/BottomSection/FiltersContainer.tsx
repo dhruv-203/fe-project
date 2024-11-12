@@ -1,29 +1,45 @@
-import React from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import FilterItem from './FilterItem'
 import FilterHead from './FilterHead'
 import FilterCategory from './FilterCategory'
 import { useWindowSize } from '../../../Context/context'
 import Slider from './Slider'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState, filterByBrands, filterByCategory } from '../../../Store'
+import { Product } from '../../../Store/Slices/productsSlice'
 function FiltersContainer() {
-    let isMobile = (useWindowSize()).isMobile
+    const { isMobile } = (useWindowSize())
+    const categoryList = useSelector<RootState, string[]>((state) => state.products.categoryList)
+    const products = useSelector<RootState, Product[]>((state) => state.products.products)
+    const dispatcher = useDispatch()
+    const selectedCategory = useSelector<RootState, string>((state) => state.products.selectedCategory)
+    const Brands = useMemo(() => {
+        return products.reduce((acc, curr) => {
+            if (!acc.includes(curr.brand) && curr.category === selectedCategory) {
+                acc.push(curr.brand)
+            }
+            return acc
+        }, [] as string[])
+    }, [selectedCategory, products])
+
+    useEffect(() => {
+        dispatcher(filterByCategory(selectedCategory === "" ? categoryList[0] : selectedCategory))
+    }, [categoryList])
+
+
+    const selectedBrands = useSelector<RootState, { [key: string]: boolean }>((state) => state.products.selectedBrands)
 
 
     return (
-
         <div className={` filter-items-container  gap-3  d-flex ${isMobile ? "align-items-center w-100 my-4" : "align-items-start px-2 justify-self-start"} justify-content-center flex-column`}>
             {isMobile ? <></> : <FilterHead>Filters</FilterHead>}
             <FilterCategory className=' filter-by-category '>
                 <FilterHead>
                     All Categories
                 </FilterHead>
-                <FilterItem className={"text-secondary"}>All Men's Clothing</FilterItem>
-                <FilterItem className={"text-secondary"}>Women's Clothing</FilterItem>
-                <FilterItem className={"text-secondary"}>Footwear</FilterItem>
-                <FilterItem className={"text-secondary"}>Watches</FilterItem>
-                <FilterItem className={"text-secondary"}>Beauty</FilterItem>
-                <FilterItem className={"text-secondary"}>Kid's Clothing</FilterItem>
-                <FilterItem className={"text-secondary"}>Hand bags</FilterItem>
-                <FilterItem className={"text-secondary"}>Jwellery</FilterItem>
+                {categoryList.map((val: string) => <FilterItem key={val} className={selectedCategory === val ? "text-primary" : "text-secondary"} onClick={() => {
+                    dispatcher(filterByCategory(val))
+                }}>{val}</FilterItem>)}
             </FilterCategory>
             <FilterCategory className='filter-by-price '>
                 <FilterHead>Price</FilterHead>
@@ -31,19 +47,14 @@ function FiltersContainer() {
             </FilterCategory>
             <FilterCategory className='filter-by-brands'>
                 <FilterHead>   Brands </FilterHead>
-                <FilterItem className='d-flex align-items-center justify-content-center gap-2'><input className="brand-check" type="checkbox" name="All" id="All" /> <label htmlFor="All" >All</label> </FilterItem>
-                <FilterItem className='d-flex align-items-center justify-content-center gap-2'><input className="brand-check" type="checkbox" name="Zara" id="Zara" /> <label htmlFor="Zara" >Zara</label> </FilterItem>
-                <FilterItem className='d-flex align-items-center justify-content-center gap-2'><input className="brand-check" type="checkbox" name="Levi's" id="Levi's" /> <label htmlFor="Levi's" >Levi's</label> </FilterItem>
-                <FilterItem className='d-flex align-items-center justify-content-center gap-2'><input className="brand-check" type="checkbox" name="Adidas" id="Adidas" /> <label htmlFor="Adidas" >Adidas</label> </FilterItem>
-                <FilterItem className='d-flex align-items-center justify-content-center gap-2'><input className="brand-check" type="checkbox" name="peterEngland" id="peterEngland" /> <label htmlFor="peterEngland" >Peter England</label> </FilterItem>
-                <FilterItem className='d-flex align-items-center justify-content-center gap-2'>
-                    <input className="brand-check" type="checkbox" name="allenSolley" id="allenSolley" />
-                    <label htmlFor="allenSolley" >Allen Solley</label>
-                </FilterItem>
-                <FilterItem className='d-flex align-items-center justify-content-center gap-2'>
-                    <input className="brand-check" type="checkbox" name="fabIndia" id="fabIndia" />
-                    <label htmlFor="fabIndia" >Fabindia</label>
-                </FilterItem>
+                {
+                    Brands.map((val: string) => <FilterItem key={val} className='d-flex align-items-center justify-content-center gap-2'><input checked={selectedBrands[val] || false} className="brand-check" type="checkbox" onChange={(e) => {
+
+                        dispatcher(filterByBrands({
+                            brands: { ...selectedBrands, [val]: e.target.checked },
+                        }))
+                    }} name={val.replaceAll(" ", "")} id={val.replaceAll(" ", "")} /> <label htmlFor={val.replaceAll(" ", "")} >{val}</label> </FilterItem>)
+                }
             </FilterCategory>
         </div>
     )

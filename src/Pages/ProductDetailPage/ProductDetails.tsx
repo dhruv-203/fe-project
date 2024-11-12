@@ -4,11 +4,14 @@ import DetailsSection from '../../Components/ProductDetailsPage/DetailsSection'
 import AdditionalInformationSection from '../../Components/ProductDetailsPage/AdditionalInformationSection'
 import BrandLogosContainer from '../../Components/ProductPage/BrandLogosContainer'
 import BestsellerProductsSection from '../../Components/ProductDetailsPage/BestsellerProductsSection'
-import { giveData } from '../ProductsPage/data2'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../Store'
+import { Product } from '../../Store/Slices/productsSlice'
 function ProductDetails() {
     const { productId } = useParams()
 
-    const data = giveData().find((val) => val.id === productId)
+    // const data = giveData().find((val) => val.id === productId)
+    const data = useSelector<RootState, Product[]>((state) => state.products.filteredProducts).find((val) => val.id === productId)
     return (
         <div className='container'>
             <BreadCrumb title={""} />

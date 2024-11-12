@@ -51,7 +51,7 @@ function MobileFilter() {
                     </div> : <></>}
                 </div>
             </div>
-            {filterOpen && <FiltersContainer /> }
+            {filterOpen && <FiltersContainer />}
         </>
     )
 }

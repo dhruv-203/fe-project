@@ -1,16 +1,32 @@
 import "./Slider.css"; // This is for our custom styles
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, filterByPrice } from "../../../Store";
 const Slider = () => {
-    const [minValue, setMinValue] = useState(12);
-    const [maxValue, setMaxValue] = useState(425);
-    const minLimit = 12;
-    const maxLimit = 425;
+
+    const minLimit = useSelector<RootState, number>((state) => state.products.minPriceLimit);
+    const maxLimit = useSelector<RootState, number>((state) => state.products.maxPriceLimit);
+    const [minValue, setMinValue] = useState(minLimit)
+    const [maxValue, setMaxValue] = useState(maxLimit)
+    const dispatcher = useDispatch()
+
+    useEffect(() => {
+        setMaxValue(maxLimit);
+        setMinValue(minLimit)
+    }, [maxLimit, minLimit])
+
+    // console.log(`minValue: ${minValue}\n
+    //     minLimit: ${minLimit}\n
+    //     maxLimit: ${maxLimit}\n
+    //     maxValue: ${maxValue}`)
+
 
     // Handle change for the min handle
     const handleMinChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = parseInt(event.target.value);
         if (value < maxValue) {
             setMinValue(value);
+            dispatcher(filterByPrice({ max: maxValue, min: value }))
         }
     };
 
@@ -19,6 +35,7 @@ const Slider = () => {
         const value = parseInt(event.target.value);
         if (value > minValue) {
             setMaxValue(value);
+            dispatcher(filterByPrice({ max: value, min: minValue }))
         }
     };
 

@@ -3,15 +3,18 @@ import { useState } from 'react'
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa6'
 import FilterItem from './FilterItem'
 import './DesktopPaginationHeader.css'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../../Store'
 function DesktopPaginationHeader() {
     const [sortOption, setSortOption] = useState("Popularity")
     const [sortOpen, setSortOpen] = useState(false)
+    const selectedCategory = useSelector<RootState, string>((state) => state.products.selectedCategory)
     return (
 
         <div className="d-flex align-items-center   justify-content-between  w-100 ">
             <div className="headings-container px-3 d-flex flex-column align-items-start justify-content-center">
                 <div className="fs-5 fw-600">
-                    Men's Clothing
+                    {selectedCategory}
                 </div>
                 <div className="fs-7">SEO Text will be here</div>
             </div>

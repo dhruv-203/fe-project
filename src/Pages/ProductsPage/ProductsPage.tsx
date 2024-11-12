@@ -12,12 +12,16 @@ import FiltersContainer from '../../Components/ProductPage/BottomSection/Filters
 import DesktopPaginationHeader from '../../Components/ProductPage/BottomSection/DesktopPaginationHeader'
 import './ProductPage.css'
 import Pagination from '../../Components/ProductPage/BottomSection/Pagination'
-import { giveData } from './data2'
 import ProductCard from '../../Components/HomePage/BestSeller/ProductCard'
 import BrandLogosContainer from '../../Components/ProductPage/BrandLogosContainer'
 import { NavLink } from 'react-router-dom'
+import { useSelector, } from 'react-redux'
+import { RootState, } from '../../Store'
+import { Product } from '../../Store/Slices/productsSlice'
 function ProductsPage() {
-  let isMobile = (useWindowSize()).isMobile
+  const isMobile = (useWindowSize()).isMobile
+  const products: Product[] = useSelector<RootState, Product[]>((state) => state.products.filteredProducts)
+  
 
   return (
     <>
@@ -35,7 +39,7 @@ function ProductsPage() {
         <div className={`sidebar-container d-flex flex-column gap-2 align-items-center justify-content-start ${isMobile ? "w-100 my-4" : " "}`}>
           {isMobile ? <></> : <DesktopPaginationHeader />}
 
-          <Pagination data={giveData().map((val) => {
+          <Pagination data={products.map((val) => {
             return (<NavLink to={`${val.id}`} key={val.id}>
               <ProductCard url={val.displayImage} title={val.title} description={val.shortDescription} ogPrice={val.originalPrice} discountPrice={val.discountedPrice} colors={val.colors} />
             </NavLink>)
