@@ -26,7 +26,6 @@ function FiltersContainer() {
         dispatcher(filterByCategory(selectedCategory === "" ? categoryList[0] : selectedCategory))
     }, [categoryList])
 
-
     const selectedBrands = useSelector<RootState, { [key: string]: boolean }>((state) => state.products.selectedBrands)
 
 

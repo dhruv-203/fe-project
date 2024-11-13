@@ -9,12 +9,11 @@ import { useEffect } from 'react';
 import { scrollUp } from './utils';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, initializeCategoryList, initializeProducts } from './Store';
-import { Product } from './Store/Slices/productsSlice';
+import { filterByCategory, Product } from './Store/Slices/productsSlice';
 import { giveData } from './Pages/ProductsPage/data2';
 
 function App() {
   const { pathname } = useLocation()
-  // const products = useSelector<RootState, Product[]>((state)=>state.products.products)
   const dispatcher = useDispatch()
   useEffect(() => {
     scrollUp(false, 'smooth', 0, 0)
@@ -29,6 +28,9 @@ function App() {
     dispatcher(initializeProducts(giveData()))
     dispatcher(initializeCategoryList(categoryList))
   }, [])
+
+
+
   return (
     <div className="App">
       <HeaderLayout />

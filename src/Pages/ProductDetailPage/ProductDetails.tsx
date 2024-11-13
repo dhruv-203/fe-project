@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react'
 function ProductDetails() {
     const { productId } = useParams()
 
-    const data = useSelector<RootState, Product[]>((state) => state.products.filteredProducts).find((val) => val.id === productId)
+    let data = useSelector<RootState, Product[]>((state) => state.products.products).find((val) => val.id === productId)
 
     const [loading, setLoading] = useState(true)
 
@@ -27,7 +27,7 @@ function ProductDetails() {
     return (
         <div className='container'>
             <BreadCrumb title={""} />
-            <DetailsSection data={data ? data : {
+            {data ? <DetailsSection data={data ? data : {
                 id: " ",
                 title: " ",
                 shortDescription: " ",
@@ -46,7 +46,7 @@ function ProductDetails() {
                     " ",
                     " "
                 ]
-            }} />
+            }} /> : <div className="container mt-5">No Details Available</div>}
             <AdditionalInformationSection reviews={data?.reviews} description={data?.longDescription} />
             <BestsellerProductsSection />
             <BrandLogosContainer />

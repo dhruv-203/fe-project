@@ -106,6 +106,7 @@ const productSlice = createSlice({
             state.filteredProducts = (action.payload)
         },
         initializeCategoryList(state, action: PayloadAction<string[]>) {
+            state.selectedCategory = action.payload[0]
             state.categoryList = action.payload
         },
         filterByCategory(state, action: PayloadAction<string>) {

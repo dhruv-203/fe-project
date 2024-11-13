@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { RootState } from '../../Store'
+import { filterByCategory, RootState } from '../../Store'
 import BreadCrumb from '../../Components/ProductPage/TopSection/BreadCrumb'
 import Carousel from '../../Components/ProductPage/TopSection/Carousel'
 import CarouselItem from '../../Components/ProductPage/TopSection/CarouselItem'
@@ -23,23 +23,26 @@ import category5 from '../../Assets/product-page/Categories/category-5.png'
 
 function ProductsPage() {
   const isMobile = useWindowSize().isMobile
+  const dispatcher = useDispatch()
 
   const [isLoading, setIsLoading] = useState(true)
-
   const products = useSelector((state: RootState) => {
     return state.products.filteredProducts
   })
-
+  const selectedCategory = useSelector((state: RootState) => state.products.selectedCategory)
   useEffect(() => {
     setIsLoading(false)
-  }, [products])
+  }, [products, selectedCategory])
 
 
 
   // Optional: Add loading state handling
-  if (isLoading && (!products || products.length === 0)) {
+  if (isLoading && (!products || products.length === 0) && (!selectedCategory || selectedCategory === "")) {
     return <div className="container mt-5">Loading products...</div>
   }
+
+  
+  // dispatcher(filterByCategory(selectedCategory))
 
   const carouselItems = [
     { img: category1, title: "MEN'S CLOTHING", items: 5 },
@@ -82,7 +85,7 @@ function ProductsPage() {
         >
           {!isMobile && <DesktopPaginationHeader />}
 
-          {products && products.length > 0 ? (
+          {products && products.length > 0 && selectedCategory && selectedCategory.length > 0 ? (
             <Pagination
               data={products.map((product) => (
                 <NavLink to={`${product.id}`} key={product.id}>

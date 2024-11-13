@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { TbMenuDeep } from "react-icons/tb";
 import FilterItem from './FilterItem';
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
@@ -6,15 +6,20 @@ import FiltersContainer from './FiltersContainer';
 
 import './MobileFilter.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, sortBy } from '../../../Store';
+import { filterByCategory, RootState, sortBy } from '../../../Store';
 import { SortOptions } from '../../../utils';
 function MobileFilter() {
     const sort = useSelector((state: RootState) => {
         return state.products.sortOption
     })
+    const selectedCategory = useSelector((state: RootState) => state.products.selectedCategory)
+    const categoryList = useSelector((state: RootState) => state.products.categoryList)
     const dispatcher = useDispatch()
     const [filterOpen, setFilterOpen] = useState(false)
     const [sortOpen, setSortOpen] = useState(false)
+    useEffect(() => {
+        dispatcher(filterByCategory(selectedCategory === "" ? categoryList[0] : selectedCategory))
+    }, [categoryList])
     return (
         <>
             <div className="d-flex w-100 align-items-start justify-content-center gap-3">
