@@ -78,12 +78,23 @@ const helper = {
     getBrandNamesArray: (brands: { [key: string]: boolean }): string[] => {
         return Object.entries(brands).filter(([_, selected]) => selected).map(([brand]) => brand)
     },
-    sortByName: (products: Product[]) => {
-        return products.sort((a, b) => a.title.localeCompare(b.title))
+    sortBy(products: Product[], sortOption: SortOptions) {
+        const filterProds = products;
+        if (sortOption === SortOptions.Name) {
+            return products.sort((a, b) => a.title.localeCompare(b.title))
+        }
+        if (sortOption === SortOptions.Rating) {
+            return products.sort((a, b) => a.ratings < b.ratings ? 1 : -1)
+        }
+        if (sortOption === SortOptions.HighestPrice) {
+            return products.sort((a, b) => b.discountedPrice - a.discountedPrice)
+        }
+        if (sortOption === SortOptions.LowestPrice) {
+            return products.sort((a, b) => a.discountedPrice - b.discountedPrice)
+        }
+        return filterProds
     },
-    sortByRating: (products: Product[]) => {
-        return products.sort((a, b) => a.ratings < b.ratings ? 1 : -1)
-    }
+
 }
 
 const productSlice = createSlice({
@@ -99,7 +110,7 @@ const productSlice = createSlice({
         },
         filterByCategory(state, action: PayloadAction<string>) {
             state.selectedCategory = action.payload;
-            state.filteredProducts = state.products.filter((product) => product.category === action.payload)
+            state.filteredProducts = helper.sortBy(state.products.filter((product) => product.category === action.payload), state.sortOption)
             const { minLimit, maxLimit } = helper.calculateRange(state.filteredProducts)
             state.maxPriceLimit = maxLimit;
             state.minPriceLimit = minLimit;
@@ -107,37 +118,24 @@ const productSlice = createSlice({
 
         },
         filterByPrice(state, action: PayloadAction<{ max: number, min: number }>) {
-            state.filteredProducts = helper.filterProducts(state.products, state.selectedCategory, state.selectedBrands)
-            state.filteredProducts = state.filteredProducts.filter((product) => {
+            state.filteredProducts = helper.sortBy(helper.filterProducts(state.products, state.selectedCategory, state.selectedBrands), state.sortOption).filter((product) => {
                 return (product.discountedPrice <= action.payload.max && product.discountedPrice >= action.payload.min)
             })
         },
         filterByBrands(state, action: PayloadAction<{ brands: { [key: string]: boolean } }>) {
             state.selectedBrands = action.payload.brands
             const selectedBrandNames = helper.getBrandNamesArray(action.payload.brands)
-            state.filteredProducts = selectedBrandNames.length === 0 ? state.products.filter((product) => product.category === state.selectedCategory) : state.products.filter((product) => product.category === state.selectedCategory && selectedBrandNames.includes(product.brand))
-            const { minLimit, maxLimit } = state.filteredProducts.reduce((acc, curr) => {
-                if (Math.ceil(curr.discountedPrice) > acc.maxLimit) {
-                    acc.maxLimit = Math.ceil(curr.discountedPrice)
-                }
-                if (Math.floor(curr.discountedPrice) < acc.minLimit) {
-                    acc.minLimit = Math.floor(curr.discountedPrice)
-                }
-
-                return acc
-            }, { minLimit: Math.floor(state.filteredProducts[0]?.discountedPrice ?? 0), maxLimit: Math.ceil(state.filteredProducts[0]?.discountedPrice ?? 0) } as { minLimit: number, maxLimit: number })
+            state.filteredProducts = selectedBrandNames.length === 0 ?
+                helper.sortBy(state.products.filter((product) => product.category === state.selectedCategory), state.sortOption) :
+                helper.sortBy(state.products.filter((product) => product.category === state.selectedCategory && selectedBrandNames.includes(product.brand)), state.sortOption)
+            const { minLimit, maxLimit } = helper.calculateRange(state.filteredProducts)
             state.maxPriceLimit = maxLimit;
             state.minPriceLimit = minLimit
         },
         // PENDING: sort-by functionality
         sortBy(state, action: PayloadAction<SortOptions>) {
             state.sortOption = action.payload
-            if (action.payload === SortOptions.Name) {
-                state.filteredProducts = helper.sortByName(state.filteredProducts)
-            }
-            if (action.payload === SortOptions.Rating) {
-                state.filteredProducts = helper.sortByRating(state.filteredProducts)
-            }
+            state.filteredProducts = helper.sortBy(state.filteredProducts, action.payload)
         }
     }
 }

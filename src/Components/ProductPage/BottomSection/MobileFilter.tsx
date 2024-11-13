@@ -48,6 +48,14 @@ function MobileFilter() {
                             dispatcher(sortBy(SortOptions.Name))
                             setSortOpen(!sortOpen)
                         }} className='text-secondary'>Name</FilterItem>
+                        <FilterItem onClick={() => {
+                            dispatcher(sortBy(SortOptions.HighestPrice))
+                            setSortOpen(!sortOpen)
+                        }} className='text-secondary text-align-center'>Highest Price</FilterItem>
+                        <FilterItem onClick={() => {
+                            dispatcher(sortBy(SortOptions.LowestPrice))
+                            setSortOpen(!sortOpen)
+                        }} className='text-secondary'>Lowest Price</FilterItem>
                     </div> : <></>}
                 </div>
             </div>

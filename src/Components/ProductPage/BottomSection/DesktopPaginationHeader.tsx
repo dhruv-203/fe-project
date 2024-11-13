@@ -33,6 +33,8 @@ function DesktopPaginationHeader() {
                     <div className='d-flex flex-column p-3 gap-2 dropdown fs-7 fw-600 justify-content-between align-items-center ' >
                         <FilterItem className='sort-item' onClick={() => { dispatcher(sortBy(SortOptions.Rating)); setSortOpen(!sortOpen) }}>Rating</FilterItem>
                         <FilterItem className='sort-item' onClick={() => { dispatcher(sortBy(SortOptions.Name)); setSortOpen(!sortOpen) }}>Name</FilterItem>
+                        <FilterItem className='sort-item' onClick={() => { dispatcher(sortBy(SortOptions.HighestPrice)); setSortOpen(!sortOpen) }}>Highest Price</FilterItem>
+                        <FilterItem className='sort-item' onClick={() => { dispatcher(sortBy(SortOptions.LowestPrice)); setSortOpen(!sortOpen) }}>Lowest Price</FilterItem>
                     </div>
                     : <></>}
             </div>

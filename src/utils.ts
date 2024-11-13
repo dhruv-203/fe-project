@@ -7,5 +7,7 @@ export function scrollUp(isMobile: boolean, scrollBehavior: ScrollBehavior, mobi
 
 export enum SortOptions {
     Rating = "Rating",
-    Name = "Name"
+    Name = "Name",
+    LowestPrice = "Lowest Price",
+    HighestPrice = "Highest Price"
 }
