@@ -115,8 +115,6 @@ const productSlice = createSlice({
             const { minLimit, maxLimit } = helper.calculateRange(state.filteredProducts)
             state.maxPriceLimit = maxLimit;
             state.minPriceLimit = minLimit;
-            state.selectedBrands = {} // reseting the brands filters on changing the category
-
         },
         filterByPrice(state, action: PayloadAction<{ max: number, min: number }>) {
             state.filteredProducts = helper.sortBy(helper.filterProducts(state.products, state.selectedCategory, state.selectedBrands), state.sortOption).filter((product) => {
