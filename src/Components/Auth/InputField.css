@@ -1,0 +1,16 @@
+.removeDefault {
+    outline: none;
+    border: none;
+    border: 1px solid rgb(128, 128, 128, 0.3);
+    font-weight: 500;
+    min-width: 200px;
+}
+
+input[type="submit"] {
+    text-decoration: none;
+    background: none;
+    border: none;
+    outline: none;
+    border: 1px solid rgb(128, 128, 128, 0.3);
+    min-width: 100px;
+}

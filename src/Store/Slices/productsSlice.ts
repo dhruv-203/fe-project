@@ -131,7 +131,6 @@ const productSlice = createSlice({
             state.maxPriceLimit = maxLimit;
             state.minPriceLimit = minLimit
         },
-        // PENDING: sort-by functionality
         sortBy(state, action: PayloadAction<SortOptions>) {
             state.sortOption = action.payload
             state.filteredProducts = helper.sortBy(state.filteredProducts, action.payload)
