@@ -6,6 +6,23 @@
     z-index: 3;
 }
 
+.profilePhoto {
+    width: auto;
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.profileIconContainer {
+    height: 50px;
+    width: 50px;
+    position: relative;
+    opacity: 1;
+    transition: all 0.2s ease-in;
+}
+
 @media (max-width: 900px) {
     .header-container {
         display: none !important;

@@ -1,21 +1,18 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import defaultImage from "../../Assets/user.png";
 import ErrorDisplay from "../../Components/Auth/ErrorDisplay";
 import InputField from "../../Components/Auth/InputField";
 import "../../Components/Auth/InputField.css";
-import { authenticate } from "../../Store";
+// import { authenticate } from "../../Store";
+import { useRegisterUserMutation } from "../../Store/Slices/authApi";
 import "./Registration.css";
-
 interface FormDataState {
   Name: string;
   Email: string;
   Password: string;
   RePassword: string;
-  Address: string;
   ProfilePhoto: File | null;
-  Pincode: string;
 }
 
 function Registration() {
@@ -24,36 +21,38 @@ function Registration() {
     Email: "",
     Password: "",
     RePassword: "",
-    Address: "",
     ProfilePhoto: null,
-    Pincode: "",
   });
-  const dispatcher = useDispatch();
+  const [registerUser, { isLoading, isError }] = useRegisterUserMutation();
+  // const dispatcher = useDispatch();
   const loc = useLocation();
   const nav = useNavigate();
-  console.log(loc.state);
   const [fileUrl, setFileUrl] = useState<string>("");
   const [errors, setErrors] = useState<string[]>([]);
+
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value, files } = e.target;
-    if (files !== null) {
+    if (files !== null && files[0] && files[0].type && files[0].size) {
       // profile photo file type validation
       if (!files[0].type.includes("image/")) {
         console.log("Please upload only image");
         setErrors(["Please upload only image"]);
-      } else setFileUrl(URL.createObjectURL(files[0]));
+      } else if (files[0].size > 10485760) {
+        console.log(
+          "Please upload less than",
+          (10485760 / (1024 * 1024)).toFixed(2)
+        );
+        setErrors([
+          `Please upload less than ${(10485760 / (1024 * 1024)).toFixed(2)} MB`,
+        ]);
+      } else {
+        setFileUrl(URL.createObjectURL(files[0]));
+        setErrors([]);
+      }
     }
     setFormState((prevState) => ({
       ...prevState,
       [name]: files ? files[0] : value,
-    }));
-  }
-
-  function handleTextAreaChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
-    const { name, value } = e.target;
-    setFormState((prevState) => ({
-      ...prevState,
-      [name]: value,
     }));
   }
 
@@ -75,12 +74,6 @@ function Registration() {
       setErrors(["Password must be of 8 or more characters"]);
     } else if (state.Password !== state.RePassword) {
       setErrors([...errors, "Password dosen't match with Re-Type Password"]);
-    }
-    //pincode validation
-    else if (state.Pincode === "Infinity" || isNaN(+state.Pincode)) {
-      setErrors([...errors, "Pincode must be a number"]);
-    } else if (state.Pincode.length !== 6) {
-      setErrors([...errors, "Pincode must be of 6 digits"]);
     } else {
       setErrors([]);
     }
@@ -98,8 +91,17 @@ function Registration() {
         formData.append(`${key}`, value);
       }
     });
-    dispatcher(authenticate(true));
-    nav(loc.state !== null ? loc.state.from : "/home");
+    try {
+      await registerUser(formData).unwrap();
+      nav(loc.state !== null ? loc.state.from : "/home");
+    } catch (error: any) {
+      if (error && error?.data?.message) {
+        setErrors([error.data.message]);
+      } else {
+        setErrors(["Unexpected Error occured"]);
+        console.log(error);
+      }
+    }
   }
 
   return (
@@ -155,21 +157,7 @@ function Registration() {
           name="RePassword"
           className="w-60 fs-7"
         />
-        <textarea
-          cols={10}
-          rows={5}
-          className="removeDefault fs-7 py-2 px-3 w-60"
-          placeholder="Enter Your Address"
-          onChange={handleTextAreaChange}
-          name="Address"
-        />
-        <InputField
-          type="text"
-          placeholder="Enter your pincode"
-          onChange={handleInputChange}
-          className="w-60 fs-7"
-          name="Pincode"
-        />
+
         <span className="text-dark fs-7 py-2">
           Already have an account?{" "}
           <NavLink to={"/auth/login"} state={loc.state}>
@@ -179,7 +167,8 @@ function Registration() {
         <input
           type="submit"
           className="w-20 p-2 fs-6 rounded bg-primary text-light cursor-pointer"
-          value="submit"
+          value={isLoading ? "loading..." : "submit"}
+          disabled={isLoading}
         />
       </form>
     </div>

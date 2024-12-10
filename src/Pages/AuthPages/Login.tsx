@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import ErrorDisplay from "../../Components/Auth/ErrorDisplay";
 import InputField from "../../Components/Auth/InputField";
 import "../../Components/Auth/InputField.css";
-import { authenticate } from "../../Store";
+// import { authenticate } from "../../Store";
+import { useLoginUserMutation } from "../../Store/Slices/authApi";
+import { toastify } from "../../utils";
 import "./Registration.css";
 interface FormDataState {
   Email: string;
@@ -16,10 +17,9 @@ function Login() {
     Email: "",
     Password: "",
   });
-  const dispatcher = useDispatch();
-  const loc = useLocation();
-  console.log(loc.state);
-  const navigate = useNavigate();
+
+  const [loginUser, { isLoading, isError }] = useLoginUserMutation();
+  // const dispatcher = useDispatch();
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
@@ -39,13 +39,25 @@ function Login() {
       formState.Password.trim() === ""
     ) {
       setError("All fileds are required");
+      toastify("All fileds are required", "error");
       return;
     }
     //directly use formState
     //implement the login fetch apis to get user login and then call this method
     // if truely authenticated
-    dispatcher(authenticate(true));
-    navigate(loc.state ? loc.state.from : "/home", { replace: true });
+    try {
+      await loginUser(formState).unwrap();
+      // navigate(loc.state ? loc.state.from : "/home", { replace: true });
+    } catch (err: any) {
+      if (err && err?.data && err.data?.message) {
+        setError(err.data.message);
+        toastify(err.data.message, "error");
+      } else {
+        setError("Unexpected Error Occurred");
+        toastify("Unexpected Error Occurred", "error");
+        console.log(err);
+      }
+    }
   }
 
   return (
@@ -79,7 +91,8 @@ function Login() {
         <input
           type="submit"
           className="w-20 p-2 fs-6 rounded bg-primary text-light cursor-pointer"
-          value="submit"
+          value={isLoading ? "Loding..." : "submit"}
+          disabled={isLoading}
         />
       </form>
     </div>

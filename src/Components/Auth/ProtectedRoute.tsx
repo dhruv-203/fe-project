@@ -1,11 +1,13 @@
 import { useSelector } from "react-redux";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { RootState } from "../../Store";
+import { RootState } from "../../Store/index";
 
 function ProtectedRoute() {
+  // const isAuthenticated = false;
   const isAuthenticated = useSelector(
     (state: RootState) => state.auth.isAuthenticated
   );
+
   const location = useLocation();
   console.log(location);
   if (isAuthenticated) {

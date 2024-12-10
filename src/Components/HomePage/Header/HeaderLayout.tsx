@@ -1,35 +1,37 @@
-import React, { ReactNode, useEffect, useState } from "react";
-import { BiSearchAlt2 } from "react-icons/bi";
+import React, { ReactNode, useState } from "react";
 import { BsCart } from "react-icons/bs";
 import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa6";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { HiOutlinePhone } from "react-icons/hi";
 import { HiOutlineHeart } from "react-icons/hi2";
+import { IoIosLogOut } from "react-icons/io";
 import { MdPersonOutline } from "react-icons/md";
 import { PiEnvelope } from "react-icons/pi";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { useCart } from "../../../Context/context";
+import { ToastContainer } from "react-toastify";
+import { useCart, useWindowSize } from "../../../Context/context";
+import { RootState } from "../../../Store";
+import { useLogoutUserMutation } from "../../../Store/Slices/authApi";
 import "../../../utility.css";
+import { toastify } from "../../../utils";
 import BrandLogo from "./BrandLogo";
 import "./HeaderLayout.css";
 import Logo from "./Logo";
 import LogoContainer from "./LogoContainer";
 import Text from "./Text";
-
 function HeaderLayout() {
-  const [isHamburger, setIsHamburger] = useState<boolean>(
-    typeof window !== "undefined" ? window.innerWidth <= 900 : false
-  );
+  let { isMobile } = useWindowSize();
   const { getCount } = useCart();
-  
-  useEffect(() => {
-    const handleResize = () => setIsHamburger(window.innerWidth <= 900);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const { isAuthenticated, user, accessToken } = useSelector(
+    (state: RootState) => state.auth
+  );
+  const [logoutUser, { isLoading }] = useLogoutUserMutation();
   const [isOpen, setOpen] = useState<boolean>(false);
+
   return (
     <div>
+      
       <Header className={"bg-dark"} />
       <div
         className={`position-relative  gap-2  d-flex justify-content-between py-2  align-items-center bg-light `}
@@ -37,14 +39,18 @@ function HeaderLayout() {
         <NavLink to={"/home"}>
           <BrandLogo className={"px-4 p-3"} />
         </NavLink>
-        {isHamburger ? (
-          <GiHamburgerMenu
-            className="fs-4 px-4"
-            onClick={() => {
-              setOpen(!isOpen);
-            }}
-          />
+        {isMobile ? (
+          //mobile
+          <>
+            <GiHamburgerMenu
+              className="fs-4 px-4"
+              onClick={() => {
+                setOpen(!isOpen);
+              }}
+            />
+          </>
         ) : (
+          //desktop
           <div className=" d-flex  align-items-center gap-3 justify-content-between container mr-5 ">
             <div className="nav-items text-align-center flex-wrap child-start d-flex align-items-center justify-content-center gap-3 p-3 ">
               <NavItem>
@@ -73,19 +79,51 @@ function HeaderLayout() {
               </NavItem>
             </div>
             <div className="login-register-container flex-wrap d-flex justify-content-center align-items-center gap-4">
-              <NavLink
-                to={"/auth/register"}
-                className={
-                  "text-primary d-flex justify-content-center align-items-center gap-1"
-                }
-              >
-                <MdPersonOutline className="fs-5" />
-                <Text className="py-2">Login / Register</Text>
-              </NavLink>
+              {!isAuthenticated ? (
+                <NavLink
+                  to={"/auth/register"}
+                  className={
+                    "text-primary d-flex justify-content-center align-items-center gap-1"
+                  }
+                >
+                  <MdPersonOutline className="fs-5" />
+                  <Text className="py-2">Login / Register</Text>
+                </NavLink>
+              ) : (
+                <div className="profileIconContainer">
+                  <img
+                    className="profilePhoto"
+                    src={user?.profilePhoto}
+                    alt="profilephoto"
+                  />
+                </div>
+              )}
               <LogoContainer className="navbar-logo-container flex-wrap text-primary gap-4  align-items-center">
-                <Logo>
-                  <BiSearchAlt2 className="fs-5 mt-1" />
-                </Logo>
+                {isAuthenticated && (
+                  <Logo
+                    className="fs-3 mt-2"
+                    onClick={async () => {
+                      try {
+                        await logoutUser({ accessToken }).unwrap();
+                        toastify("Logout Successful", "success");
+                        handleLinkClick(isOpen, setOpen);
+                      } catch (err: any) {
+                        console.log(err);
+                        if (err?.data && err.data?.message) {
+                          toastify(err.data.message, "error");
+                        } else {
+                          toastify(
+                            "Unexpected error occureed: logout failed",
+                            "error"
+                          );
+                        }
+                        handleLinkClick(isOpen, setOpen);
+                      }
+                    }}
+                  >
+                    <IoIosLogOut />
+                  </Logo>
+                )}
                 <NavLink to={"/home/cart"}>
                   <Logo>
                     <span className="d-flex align-items-center justify-content-center gap-1 text-primary">
@@ -106,7 +144,7 @@ function HeaderLayout() {
             </div>
           </div>
         )}
-        {isHamburger && isOpen && (
+        {isMobile && isOpen && (
           <div className="position-absolute  nav-items-container d-flex flex-column align-items-center gap-3 justify-content-center mr-0 py-3">
             <div className="nav-items text-align-center flex-column flex-wrap child-start d-flex align-items-center justify-content-center gap-3 p-3 mr-0">
               <NavItem
@@ -150,22 +188,45 @@ function HeaderLayout() {
               </NavItem>
             </div>
             <div className="login-register-container flex-column flex-wrap d-flex justify-content-center align-items-center gap-4">
-              <NavLink
-                to={"/auth/register"}
-                onClick={() => {
-                  handleLinkClick(isOpen, setOpen);
-                }}
-                className={
-                  "text-primary d-flex justify-content-center align-items-center gap-1"
-                }
-              >
-                <MdPersonOutline className="fs-4" />
-                <div className="py-2 fs-5 fw-600">Login / Register</div>
-              </NavLink>
+              {!isAuthenticated ? (
+                <NavLink
+                  to={"/auth/register"}
+                  onClick={() => {
+                    handleLinkClick(isOpen, setOpen);
+                  }}
+                  className={
+                    "text-primary d-flex justify-content-center align-items-center gap-1"
+                  }
+                >
+                  <MdPersonOutline className="fs-4" />
+                  <div className="py-2 fs-5 fw-600">Login / Register</div>
+                </NavLink>
+              ) : (
+                <div className="profileIconContainer">
+                  <img
+                    className="profilePhoto"
+                    src={user?.profilePhoto}
+                    alt="profilephoto"
+                  />
+                </div>
+              )}
               <LogoContainer className="navbar-logo-container flex-column flex-wrap text-primary gap-4  align-items-center">
-                <Logo className="fs-3">
-                  <BiSearchAlt2 />
-                </Logo>
+                {isAuthenticated && (
+                  <Logo
+                    className="fs-2"
+                    onClick={async () => {
+                      try {
+                        await logoutUser({ accessToken });
+                        handleLinkClick(isOpen, setOpen);
+                      } catch (err) {
+                        handleLinkClick(isOpen, setOpen);
+                        console.log(err);
+                      }
+                    }}
+                  >
+                    <IoIosLogOut />
+                  </Logo>
+                )}
                 <NavLink
                   to={"/home/cart"}
                   onClick={() => {
@@ -181,6 +242,7 @@ function HeaderLayout() {
                     </span>
                   </Logo>
                 </NavLink>
+                {/* Convert this heart option into orders btn */}
                 <Logo className="fs-3">
                   <span className="d-flex align-items-center justify-content-center gap-1">
                     <HiOutlineHeart />{" "}

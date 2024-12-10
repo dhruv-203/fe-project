@@ -6,6 +6,7 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
+import "react-toastify/ReactToastify.css";
 import App from "./App";
 import contactImg from "./Assets/AboutUs/contact.png";
 import ProtectedRoute from "./Components/Auth/ProtectedRoute";
