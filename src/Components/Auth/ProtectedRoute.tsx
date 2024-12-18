@@ -9,7 +9,6 @@ function ProtectedRoute() {
   );
 
   const location = useLocation();
-  console.log(location);
   if (isAuthenticated) {
     return location.pathname.includes("/auth/") ? (
       <Navigate to={"/home"} />

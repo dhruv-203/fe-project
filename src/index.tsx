@@ -20,6 +20,7 @@ import ContactUs from "./Pages/ContactUs/ContactUs";
 import HomePage from "./Pages/HomePage/HomePage";
 import ProductDetails from "./Pages/ProductDetailPage/ProductDetails";
 import ProductsPage from "./Pages/ProductsPage/ProductsPage";
+import Profile from "./Pages/Profile/Profile";
 import { store } from "./Store";
 const rootElement = document.getElementById("root");
 const router = createBrowserRouter([
@@ -56,7 +57,18 @@ const router = createBrowserRouter([
         element: <ProtectedRoute />,
         children: [
           {
+            path: "",
             element: <Cart />,
+          },
+        ],
+      },
+      {
+        path: "profile",
+        element: <ProtectedRoute />,
+        children: [
+          {
+            path: "",
+            element: <Profile />,
           },
         ],
       },

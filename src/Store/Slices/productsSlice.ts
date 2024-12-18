@@ -43,7 +43,6 @@ const initialState: ProductSliceState = {
     brands: [] // these are the avaiable brands in marketplace of the project not the one selected by user 
 }
 */
-
 const initialState: ProductSliceState = {
     products: [],
     filteredProducts: [],

@@ -48,7 +48,6 @@ function ProductsPage() {
     { img: category1, title: "MEN'S CLOTHING", items: 5 },
     { img: category2, title: "WOMEN'S CLOTHING", items: 5 },
     { img: category3, title: "KID'S CLOTHING", items: 5 },
-    { img: category4, title: "MEN'S CLOTHING", items: 5 },
     { img: category5, title: "BEAUTY", items: 5 },
     { img: category1, title: "ACCESSORIES", items: 5 },
     { img: category2, title: "FASHION", items: 5 },

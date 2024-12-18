@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { User } from "../Types";
 import { authApi } from "./authApi";
+import { userApi } from "./userApi";
 interface InitialStateType {
   isAuthenticated: boolean;
   accessToken: string | null;
@@ -38,15 +39,7 @@ const authSlice = createSlice({
         state.isAuthenticated = true;
       }
     );
-    builder.addMatcher(
-      authApi.endpoints.registerUser.matchRejected,
-      (state, action) => {
-        state.accessToken = null;
-        state.refreshToken = null;
-        state.user = null;
-        state.isAuthenticated = false;
-      }
-    );
+
     builder.addMatcher(
       authApi.endpoints.loginUser.matchFulfilled,
       (state, action) => {
@@ -56,19 +49,10 @@ const authSlice = createSlice({
         state.isAuthenticated = true;
       }
     );
-    builder.addMatcher(
-      authApi.endpoints.loginUser.matchRejected,
-      (state, action) => {
-        state.accessToken = null;
-        state.refreshToken = null;
-        state.user = null;
-        state.isAuthenticated = false;
-      }
-    );
+
     builder.addMatcher(
       authApi.endpoints.logoutUser.matchFulfilled,
       (state, action) => {
-        console.log(action);
         state.accessToken = null;
         state.refreshToken = null;
         state.user = null;
@@ -77,7 +61,14 @@ const authSlice = createSlice({
     );
 
     builder.addMatcher(
-      authApi.endpoints.logoutUser.matchRejected,
+      userApi.endpoints.updateProfile.matchFulfilled,
+      (state, action) => {
+        state.user = action.payload.data.user;
+      }
+    );
+
+    builder.addMatcher(
+      userApi.endpoints.updateProfile.matchRejected,
       (state, action) => {
         console.log(action);
       }

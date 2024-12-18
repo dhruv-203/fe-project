@@ -6,8 +6,9 @@ import InputField from "../../Components/Auth/InputField";
 import "../../Components/Auth/InputField.css";
 // import { authenticate } from "../../Store";
 import { useRegisterUserMutation } from "../../Store/Slices/authApi";
+import { toastify } from "../../utils";
 import "./Registration.css";
-interface FormDataState {
+export interface FormDataState {
   Name: string;
   Email: string;
   Password: string;
@@ -36,6 +37,7 @@ function Registration() {
       // profile photo file type validation
       if (!files[0].type.includes("image/")) {
         console.log("Please upload only image");
+        toastify("Please upload only image", "error");
         setErrors(["Please upload only image"]);
       } else if (files[0].size > 10485760) {
         console.log(
@@ -45,6 +47,10 @@ function Registration() {
         setErrors([
           `Please upload less than ${(10485760 / (1024 * 1024)).toFixed(2)} MB`,
         ]);
+        toastify(
+          `Please upload less than ${(10485760 / (1024 * 1024)).toFixed(2)} MB`,
+          "error"
+        );
       } else {
         setFileUrl(URL.createObjectURL(files[0]));
         setErrors([]);
@@ -63,6 +69,7 @@ function Registration() {
 
     if (nullCheck) {
       setErrors(["Error Occured all fields are required"]);
+      toastify("Error Occured all fields are required", "error");
       console.log("Error Occured all fields are required");
       return false;
     } else {
@@ -72,8 +79,10 @@ function Registration() {
     // password validation
     if (state.Password.length < 8) {
       setErrors(["Password must be of 8 or more characters"]);
+      toastify("Password must be of 8 or more characters", "error");
     } else if (state.Password !== state.RePassword) {
       setErrors([...errors, "Password dosen't match with Re-Type Password"]);
+      toastify("Password dosen't match with Re-Type Password", "error");
     } else {
       setErrors([]);
     }
@@ -96,9 +105,11 @@ function Registration() {
       nav(loc.state !== null ? loc.state.from : "/home");
     } catch (error: any) {
       if (error && error?.data?.message) {
+        toastify(error.data.message, "error");
         setErrors([error.data.message]);
       } else {
         setErrors(["Unexpected Error occured"]);
+        toastify("Unexpected Error occured", "error");
         console.log(error);
       }
     }

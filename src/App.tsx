@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "./App.css";
@@ -7,7 +7,7 @@ import Footer from "./Components/HomePage/Footer/Footer";
 import HeaderLayout from "./Components/HomePage/Header/HeaderLayout";
 import Layout from "./Components/HomePage/Layout";
 import { giveData } from "./Pages/ProductsPage/data2";
-import { initializeCategoryList, initializeProducts } from "./Store";
+import { initializeCategoryList, initializeProducts, RootState } from "./Store";
 import {
   useCheckUserMutation,
   useRefreshTokenMutation,
@@ -19,8 +19,12 @@ import { scrollUp } from "./utils";
 function App() {
   const { pathname } = useLocation();
   const dispatcher = useDispatch();
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
   const [checkUser] = useCheckUserMutation();
   const [refreshTokenMut] = useRefreshTokenMutation();
+
   useEffect(() => {
     scrollUp(false, "smooth", 0, 0);
   }, [pathname]);
@@ -51,10 +55,13 @@ function App() {
       }
       return acc;
     }, []);
-    check();
     dispatcher(initializeProducts(giveData()));
     dispatcher(initializeCategoryList(categoryList));
   }, []);
+
+  useEffect(() => {
+    if (!isAuthenticated) check();
+  }, [isAuthenticated]);
 
   return (
     <div className="App">

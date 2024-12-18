@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { authApi } from "./Slices/authApi";
+import { Api } from "./Slices/Api";
 import { authReducer } from "./Slices/authSlice";
 import {
   filterByBrands,
@@ -13,11 +13,11 @@ import {
 const store = configureStore({
   reducer: {
     products: productReducer,
-    [authApi.reducerPath]: authApi.reducer,
+    [Api.reducerPath]: Api.reducer,
     auth: authReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authApi.middleware),
+    getDefaultMiddleware().concat(Api.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

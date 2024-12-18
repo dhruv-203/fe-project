@@ -9,7 +9,6 @@ import { MdPersonOutline } from "react-icons/md";
 import { PiEnvelope } from "react-icons/pi";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import { useCart, useWindowSize } from "../../../Context/context";
 import { RootState } from "../../../Store";
 import { useLogoutUserMutation } from "../../../Store/Slices/authApi";
@@ -31,7 +30,6 @@ function HeaderLayout() {
 
   return (
     <div>
-      
       <Header className={"bg-dark"} />
       <div
         className={`position-relative  gap-2  d-flex justify-content-between py-2  align-items-center bg-light `}
@@ -90,13 +88,15 @@ function HeaderLayout() {
                   <Text className="py-2">Login / Register</Text>
                 </NavLink>
               ) : (
-                <div className="profileIconContainer">
-                  <img
-                    className="profilePhoto"
-                    src={user?.profilePhoto}
-                    alt="profilephoto"
-                  />
-                </div>
+                <NavLink to={"/home/profile"}>
+                  <div className="profileIconContainer">
+                    <img
+                      className="profilePhoto"
+                      src={user?.profilePhoto}
+                      alt="profilephoto"
+                    />
+                  </div>
+                </NavLink>
               )}
               <LogoContainer className="navbar-logo-container flex-wrap text-primary gap-4  align-items-center">
                 {isAuthenticated && (

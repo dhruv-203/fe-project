@@ -1,21 +1,17 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import {
   LoginRequest,
   LoginResponse,
   LogoutRequest,
   RefreshTokenResponse,
 } from "../Types";
+import { Api } from "./Api";
 
-export const authApi = createApi({
-  reducerPath: "authApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8080/auth/",
-  }),
+export const authApi = Api.injectEndpoints({
   endpoints: (builder) => ({
     //check user using cookies
     checkUser: builder.mutation<LoginResponse, void>({
       query: () => ({
-        url: "checkUser",
+        url: "/auth/checkUser",
         method: "POST",
         credentials: "include",
       }),
@@ -24,7 +20,7 @@ export const authApi = createApi({
     //reset access token by requesting refreshToken
     refreshToken: builder.mutation<RefreshTokenResponse, void>({
       query: () => ({
-        url: "refreshToken",
+        url: "/auth/refreshToken",
         method: "POST",
         credentials: "include",
       }),
@@ -33,7 +29,7 @@ export const authApi = createApi({
     //login
     loginUser: builder.mutation<LoginResponse, LoginRequest>({
       query: (params: LoginRequest) => ({
-        url: "login",
+        url: "/auth/login",
         method: "POST",
         body: { ...params },
         headers: {
@@ -46,7 +42,7 @@ export const authApi = createApi({
     //register
     registerUser: builder.mutation<LoginResponse, FormData>({
       query: (credential: FormData) => ({
-        url: "register",
+        url: "/auth/register",
         method: "POST",
         body: credential,
         credentials: "include",
@@ -57,7 +53,7 @@ export const authApi = createApi({
     logoutUser: builder.mutation<LogoutRequest, LogoutRequest>({
       query: (tmp: LogoutRequest) => {
         return {
-          url: "logout",
+          url: "/auth/logout",
           method: "POST",
           body: {},
           headers: {
