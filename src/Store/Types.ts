@@ -1,3 +1,13 @@
+import { SortOptions } from "../utils";
+
+export interface Order {
+  id: string;
+  orderDate: string;
+  orderTotal: number;
+  orderItems: CartItem[];
+  shippingAddress: string;
+}
+
 export interface User {
   id: string;
   name: string;
@@ -5,6 +15,8 @@ export interface User {
   profilePhoto: string;
   cart: Cart;
   addresses: Address[];
+  wishlist: string[];
+  orders: Order[];
 }
 
 export interface Address {
@@ -13,7 +25,6 @@ export interface Address {
 }
 
 export interface CartItem {
-  itemID: string;
   img: string;
   prodID: string;
   prodName: string;
@@ -90,7 +101,7 @@ export interface UpdatePasswordResponse {
   message: string;
 }
 
-interface Product {
+export interface Product {
   id: string;
   title: string;
   shortDescription: string;
@@ -104,12 +115,108 @@ interface Product {
   reviews: string[];
   longDescription: string;
   additionalImages: string[];
-  overview: string;
-  keyFeatures: KeyFeatureItem[]; 
+  overview: string[];
+  keyFeatures: Array<{ [key: string]: string }>;
   isBestseller: boolean;
+  descriptionImage: string;
 }
 
-interface KeyFeatureItem {
-  key: string;
-  value: string;
+export interface Category {
+  id: string;
+  name: string;
+  img: string;
+}
+
+export interface ApiResponse<T> {
+  statusCode: number;
+  data: T;
+  message: string;
+}
+
+export interface FetchProductsResponseType {
+  pageNumber: number;
+  pageSize: number;
+  totalPages: number;
+  selectedCategory: string;
+  sortOption: SortOptions;
+  products: Product[];
+  totalItems: number;
+  selectedBrands: { [key: string]: boolean };
+}
+
+export interface InitialFetchProductsResponseType
+  extends FetchProductsResponseType {
+  categoryList: Category[];
+  itemsCountPerCategory: { [key: string]: number };
+  minPriceLimit: number;
+  maxPriceLimit: number;
+  availableBrands: string[];
+  bestsellerProducts: Product[];
+}
+
+export interface FilterByCategoriesResponseType
+  extends FetchProductsResponseType {
+  minPriceLimit: number;
+  maxPriceLimit: number;
+  availableBrands: string[];
+}
+
+export interface FilterByBrandsResponseType extends FetchProductsResponseType {
+  minPriceLimit: number;
+  maxPriceLimit: number;
+}
+
+export interface FilterByPriceResponseType extends FetchProductsResponseType {
+  minPrice: number;
+  maxPrice: number;
+}
+
+export interface FilterByCategoryRequestType {
+  selectedCategory: string;
+  sortOption: SortOptions;
+  pageSize: number;
+}
+
+export interface FilterByPriceRequestType extends FilterByCategoryRequestType {
+  selectedBrands: string[];
+  minPrice: number;
+  maxPrice: number;
+}
+
+export interface FilterByBrandsRequestType extends FilterByCategoryRequestType {
+  selectedBrands: string[];
+}
+
+export interface ApiError {
+  statusCode: number;
+  data: any;
+  errors: any[];
+  message: string;
+}
+
+export interface PageChangeRequestType extends FilterByPriceRequestType {
+  pageNumber: number;
+}
+
+export interface AddItemToCartRequest {
+  cartID: string;
+  cartItem: CartItem;
+}
+
+export interface RemoveItemFromCartRequest {
+  cartID: string;
+  prodID: string;
+  prodColor: string;
+}
+
+export interface UpdateCartRequest {
+  cartID: string;
+  prodID: string;
+  prodColor: string;
+  prodQuant: number;
+}
+
+export interface WishlistRequest {
+  prodID: string;
+  isExists: boolean;
 }

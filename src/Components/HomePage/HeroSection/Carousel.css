@@ -4,7 +4,7 @@
 }
 
 .carousel-item-1 {
-    background-image: url(../../../Assets/home-page/hero-section.jpg);
+    /* background-image: url(../../../Assets/home-page/hero-section.jpg); */
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;

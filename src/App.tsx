@@ -1,29 +1,33 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import ReactLoading from "react-loading";
+import { useSelector } from "react-redux";
 import { Outlet, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "./App.css";
 import Footer from "./Components/HomePage/Footer/Footer";
 import HeaderLayout from "./Components/HomePage/Header/HeaderLayout";
 import Layout from "./Components/HomePage/Layout";
-import { giveData } from "./Pages/ProductsPage/data2";
-import { initializeCategoryList, initializeProducts, RootState } from "./Store";
+import { RootState } from "./Store";
 import {
   useCheckUserMutation,
   useRefreshTokenMutation,
 } from "./Store/Slices/authApi";
-import { Product } from "./Store/Slices/productsSlice";
+import { useLazyInitialQuery } from "./Store/Slices/productsApi";
 import "./utility.css";
 import { scrollUp } from "./utils";
 
 function App() {
   const { pathname } = useLocation();
-  const dispatcher = useDispatch();
+  const [initialFetchTrigger] = useLazyInitialQuery();
+  useEffect(() => {
+    initialFetchTrigger(6);
+  }, []);
   const isAuthenticated = useSelector(
     (state: RootState) => state.auth.isAuthenticated
   );
-  const [checkUser] = useCheckUserMutation();
-  const [refreshTokenMut] = useRefreshTokenMutation();
+  const [checkUser, { isLoading: isCheckUserLoading }] = useCheckUserMutation();
+  const [refreshTokenMut, { isLoading: isRefreshLoading }] =
+    useRefreshTokenMutation();
 
   useEffect(() => {
     scrollUp(false, "smooth", 0, 0);
@@ -49,28 +53,28 @@ function App() {
   };
 
   useEffect(() => {
-    const categoryList = giveData().reduce((acc: string[], curr: Product) => {
-      if (!acc.includes(curr.category)) {
-        acc.push(curr.category);
-      }
-      return acc;
-    }, []);
-    dispatcher(initializeProducts(giveData()));
-    dispatcher(initializeCategoryList(categoryList));
-  }, []);
-
-  useEffect(() => {
     if (!isAuthenticated) check();
   }, [isAuthenticated]);
 
   return (
-    <div className="App">
+    <div className="App" id="App">
       <ToastContainer position="top-right" />
-      <HeaderLayout />
-      <Outlet />
-      <Layout className={"mb-3 "}>
-        <Footer />
-      </Layout>
+      {isCheckUserLoading || isRefreshLoading ? (
+        <div
+          className="container-fluid d-flex align-items-center justify-content-center"
+          style={{ height: "70vh" }}
+        >
+          <ReactLoading type="spin" color="#007bff" height={100} width={100} />
+        </div>
+      ) : (
+        <>
+          <HeaderLayout />
+          <Outlet />
+          <Layout className={"mb-3 "}>
+            <Footer />
+          </Layout>
+        </>
+      )}
     </div>
   );
 }

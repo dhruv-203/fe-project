@@ -1,9 +1,9 @@
 import React, { ReactNode, useState } from "react";
 import { BsCart } from "react-icons/bs";
 import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa6";
+import { FiShoppingBag } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { HiOutlinePhone } from "react-icons/hi";
-import { HiOutlineHeart } from "react-icons/hi2";
 import { IoIosLogOut } from "react-icons/io";
 import { MdPersonOutline } from "react-icons/md";
 import { PiEnvelope } from "react-icons/pi";
@@ -25,8 +25,13 @@ function HeaderLayout() {
   const { isAuthenticated, user, accessToken } = useSelector(
     (state: RootState) => state.auth
   );
+
   const [logoutUser, { isLoading }] = useLogoutUserMutation();
   const [isOpen, setOpen] = useState<boolean>(false);
+
+  const getOrdersCount = () => {
+    return user?.orders.length ?? 0;
+  };
 
   return (
     <div>
@@ -100,46 +105,52 @@ function HeaderLayout() {
               )}
               <LogoContainer className="navbar-logo-container flex-wrap text-primary gap-4  align-items-center">
                 {isAuthenticated && (
-                  <Logo
-                    className="fs-3 mt-2"
-                    onClick={async () => {
-                      try {
-                        await logoutUser({ accessToken }).unwrap();
-                        toastify("Logout Successful", "success");
-                        handleLinkClick(isOpen, setOpen);
-                      } catch (err: any) {
-                        console.log(err);
-                        if (err?.data && err.data?.message) {
-                          toastify(err.data.message, "error");
-                        } else {
-                          toastify(
-                            "Unexpected error occureed: logout failed",
-                            "error"
-                          );
+                  <>
+                    <Logo
+                      className="fs-3 mt-2"
+                      onClick={async () => {
+                        try {
+                          await logoutUser({ accessToken }).unwrap();
+                          toastify("Logout Successful", "success");
+                          handleLinkClick(isOpen, setOpen);
+                        } catch (err: any) {
+                          console.log(err);
+                          if (err?.data && err.data?.message) {
+                            toastify(err.data.message, "error");
+                          } else {
+                            toastify(
+                              "Unexpected error occureed: logout failed",
+                              "error"
+                            );
+                          }
+                          handleLinkClick(isOpen, setOpen);
                         }
-                        handleLinkClick(isOpen, setOpen);
-                      }
-                    }}
-                  >
-                    <IoIosLogOut />
-                  </Logo>
+                      }}
+                    >
+                      <IoIosLogOut />
+                    </Logo>
+                    <NavLink to={"/home/cart"}>
+                      <Logo>
+                        <span className="d-flex align-items-center justify-content-center gap-1 text-primary">
+                          <BsCart />{" "}
+                          <span className="fs-6 text-align-center">
+                            {getCount()}
+                          </span>
+                        </span>
+                      </Logo>
+                    </NavLink>
+                    <NavLink to={"/home/orders"}>
+                      <Logo>
+                        <span className="d-flex align-items-center justify-content-center text-primary gap-1">
+                          <FiShoppingBag />{" "}
+                          <span className="fs-6 text-align-center">
+                            {getOrdersCount()}
+                          </span>
+                        </span>
+                      </Logo>
+                    </NavLink>
+                  </>
                 )}
-                <NavLink to={"/home/cart"}>
-                  <Logo>
-                    <span className="d-flex align-items-center justify-content-center gap-1 text-primary">
-                      <BsCart />{" "}
-                      <span className="fs-6 text-align-center">
-                        {getCount()}
-                      </span>
-                    </span>
-                  </Logo>
-                </NavLink>
-                <Logo>
-                  <span className="d-flex align-items-center justify-content-center gap-1">
-                    <HiOutlineHeart />{" "}
-                    <span className="fs-6 text-align-center">1</span>
-                  </span>
-                </Logo>
               </LogoContainer>
             </div>
           </div>
@@ -212,43 +223,51 @@ function HeaderLayout() {
               )}
               <LogoContainer className="navbar-logo-container flex-column flex-wrap text-primary gap-4  align-items-center">
                 {isAuthenticated && (
-                  <Logo
-                    className="fs-2"
-                    onClick={async () => {
-                      try {
-                        await logoutUser({ accessToken });
+                  <>
+                    <Logo
+                      className="fs-2"
+                      onClick={async () => {
+                        try {
+                          await logoutUser({ accessToken });
+                          handleLinkClick(isOpen, setOpen);
+                        } catch (err) {
+                          handleLinkClick(isOpen, setOpen);
+                          console.log(err);
+                        }
+                      }}
+                    >
+                      <IoIosLogOut />
+                    </Logo>
+                    <NavLink
+                      to={"/home/cart"}
+                      onClick={() => {
                         handleLinkClick(isOpen, setOpen);
-                      } catch (err) {
-                        handleLinkClick(isOpen, setOpen);
-                        console.log(err);
-                      }
-                    }}
-                  >
-                    <IoIosLogOut />
-                  </Logo>
+                      }}
+                    >
+                      <Logo className="fs-3">
+                        <span className="d-flex align-items-center justify-content-center gap-1 text-primary">
+                          <BsCart />{" "}
+                          <span className="fs-6 text-align-center">
+                            {getCount()}
+                          </span>
+                        </span>
+                      </Logo>
+                    </NavLink>
+                    <NavLink
+                      to={"/home/orders"}
+                      onClick={() => handleLinkClick(isOpen, setOpen)}
+                    >
+                      <Logo className="fs-3">
+                        <span className="d-flex align-items-center justify-content-center gap-1 text-primary">
+                          <FiShoppingBag />{" "}
+                          <span className="fs-6 text-align-center">
+                            {getOrdersCount()}
+                          </span>
+                        </span>
+                      </Logo>
+                    </NavLink>
+                  </>
                 )}
-                <NavLink
-                  to={"/home/cart"}
-                  onClick={() => {
-                    handleLinkClick(isOpen, setOpen);
-                  }}
-                >
-                  <Logo className="fs-3">
-                    <span className="d-flex align-items-center justify-content-center gap-1 text-primary">
-                      <BsCart />{" "}
-                      <span className="fs-6 text-align-center">
-                        {getCount()}
-                      </span>
-                    </span>
-                  </Logo>
-                </NavLink>
-                {/* Convert this heart option into orders btn */}
-                <Logo className="fs-3">
-                  <span className="d-flex align-items-center justify-content-center gap-1">
-                    <HiOutlineHeart />{" "}
-                    <span className="fs-6 text-align-center">1</span>
-                  </span>
-                </Logo>
               </LogoContainer>
             </div>
           </div>

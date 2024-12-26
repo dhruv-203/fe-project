@@ -18,10 +18,12 @@ import Registration from "./Pages/AuthPages/Registration";
 import Cart from "./Pages/Cart/Cart";
 import ContactUs from "./Pages/ContactUs/ContactUs";
 import HomePage from "./Pages/HomePage/HomePage";
+import Orders from "./Pages/Orders";
 import ProductDetails from "./Pages/ProductDetailPage/ProductDetails";
 import ProductsPage from "./Pages/ProductsPage/ProductsPage";
 import Profile from "./Pages/Profile/Profile";
 import { store } from "./Store";
+
 const rootElement = document.getElementById("root");
 const router = createBrowserRouter([
   {
@@ -59,6 +61,16 @@ const router = createBrowserRouter([
           {
             path: "",
             element: <Cart />,
+          },
+        ],
+      },
+      {
+        path: "orders",
+        element: <ProtectedRoute />,
+        children: [
+          {
+            path: "",
+            element: <Orders />,
           },
         ],
       },

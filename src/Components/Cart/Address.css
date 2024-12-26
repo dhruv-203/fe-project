@@ -1,0 +1,37 @@
+.address-parent {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    min-width: 300px;
+}
+
+
+
+.flex-grow-3 {
+    flex-grow: 4;
+}
+
+.address-input {
+    min-width: 200px;
+}
+
+.address-showcase {
+    min-width: 200px;
+}
+
+.two-fields-in-one-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.875rem;
+
+}
+
+.cus-min-width {
+    min-width: 200px;
+}
+
+@media screen and (max-width: 768px) {
+    .address-parent {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,28 @@
+.order-item-card {
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1),
+        0 6px 20px rgba(0, 0, 0, 0.1);
+    text-align: justify;
+    border: 1px solid rgb(128, 128, 128, 0.3);
+    width: 90%;
+}
+
+.order-item-image {
+    width: 150px;
+    flex-grow: 2;
+    height: auto;
+    aspect-ratio: 4/3;
+    /* background-color: grey; */
+    position: relative;
+    /* background-image: ; */
+    background-size: 100% 100%;
+}
+
+.order-item-detail {
+    flex-grow: 2;
+}
+
+@media screen and (max-width: 768px) {
+    .order-item-card {
+        flex-direction: column;
+    }
+}

@@ -19,6 +19,7 @@ interface UpdateFormState {
 function Profile() {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const user = useSelector((state: RootState) => state.auth.user);
+  console.log(user);
   const [fileUrl, setFileUrl] = useState(user?.profilePhoto);
   const [passChnage, setPassChange] = useState({
     currentPassword: "",

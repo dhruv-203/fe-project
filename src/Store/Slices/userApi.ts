@@ -1,8 +1,11 @@
 import {
+  ApiResponse,
   UpdatePasswordRequest,
   UpdatePasswordResponse,
   UpdateProfileRequest,
   UpdateProfileResponse,
+  User,
+  WishlistRequest,
 } from "../Types";
 import { Api } from "./Api";
 
@@ -30,7 +33,32 @@ export const userApi = Api.injectEndpoints({
         credentials: "include",
       }),
     }),
+
+    addToWishlist: builder.mutation<ApiResponse<User>, WishlistRequest>({
+      query: (params: WishlistRequest) => ({
+        url: `/user/${params.prodID}`,
+        method: "POST",
+        body: { isExists: params.isExists },
+        credentials: "include",
+      }),
+    }),
+    placeOrder: builder.mutation<ApiResponse<User>, string>({
+      query: (params: string) => {
+        console.log(params);
+        return {
+          url: `/orders/placeOrder`,
+          method: "POST",
+          body: { shippingAddress: params },
+          credentials: "include",
+        };
+      },
+    }),
   }),
 });
 
-export const { useUpdatePasswordMutation, useUpdateProfileMutation } = userApi;
+export const {
+  useUpdatePasswordMutation,
+  useUpdateProfileMutation,
+  useAddToWishlistMutation,
+  usePlaceOrderMutation,
+} = userApi;

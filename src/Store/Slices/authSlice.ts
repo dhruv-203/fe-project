@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { User } from "../Types";
 import { authApi } from "./authApi";
+import { cartApi } from "./cartApi";
 import { userApi } from "./userApi";
 interface InitialStateType {
   isAuthenticated: boolean;
@@ -71,6 +72,36 @@ const authSlice = createSlice({
       userApi.endpoints.updateProfile.matchRejected,
       (state, action) => {
         console.log(action);
+      }
+    );
+    builder.addMatcher(
+      cartApi.endpoints.addToCart.matchFulfilled,
+      (state, action) => {
+        state.user!.cart = action.payload.data;
+      }
+    );
+    builder.addMatcher(
+      cartApi.endpoints.removeFromCart.matchFulfilled,
+      (state, action) => {
+        state.user!.cart = action.payload.data;
+      }
+    );
+    builder.addMatcher(
+      cartApi.endpoints.updateCart.matchFulfilled,
+      (state, action) => {
+        state.user!.cart = action.payload.data;
+      }
+    );
+    builder.addMatcher(
+      userApi.endpoints.addToWishlist.matchFulfilled,
+      (state, action) => {
+        state.user = action.payload.data;
+      }
+    );
+    builder.addMatcher(
+      userApi.endpoints.placeOrder.matchFulfilled,
+      (state, action) => {
+        state.user = action.payload.data;
       }
     );
   },

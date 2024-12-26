@@ -13,6 +13,10 @@
     cursor: pointer;
 }
 
+.searchBarContainer {
+    flex-grow: 2;
+}
+
 .searchBar {
     outline: none;
     border: none;
@@ -48,8 +52,9 @@
     }
 }
 
-@media (max-width:768px) and (min-width:501px) {
+@media (max-width:993px) and (min-width:501px) {
     .row2 {
         flex-wrap: wrap;
     }
+    
 }
