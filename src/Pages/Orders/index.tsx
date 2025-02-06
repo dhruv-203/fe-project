@@ -7,6 +7,7 @@ function Orders() {
   const orders = useSelector<RootState, Order[]>(
     (state) => state.auth.user!.orders
   );
+  // console.log(orders);
   return (
     <div className=" orders-main d-flex flex-column gap-4 h-100 w-100 ">
       <div className="fs-3 fw-700 text-dark p-2">Order Details</div>

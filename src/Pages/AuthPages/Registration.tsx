@@ -105,6 +105,7 @@ function Registration() {
       nav(loc.state !== null ? loc.state.from : "/home");
     } catch (error: any) {
       if (error && error?.data?.message) {
+        console.log(error)
         toastify(error.data.message, "error");
         setErrors([error.data.message]);
       } else {

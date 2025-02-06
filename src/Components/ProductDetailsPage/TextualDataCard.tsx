@@ -6,14 +6,14 @@ import { IoMdEye } from "react-icons/io";
 import { RxStar, RxStarFilled } from "react-icons/rx";
 import ReactLoading from "react-loading";
 import { useSelector } from "react-redux";
-import { useCart, useWindowSize } from "../../Context/context";
+import { useCart } from "../../Context/context";
 import { RootState } from "../../Store";
 import {
   useAddToCartMutation,
   useRemoveFromCartMutation,
 } from "../../Store/Slices/cartApi";
 import { useAddToWishlistMutation } from "../../Store/Slices/userApi";
-import { CartItem } from "../../Store/Types";
+import { CartItem, User } from "../../Store/Types";
 import { toastify } from "../../utils";
 import PreTitle from "../HomePage/EditorPick/PreTitle";
 import SectionDescription from "../HomePage/EditorPick/SectionDescription";
@@ -33,12 +33,10 @@ interface TextualDataType {
 }
 
 function TextualDataCard({ data }: { data: TextualDataType }) {
-  let { isMobile } = useWindowSize();
   let { productExists } = useCart();
   let [selectedColor, setSelectedColor] = useState(data.colors[0]);
-  let cartID = useSelector<RootState, string>(
-    (state) => state.auth.user!.cart.id
-  );
+  let user = useSelector<RootState, User | null>((state) => state.auth.user);
+  let cartID = user ? user.cart.id : "";
   const [addTrigger, { isLoading: isAddLoading }] = useAddToCartMutation();
   const [removeTrigger, { isLoading: isRemoveLoading }] =
     useRemoveFromCartMutation();
@@ -125,12 +123,18 @@ function TextualDataCard({ data }: { data: TextualDataType }) {
           }
           width={" 30px "}
           height={" 30px "}
-          onClick={() => {
-            if (!isAddWishlistLoading) {
-              setIsWishlisted(!isWishlisted);
-              addToWishlistHandler(data.id, isWishlisted);
-            }
-          }}
+          onClick={
+            user
+              ? () => {
+                  if (!isAddWishlistLoading) {
+                    setIsWishlisted(!isWishlisted);
+                    addToWishlistHandler(data.id, isWishlisted);
+                  }
+                }
+              : () => {
+                  toastify("Please login to add to wishlist", "error");
+                }
+          }
         >
           {isAddWishlistLoading ? (
             <ReactLoading
@@ -152,22 +156,6 @@ function TextualDataCard({ data }: { data: TextualDataType }) {
             height={30}
             width={30}
           />
-        ) : productExists(data.id, selectedColor) ? (
-          <CircleBtn
-            className={
-              " d-flex p-1 justify-content-center align-items-center option-btn "
-            }
-            width={" 30px "}
-            height={" 30px "}
-          >
-            {" "}
-            <BsCartCheck
-              className="fs-6"
-              onClick={() => {
-                removeFromCartHandler(data.id, selectedColor);
-              }}
-            />{" "}
-          </CircleBtn>
         ) : (
           <CircleBtn
             className={
@@ -175,19 +163,32 @@ function TextualDataCard({ data }: { data: TextualDataType }) {
             }
             width={" 30px "}
             height={" 30px "}
-            onClick={() => {
-              addToCartHandler({
-                img: data.img,
-                prodID: data.id,
-                prodName: data.title,
-                prodPrice: data.price,
-                prodQuant: 1,
-                prodColor: selectedColor,
-              });
-            }}
+            onClick={
+              user
+                ? productExists(data.id, selectedColor)
+                  ? () => {
+                      removeFromCartHandler(data.id, selectedColor);
+                    }
+                  : () => {
+                      addToCartHandler({
+                        img: data.img,
+                        prodID: data.id,
+                        prodName: data.title,
+                        prodPrice: data.price,
+                        prodQuant: 1,
+                        prodColor: selectedColor,
+                      });
+                    }
+                : () => {
+                    toastify("Please login to add to cart", "error");
+                  }
+            }
           >
-            {" "}
-            <BsCart className="fs-6" />{" "}
+            {productExists(data.id, selectedColor) ? (
+              <BsCartCheck className="fs-6" />
+            ) : (
+              <BsCart className="fs-6" />
+            )}
           </CircleBtn>
         )}
 

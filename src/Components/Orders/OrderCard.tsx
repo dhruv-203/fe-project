@@ -15,7 +15,9 @@ function OrderCard({ data }: { data: Order }) {
       </div>
       <div className="two-in-one-row">
         <div className="fs-5  fw-700 text-dark">Order Date</div>
-        <div className="fs-6 fw-500 text-secondary">{data.orderDate}</div>
+        <div className="fs-6 fw-500 text-secondary">
+          {new Date(data.orderDate).toLocaleDateString()}
+        </div>
       </div>
       <div className="two-in-one-row">
         <div className="fs-5  fw-700 text-dark">Order Total</div>

@@ -26,6 +26,8 @@ function HomePage() {
     (state) => state.products.bestsellerProducts
   );
 
+  console.log(process.env.REACT_APP_API_URL);
+
   return bestSellerProducts.length > 0 ? (
     <div>
       {bestSellerProducts.length > 0 && (
